@@ -17,4 +17,7 @@ class Auth extends MythAuth
         // 'reset'       => 'Myth\Auth\Views\reset',
         // 'emailForgot' => 'Myth\Auth\Views\emails\forgot',
     ];
+
+    public $requireActivation = null;
+    public $defaultUserGroup = "User";
 }

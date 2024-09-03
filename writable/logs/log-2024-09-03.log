@@ -1,0 +1,247 @@
+INFO - 2024-09-03 03:28:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:28:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:28:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:28:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:29:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:30:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:30:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:30:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:30:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:30:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:31:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:31:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:31:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:31:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:31:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:42:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:44:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:44:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:44:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:44:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:44:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:44:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:45:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:45:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:45:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:45:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:55:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:55:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:55:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:55:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:55:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 03:55:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 04:32:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-03 04:32:37 --> ErrorException: Undefined variable $config
+[Method: GET, Route: /]
+in APPPATH\Views\CoronaDark\index.php on line 16.
+ 1 APPPATH\Views\CoronaDark\index.php(16): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $config', 'D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\index.php', 16)
+ 2 SYSTEMPATH\View\View.php(234): include('D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('CoronaDark\\index', [], true)
+ 5 APPPATH\Controllers\Home.php(10): view('CoronaDark\\index')
+ 6 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 7 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 8 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+12 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-03 04:33:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-03 04:33:24 --> ErrorException: Undefined variable $curUser
+[Method: GET, Route: /]
+in APPPATH\Views\CoronaDark\Layout\Partials\sidebar.php on line 18.
+ 1 APPPATH\Views\CoronaDark\Layout\Partials\sidebar.php(18): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $curUser', 'D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\Partials\\sidebar.php', 18)
+ 2 SYSTEMPATH\View\View.php(234): include('D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\Partials\\sidebar.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(487): CodeIgniter\View\View->render('CoronaDark/Layout/Partials/sidebar', null, true)
+ 5 APPPATH\Views\CoronaDark\Layout\index.php(70): CodeIgniter\View\View->include('CoronaDark/Layout/Partials/sidebar')
+ 6 SYSTEMPATH\View\View.php(234): include('D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('coronadark/layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('CoronaDark\\index', [], true)
+10 APPPATH\Controllers\Home.php(10): view('CoronaDark\\index')
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-03 04:34:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-03 04:34:42 --> ErrorException: Undefined variable $curUser
+[Method: GET, Route: /]
+in APPPATH\Views\CoronaDark\Layout\Partials\navbar.php on line 21.
+ 1 APPPATH\Views\CoronaDark\Layout\Partials\navbar.php(21): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $curUser', 'D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\Partials\\navbar.php', 21)
+ 2 SYSTEMPATH\View\View.php(234): include('D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\Partials\\navbar.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(487): CodeIgniter\View\View->render('CoronaDark/Layout/Partials/navbar', null, true)
+ 5 APPPATH\Views\CoronaDark\Layout\index.php(74): CodeIgniter\View\View->include('CoronaDark/Layout/Partials/navbar')
+ 6 SYSTEMPATH\View\View.php(234): include('D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('coronadark/layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('CoronaDark\\index', [], true)
+10 APPPATH\Controllers\Home.php(10): view('CoronaDark\\index')
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-03 04:35:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-03 04:35:12 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "CoronaDark/Layout/Partials/footer.php"
+[Method: GET, Route: /]
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 41.
+ 1 SYSTEMPATH\View\View.php(222): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('CoronaDark/Layout/Partials/footer.php')
+ 2 SYSTEMPATH\View\View.php(487): CodeIgniter\View\View->render('CoronaDark/Layout/Partials/footer', null, true)
+ 3 APPPATH\Views\CoronaDark\Layout\index.php(101): CodeIgniter\View\View->include('CoronaDark/Layout/Partials/footer')
+ 4 SYSTEMPATH\View\View.php(234): include('D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\index.php')
+ 5 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('coronadark/layout/index', [], true)
+ 7 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('CoronaDark\\index', [], true)
+ 8 APPPATH\Controllers\Home.php(10): view('CoronaDark\\index')
+ 9 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+10 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+11 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+13 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+14 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+15 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-03 04:53:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-03 04:53:26 --> ErrorException: Undefined variable $general
+[Method: GET, Route: /]
+in APPPATH\Views\CoronaDark\Layout\index.php on line 136.
+ 1 APPPATH\Views\CoronaDark\Layout\index.php(136): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $general', 'D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\index.php', 136)
+ 2 SYSTEMPATH\View\View.php(234): include('D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('coronadark/layout/index', [], true)
+ 5 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('CoronaDark\\index', [], true)
+ 6 APPPATH\Controllers\Home.php(10): view('CoronaDark\\index')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-03 04:53:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-03 04:53:27 --> ErrorException: Undefined variable $general
+[Method: GET, Route: /]
+in APPPATH\Views\CoronaDark\Layout\index.php on line 136.
+ 1 APPPATH\Views\CoronaDark\Layout\index.php(136): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $general', 'D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\index.php', 136)
+ 2 SYSTEMPATH\View\View.php(234): include('D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\index.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('coronadark/layout/index', [], true)
+ 5 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('CoronaDark\\index', [], true)
+ 6 APPPATH\Controllers\Home.php(10): view('CoronaDark\\index')
+ 7 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+ 8 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 9 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+13 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-03 04:53:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 05:02:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-03 05:02:43 --> ErrorException: Undefined variable $auth
+[Method: GET, Route: /]
+in APPPATH\Views\CoronaDark\Layout\Partials\navbar.php on line 26.
+ 1 APPPATH\Views\CoronaDark\Layout\Partials\navbar.php(26): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $auth', 'D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\Partials\\navbar.php', 26)
+ 2 SYSTEMPATH\View\View.php(234): include('D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\Partials\\navbar.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(487): CodeIgniter\View\View->render('CoronaDark/Layout/Partials/navbar', null, true)
+ 5 APPPATH\Views\CoronaDark\Layout\index.php(74): CodeIgniter\View\View->include('CoronaDark/Layout/Partials/navbar')
+ 6 SYSTEMPATH\View\View.php(234): include('D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('coronadark/layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('CoronaDark\\index', [], true)
+10 APPPATH\Controllers\Home.php(10): view('CoronaDark\\index')
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-03 05:03:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 06:37:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 06:37:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 06:37:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 06:39:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 06:39:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 06:39:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 06:39:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 06:40:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 06:40:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 06:42:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-03 06:42:33 --> ErrorException: Undefined variable $auth
+[Method: GET, Route: /]
+in APPPATH\Views\CoronaDark\Layout\Partials\navbar.php on line 20.
+ 1 APPPATH\Views\CoronaDark\Layout\Partials\navbar.php(20): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $auth', 'D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\Partials\\navbar.php', 20)
+ 2 SYSTEMPATH\View\View.php(234): include('D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\Partials\\navbar.php')
+ 3 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\View\View.php(487): CodeIgniter\View\View->render('CoronaDark/Layout/Partials/navbar', null, true)
+ 5 APPPATH\Views\CoronaDark\Layout\index.php(74): CodeIgniter\View\View->include('CoronaDark/Layout/Partials/navbar')
+ 6 SYSTEMPATH\View\View.php(234): include('D:\\Proyek\\v8\\ci45-template\\app\\Views\\CoronaDark\\Layout\\index.php')
+ 7 SYSTEMPATH\View\View.php(237): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\View\View.php(250): CodeIgniter\View\View->render('coronadark/layout/index', [], true)
+ 9 SYSTEMPATH\Common.php(1169): CodeIgniter\View\View->render('CoronaDark\\index', [], true)
+10 APPPATH\Controllers\Home.php(10): view('CoronaDark\\index')
+11 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Home->index()
+12 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+13 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+15 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+16 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+17 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-03 07:20:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:20:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:21:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:27:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-03 07:32:29 --> mysqli_sql_exception: Table 'db_ci4.users' doesn't exist in D:\Proyek\v8\ci45-template\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\Proyek\v8\ci45-template\system\Database\MySQLi\Connection.php(312): mysqli->query('ALTER TABLE `us...', 0)
+#1 D:\Proyek\v8\ci45-template\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('ALTER TABLE `us...')
+#2 D:\Proyek\v8\ci45-template\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('ALTER TABLE `us...')
+#3 D:\Proyek\v8\ci45-template\system\Database\Forge.php(772): CodeIgniter\Database\BaseConnection->query('ALTER TABLE `us...')
+#4 D:\Proyek\v8\ci45-template\app\Database\Migrations\2024-08-07-064921_UpdateAndAddfieldToUsersTable.php(15): CodeIgniter\Database\Forge->addColumn('users', Array)
+#5 D:\Proyek\v8\ci45-template\system\Database\MigrationRunner.php(867): App\Database\Migrations\UpdateAndAddfieldToUsersTable->up()
+#6 D:\Proyek\v8\ci45-template\system\Database\MigrationRunner.php(183): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+#7 D:\Proyek\v8\ci45-template\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 D:\Proyek\v8\ci45-template\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 D:\Proyek\v8\ci45-template\system\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 D:\Proyek\v8\ci45-template\system\Commands\Database\MigrateRefresh.php(87): CodeIgniter\CLI\BaseCommand->call('migrate', Array)
+#11 D:\Proyek\v8\ci45-template\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\MigrateRefresh->run(Array)
+#12 D:\Proyek\v8\ci45-template\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('migrate:refresh', Array)
+#13 D:\Proyek\v8\ci45-template\system\Boot.php(351): CodeIgniter\CLI\Console->run()
+#14 D:\Proyek\v8\ci45-template\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#15 D:\Proyek\v8\ci45-template\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#16 {main}
+INFO - 2024-09-03 07:33:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:33:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:33:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:33:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2024-09-03 07:33:32 --> ErrorException: Attempt to read property "id" on null
+[Method: POST, Route: register]
+in VENDORPATH\myth\auth\src\Models\UserModel.php on line 77.
+ 1 VENDORPATH\myth\auth\src\Models\UserModel.php(77): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Attempt to read property "id" on null', 'D:\\Proyek\\v8\\ci45-template\\vendor\\myth\\auth\\src\\Models\\UserModel.php', 77)
+ 2 VENDORPATH\myth\auth\src\Controllers\AuthController.php(176): Myth\Auth\Models\UserModel->withGroup('User')
+ 3 SYSTEMPATH\CodeIgniter.php(933): Myth\Auth\Controllers\AuthController->attemptRegister()
+ 4 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AuthController))
+ 5 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 6 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 7 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 8 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 9 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-03 07:34:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:34:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:34:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:34:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:35:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:35:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:35:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:35:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:36:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:37:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:38:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-03 07:39:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

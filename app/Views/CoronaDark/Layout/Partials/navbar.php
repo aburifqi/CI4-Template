@@ -17,13 +17,13 @@
         <li class="nav-item dropdown">
           <a class="nav-link" id="profileDropdown" href="#" data-toggle="dropdown">
             <div class="navbar-profile">
-              <img class="img-xs rounded-circle" src="<?= $curUser["foto"] ?? 'app/assets/images/default-user.png'?>" alt="">
-              <p class="mb-0 d-none d-sm-block navbar-profile-name"><?= $curUser['name']?></p>
+              <img class="img-xs rounded-circle" src="<?= base_url()?>/img/<?= user()->user_image ?>" alt="">
+              <p class="mb-0 d-none d-sm-block navbar-profile-name"><?= ucwords(user()->username) ?></p>
               <i class="mdi mdi-menu-down d-none d-sm-block"></i>
             </div>
           </a>
           <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="profileDropdown">
-            <a class="dropdown-item preview-item" onclick="logOut();">
+            <a class="dropdown-item preview-item" href="<?= base_url('logout'); ?>">
               <div class="preview-thumbnail">
                 <div class="preview-icon bg-dark rounded-circle">
                   <i class="mdi mdi-logout text-danger"></i>

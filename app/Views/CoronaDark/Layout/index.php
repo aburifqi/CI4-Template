@@ -133,10 +133,7 @@
     <script src="<?= base_url(); ?>/datatables/datatables.min.js"></script>
 
     <script>
-      var listItemPerPage = <?= $general['listitemperpage'] ?>;
     </script>
     <script src="app/scripts/common/custom-data-tables.js"></script>
-    <div id="inject-js">
-    </div>
   </body>
 </html>

@@ -10,13 +10,13 @@
       <div class="profile-desc">
         <div class="profile-pic">
           <div class="count-indicator">
-            <img class="img-xs rounded-circle " src="<?= $curUser["foto"] ?? 'app/assets/images/default-user.png'?>"
+            <img class="img-xs rounded-circle " src="<?= base_url()?>/img/<?= user()->user_image ?>"
               alt="">
             <span class="count bg-success"></span>
           </div>
           <div class="profile-name">
-            <h5 class="mb-0 font-weight-normal"><?= $curUser["name"] ?></h5>
-            <span><?= $curUser["grup"] ?></span>
+            <h5 class="mb-0 font-weight-normal"><?= ucwords(user()->username) ?></h5>
+            <span><?= "GRUP" ?></span>
           </div>
         </div>
         <a href="#" id="profile-dropdown" data-toggle="dropdown"><i class="mdi mdi-dots-vertical"></i></a>
