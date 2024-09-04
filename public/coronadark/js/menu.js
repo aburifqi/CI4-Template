@@ -2,28 +2,28 @@ let currentPage="";
 let initPage = true;
 // var otoritas = [];
 $(function() {
-    const curURL = window.location.href;
-    const paramData = parseURLParams(curURL);
+    // const curURL = window.location.href;
+    // const paramData = parseURLParams(curURL);
 
-    if (paramData && paramData.page[0]) {
-        currentPage = paramData.page[0];
-        sessionStorage.setItem('current-page', currentPage);
-        location.href="index.php";
-        return;
-    }
-    //render side bar menu
+    // if (paramData && paramData.page[0]) {
+    //     currentPage = paramData.page[0];
+    //     sessionStorage.setItem('current-page', currentPage);
+    //     location.href="index.php";
+    //     return;
+    // }
+    // //render side bar menu
     renderSideBar();
-    initPage = true;
-    if(!currentPage){
-        currentPage = sessionStorage.getItem('current-page');//$.cookie('current-page');
-        // if(!currentPage)currentPage = 'menu_beranda';
-    }
+    // initPage = true;
+    // if(!currentPage){
+    //     currentPage = sessionStorage.getItem('current-page');//$.cookie('current-page');
+    //     // if(!currentPage)currentPage = 'menu_beranda';
+    // }
 
-    if(currentPage){
-        // let param = $.cookie('param')?JSON.parse($.cookie('param')):{};
-        let param = sessionStorage.getItem('param')?JSON.parse(sessionStorage.getItem('param')):{};
-        openPage(currentPage, param);
-    }
+    // if(currentPage){
+    //     // let param = $.cookie('param')?JSON.parse($.cookie('param')):{};
+    //     let param = sessionStorage.getItem('param')?JSON.parse(sessionStorage.getItem('param')):{};
+    //     openPage(currentPage, param);
+    // }
 });
 //#region Functions
     function setActiveLinkMenu(obj){
@@ -93,37 +93,114 @@ $(function() {
 
     function renderSideBar(){
         $(".navigasi-template-app .render-menu").remove();
-        $.ajax({
-            url:"modules/common.php",
-            type: 'POST',
-            dataType: 'json',
-            async:false,
-            data:{
-                action:"side-bar-menu",
-            },
-            success : (data)=>{
-                if(data.menu){
-                    let parentMenuFormat = data.parentMenuFormat;
-                    let childMenuContainerFormat = data.childMenuContainerFormat;
-                    let childMenuFormat = data.childMenuFormat;
-                    let parentMenu = $.grep(data.menu,(d, i)=>{
-                        return d.parent_code == 0;
-                    });
-                    parentMenu = parentMenu.sort((a, b)=>{
-                        return a.urut - b.urut;
-                    });
-                    if (parentMenu.length){
-                        $.each(parentMenu, (i, pm)=>{
-                            if (pm.children.length){
-                                getChildMenu(pm);
-                            }
-                            //Render Menu
-                            $(".navigasi-template-app").append(renderMenu(pm, parentMenuFormat, childMenuContainerFormat, childMenuFormat));
-                        });
-                    }
-                }
+        fetch(`${baseURL}/menu`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              "X-Requested-With": "XMLHttpRequest"
             }
-        });
+        })
+        .then(r =>  r.json().then(res =>{
+            console.log(res)
+            if(res.hasil == 1){
+                const parentMenuFormat =`<li class="nav-item menu-items">
+                    <a class="nav-link parent-menu" href="javascript:void(0);">
+                        <div style = "display:flex; align-items: center; width: 100%;">
+                            <span class="menu-icon">
+                                <i></i>
+                            </span>
+                            <span class="menu-title judul-menu"></span>
+                            <i class="menu-arrow"></i>
+                        </div>
+                    </a>
+                </li>`;
+
+                const childMenuContainerFormat =`<div class="collapse" id="">
+                    <ul class="nav flex-column sub-menu">
+                    </ul>
+                </div>`;
+
+                const childMenuFormat =`<li class="nav-item">
+                    <a class="nav-link" href="javascript:void(0);">
+                        <div>
+                            <i class=""></i>&nbsp;<span style="width:auto;left:40px;padding:0;" class="child-menu-label menu-title"></span>
+                        </div>
+                    </a>
+                </li>`;
+
+                let parentMenu = $.grep(res.data,(d, i)=>{
+                    return d.parent_code == 0;
+                });
+                parentMenu = parentMenu.sort((a, b)=>{
+                    return a.urut - b.urut;
+                });
+                if (parentMenu.length){
+                    $.each(parentMenu, (i, pm)=>{
+                        if (pm.children.length){
+                            getChildMenu(pm);
+                        }
+                        //Render Menu
+                        $(".navigasi-template-app").append(renderMenu(pm, parentMenuFormat, childMenuContainerFormat, childMenuFormat));
+                    });
+                }
+                console.log(parentMenu)
+            }
+        }));
+        // .then((res)=>{
+        //     if(res.hasil == 1){
+
+        //     }
+        //     console.log(res)
+        // });
+    
+        // $.ajax({
+        //     url:"modules/common.php",
+        //     type: 'POST',
+        //     dataType: 'json',
+        //     async:false,
+        //     data:{
+        //         action:"side-bar-menu",
+        //     },
+        //     success : (data)=>{
+        //         if(data.menu){
+        //             const parentMenuFormat =`<li>
+        //                 <a class="parent-menu" href="javascript:void(0);">
+        //                     <span class="menu-icon">
+        //                         <i class="icon-menu"></i>
+        //                     </span>
+        //                     <span class="judul-menu">Menu</span>
+        //                 </a>
+        //             </li>`;
+    
+        //             const childMenuContainerFormat =`<div class="collapse" id="">
+        //                 <ul class="nav flex-column sub-menu">
+        //                 </ul>
+        //             </div>`;
+    
+        //             const childMenuFormat =`<li class="nav-item">
+        //                 <a class="nav-link" href="javascript:void(0);">
+        //                     <i class=""></i>&nbsp;
+        //                 </a>
+        //             </li>`;
+
+        //             let parentMenu = $.grep(data.menu,(d, i)=>{
+        //                 return d.parent_code == 0;
+        //             });
+        //             parentMenu = parentMenu.sort((a, b)=>{
+        //                 return a.urut - b.urut;
+        //             });
+        //             if (parentMenu.length){
+        //                 $.each(parentMenu, (i, pm)=>{
+        //                     if (pm.children.length){
+        //                         getChildMenu(pm);
+        //                     }
+        //                     //Render Menu
+        //                     $(".navigasi-template-app").append(renderMenu(pm, parentMenuFormat, childMenuContainerFormat, childMenuFormat));
+        //                 });
+        //             }
+        //         }
+        //     }
+        // });
 
     }
     

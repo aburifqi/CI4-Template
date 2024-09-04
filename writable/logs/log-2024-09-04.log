@@ -1,0 +1,512 @@
+INFO - 2024-09-04 02:38:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 02:38:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 03:31:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-04 03:45:43 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':name:, :description:)' at line 1 in D:\Proyek\v8\ci45-template\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\Proyek\v8\ci45-template\system\Database\MySQLi\Connection.php(312): mysqli->query('INSERT INTO aut...', 0)
+#1 D:\Proyek\v8\ci45-template\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO aut...')
+#2 D:\Proyek\v8\ci45-template\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO aut...')
+#3 D:\Proyek\v8\ci45-template\app\Database\Seeds\AuthGroupSeed.php(27): CodeIgniter\Database\BaseConnection->query('INSERT INTO aut...', Array)
+#4 D:\Proyek\v8\ci45-template\system\Database\Seeder.php(147): App\Database\Seeds\AuthGroupSeed->run()
+#5 D:\Proyek\v8\ci45-template\app\Database\Seeds\InitDBSeed.php(11): CodeIgniter\Database\Seeder->call('App\\Database\\Se...')
+#6 D:\Proyek\v8\ci45-template\system\Database\Seeder.php(147): App\Database\Seeds\InitDBSeed->run()
+#7 D:\Proyek\v8\ci45-template\system\Commands\Database\Seed.php(79): CodeIgniter\Database\Seeder->call('App\\Database\\Se...')
+#8 D:\Proyek\v8\ci45-template\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Seed->run(Array)
+#9 D:\Proyek\v8\ci45-template\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('db:seed', Array)
+#10 D:\Proyek\v8\ci45-template\system\Boot.php(351): CodeIgniter\CLI\Console->run()
+#11 D:\Proyek\v8\ci45-template\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#12 D:\Proyek\v8\ci45-template\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#13 {main}
+INFO - 2024-09-04 03:55:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 03:55:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 03:55:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:09:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:09:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:09:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:09:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:09:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:09:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:09:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:09:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:25:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:29:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:33:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:35:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:35:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:36:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:40:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:44:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:45:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:46:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:53:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 04:57:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 06:43:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:26:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:29:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:29:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-04 07:29:33 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha' at line 7 in D:\Proyek\v8\ci45-template\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\Proyek\v8\ci45-template\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT \n       ...', 0)
+#1 D:\Proyek\v8\ci45-template\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT \n       ...')
+#2 D:\Proyek\v8\ci45-template\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT \n       ...')
+#3 D:\Proyek\v8\ci45-template\app\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT \n       ...', Array)
+#4 D:\Proyek\v8\ci45-template\system\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+#5 D:\Proyek\v8\ci45-template\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+#6 D:\Proyek\v8\ci45-template\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\Proyek\v8\ci45-template\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#8 D:\Proyek\v8\ci45-template\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 D:\Proyek\v8\ci45-template\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 D:\Proyek\v8\ci45-template\system\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci...')
+#11 {main}
+CRITICAL - 2024-09-04 07:29:33 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha' at line 7
+[Method: POST, Route: menu]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+CRITICAL - 2024-09-04 07:29:33 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha' at line 7
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 3 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+CRITICAL - 2024-09-04 07:29:33 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha' at line 7
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 4 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-04 07:31:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:31:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-04 07:31:14 --> mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha' at line 7 in D:\Proyek\v8\ci45-template\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\Proyek\v8\ci45-template\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT \n       ...', 0)
+#1 D:\Proyek\v8\ci45-template\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT \n       ...')
+#2 D:\Proyek\v8\ci45-template\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT \n       ...')
+#3 D:\Proyek\v8\ci45-template\app\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT \n       ...', Array)
+#4 D:\Proyek\v8\ci45-template\system\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+#5 D:\Proyek\v8\ci45-template\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+#6 D:\Proyek\v8\ci45-template\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\Proyek\v8\ci45-template\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#8 D:\Proyek\v8\ci45-template\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 D:\Proyek\v8\ci45-template\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 D:\Proyek\v8\ci45-template\system\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci...')
+#11 {main}
+CRITICAL - 2024-09-04 07:31:14 --> CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha' at line 7
+[Method: POST, Route: menu]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+CRITICAL - 2024-09-04 07:31:14 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha' at line 7
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 3 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+CRITICAL - 2024-09-04 07:31:14 --> [Caused by] mysqli_sql_exception: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ':id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha' at line 7
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 4 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-04 07:33:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:33:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-04 07:33:34 --> mysqli_sql_exception: Table 'db_ci4.user_group' doesn't exist in D:\Proyek\v8\ci45-template\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\Proyek\v8\ci45-template\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT \n       ...', 0)
+#1 D:\Proyek\v8\ci45-template\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT \n       ...')
+#2 D:\Proyek\v8\ci45-template\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT \n       ...')
+#3 D:\Proyek\v8\ci45-template\app\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT \n       ...', Array)
+#4 D:\Proyek\v8\ci45-template\system\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+#5 D:\Proyek\v8\ci45-template\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+#6 D:\Proyek\v8\ci45-template\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\Proyek\v8\ci45-template\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#8 D:\Proyek\v8\ci45-template\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 D:\Proyek\v8\ci45-template\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 D:\Proyek\v8\ci45-template\system\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci...')
+#11 {main}
+CRITICAL - 2024-09-04 07:33:34 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_ci4.user_group' doesn't exist
+[Method: POST, Route: menu]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user: AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+CRITICAL - 2024-09-04 07:33:34 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_ci4.user_group' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = 3 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = 3 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 3 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user: AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+CRITICAL - 2024-09-04 07:33:34 --> [Caused by] mysqli_sql_exception: Table 'db_ci4.user_group' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = 3 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = 3 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = 3 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 4 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN user_group ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user: AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-04 07:34:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:34:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-04 07:34:45 --> mysqli_sql_exception: Unknown column 'us.user_group_id' in 'on clause' in D:\Proyek\v8\ci45-template\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 D:\Proyek\v8\ci45-template\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT \n       ...', 0)
+#1 D:\Proyek\v8\ci45-template\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT \n       ...')
+#2 D:\Proyek\v8\ci45-template\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT \n       ...')
+#3 D:\Proyek\v8\ci45-template\app\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT \n       ...', Array)
+#4 D:\Proyek\v8\ci45-template\system\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+#5 D:\Proyek\v8\ci45-template\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+#6 D:\Proyek\v8\ci45-template\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 D:\Proyek\v8\ci45-template\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#8 D:\Proyek\v8\ci45-template\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 D:\Proyek\v8\ci45-template\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 D:\Proyek\v8\ci45-template\system\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci...')
+#11 {main}
+CRITICAL - 2024-09-04 07:34:45 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'us.user_group_id' in 'on clause'
+[Method: POST, Route: menu]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user: AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+CRITICAL - 2024-09-04 07:34:45 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'us.user_group_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = 1 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = 1 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 3 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user: AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+CRITICAL - 2024-09-04 07:34:45 --> [Caused by] mysqli_sql_exception: Unknown column 'us.user_group_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = 1 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = 1 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = 1 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 4 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN users us ON us.user_group_id = ug.id
+                WHERE us.id = :id_user: AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('D:\\Proyek\\v8\\ci45-template\\public\\index.php')
+INFO - 2024-09-04 07:37:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:37:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:39:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:40:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:47:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:47:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:48:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:48:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:51:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:51:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:56:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:57:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:57:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 07:57:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 08:01:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 08:01:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 08:04:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 08:05:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 08:05:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 08:05:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 08:06:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 08:06:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 08:13:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 08:13:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 08:15:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 08:15:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 09:27:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 09:27:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
