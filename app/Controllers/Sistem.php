@@ -26,7 +26,7 @@ class Sistem extends BaseController
         return json_encode([
             "hasil"=>1,
             "data"=>$data,
-            "ID"=>user()->id
+            "tes"=>view_cell('\App\Libraries\Page::beranda')
         ]);
     }
 }

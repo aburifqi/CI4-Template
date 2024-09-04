@@ -85,7 +85,7 @@ final class Nexus81 extends AbstractRuleset
             'class_definition' => [
                 'multi_line_extends_each_single_line' => true,
                 'single_item_single_line' => true,
-                'single_line' => true,
+                'single_line' => false,
                 'space_before_parenthesis' => true,
                 'inline_constructor_arguments' => true,
             ],
@@ -386,6 +386,7 @@ final class Nexus81 extends AbstractRuleset
                 'null_adjustment' => 'always_first',
                 'case_sensitive' => false,
             ],
+            'php_unit_assert_new_names' => true,
             'php_unit_attributes' => [
                 'keep_annotations' => false,
             ],
@@ -539,8 +540,7 @@ final class Nexus81 extends AbstractRuleset
                     ['readonly', 'phpstan-readonly'],
                     ['return', 'phpstan-return'],
                     ['runTestsInSeparateProcess', 'runInSeparateProcess', 'preserveGlobalState'],
-                    ['template', 'phpstan-template'],
-                    ['template-covariant', 'phpstan-template-covariant'],
+                    ['template', 'template-covariant', 'phpstan-template', 'phpstan-template-covariant'],
                     ['var', 'phpstan-var', 'psalm-var'],
                 ],
                 'skip_unlisted_annotations' => false,

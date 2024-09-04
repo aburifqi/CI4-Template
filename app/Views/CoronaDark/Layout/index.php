@@ -85,7 +85,7 @@
                       <div class="card">
                           <div class="card-body">
                             <div id="data-display">
-                              <?= view_cell('\App\Libraries\Page::beranda') ?>
+                              
                             </div>
                           </div>
                       </div>

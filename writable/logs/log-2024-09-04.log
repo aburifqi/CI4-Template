@@ -510,3 +510,149 @@ INFO - 2024-09-04 08:15:27 --> Session: Class initialized using 'CodeIgniter\Ses
 INFO - 2024-09-04 08:15:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-09-04 09:27:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 INFO - 2024-09-04 09:27:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-04 14:28:16 --> mysqli_sql_exception: Table 'db_ci4.users' doesn't exist in E:\Kerjaan\Venpillar\CI4-Template\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 E:\Kerjaan\Venpillar\CI4-Template\system\Database\MySQLi\Connection.php(312): mysqli->query('ALTER TABLE `us...', 0)
+#1 E:\Kerjaan\Venpillar\CI4-Template\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('ALTER TABLE `us...')
+#2 E:\Kerjaan\Venpillar\CI4-Template\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('ALTER TABLE `us...')
+#3 E:\Kerjaan\Venpillar\CI4-Template\system\Database\Forge.php(772): CodeIgniter\Database\BaseConnection->query('ALTER TABLE `us...')
+#4 E:\Kerjaan\Venpillar\CI4-Template\app\Database\Migrations\2024-08-07-064921_UpdateAndAddfieldToUsersTable.php(15): CodeIgniter\Database\Forge->addColumn('users', Array)
+#5 E:\Kerjaan\Venpillar\CI4-Template\system\Database\MigrationRunner.php(867): App\Database\Migrations\UpdateAndAddfieldToUsersTable->up()
+#6 E:\Kerjaan\Venpillar\CI4-Template\system\Database\MigrationRunner.php(183): CodeIgniter\Database\MigrationRunner->migrate('up', Object(stdClass))
+#7 E:\Kerjaan\Venpillar\CI4-Template\system\Commands\Database\Migrate.php(85): CodeIgniter\Database\MigrationRunner->latest(NULL)
+#8 E:\Kerjaan\Venpillar\CI4-Template\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\Migrate->run(Array)
+#9 E:\Kerjaan\Venpillar\CI4-Template\system\CLI\BaseCommand.php(119): CodeIgniter\CLI\Commands->run('migrate', Array)
+#10 E:\Kerjaan\Venpillar\CI4-Template\system\Commands\Database\MigrateRefresh.php(87): CodeIgniter\CLI\BaseCommand->call('migrate', Array)
+#11 E:\Kerjaan\Venpillar\CI4-Template\system\CLI\Commands.php(70): CodeIgniter\Commands\Database\MigrateRefresh->run(Array)
+#12 E:\Kerjaan\Venpillar\CI4-Template\system\CLI\Console.php(48): CodeIgniter\CLI\Commands->run('migrate:refresh', Array)
+#13 E:\Kerjaan\Venpillar\CI4-Template\system\Boot.php(351): CodeIgniter\CLI\Console->run()
+#14 E:\Kerjaan\Venpillar\CI4-Template\system\Boot.php(104): CodeIgniter\Boot::runCommand(Object(CodeIgniter\CLI\Console))
+#15 E:\Kerjaan\Venpillar\CI4-Template\spark(84): CodeIgniter\Boot::bootSpark(Object(Config\Paths))
+#16 {main}
+INFO - 2024-09-04 14:29:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 14:29:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 14:30:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 14:30:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 14:30:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2024-09-04 14:30:40 --> mysqli_sql_exception: Table 'db_ci4.sistem_otoritas' doesn't exist in E:\Kerjaan\Venpillar\CI4-Template\system\Database\MySQLi\Connection.php:312
+Stack trace:
+#0 E:\Kerjaan\Venpillar\CI4-Template\system\Database\MySQLi\Connection.php(312): mysqli->query('SELECT \r\n      ...', 0)
+#1 E:\Kerjaan\Venpillar\CI4-Template\system\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT \r\n      ...')
+#2 E:\Kerjaan\Venpillar\CI4-Template\system\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT \r\n      ...')
+#3 E:\Kerjaan\Venpillar\CI4-Template\app\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT \r\n      ...', Array)
+#4 E:\Kerjaan\Venpillar\CI4-Template\system\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+#5 E:\Kerjaan\Venpillar\CI4-Template\system\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+#6 E:\Kerjaan\Venpillar\CI4-Template\system\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#7 E:\Kerjaan\Venpillar\CI4-Template\system\Boot.php(325): CodeIgniter\CodeIgniter->run()
+#8 E:\Kerjaan\Venpillar\CI4-Template\system\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#9 E:\Kerjaan\Venpillar\CI4-Template\public\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#10 E:\Kerjaan\Venpillar\CI4-Template\system\rewrite.php(44): require_once('E:\\Kerjaan\\Venp...')
+#11 {main}
+CRITICAL - 2024-09-04 14:30:40 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_ci4.sistem_otoritas' doesn't exist
+[Method: POST, Route: menu]
+in SYSTEMPATH\Database\BaseConnection.php on line 688.
+ 1 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN auth_groups_users agu ON agu.group_id = ug.id
+                JOIN users us ON us.id = agu.user_id
+                WHERE us.id = :id_user: AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 2 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 3 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 4 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 6 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 7 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+ 8 SYSTEMPATH\rewrite.php(44): require_once('E:\\Kerjaan\\Venpillar\\CI4-Template\\public\\index.php')
+CRITICAL - 2024-09-04 14:30:40 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'db_ci4.sistem_otoritas' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 317.
+ 1 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN auth_groups_users agu ON agu.group_id = ug.id
+                JOIN users us ON us.id = agu.user_id
+                WHERE us.id = 2 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 2 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN auth_groups_users agu ON agu.group_id = ug.id
+                JOIN users us ON us.id = agu.user_id
+                WHERE us.id = 2 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 3 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN auth_groups_users agu ON agu.group_id = ug.id
+                JOIN users us ON us.id = agu.user_id
+                WHERE us.id = :id_user: AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 5 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 6 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+10 SYSTEMPATH\rewrite.php(44): require_once('E:\\Kerjaan\\Venpillar\\CI4-Template\\public\\index.php')
+CRITICAL - 2024-09-04 14:30:40 --> [Caused by] mysqli_sql_exception: Table 'db_ci4.sistem_otoritas' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 312.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(312): mysqli->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN auth_groups_users agu ON agu.group_id = ug.id
+                JOIN users us ON us.id = agu.user_id
+                WHERE us.id = 2 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(734): CodeIgniter\Database\MySQLi\Connection->execute('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN auth_groups_users agu ON agu.group_id = ug.id
+                JOIN users us ON us.id = agu.user_id
+                WHERE us.id = 2 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 3 SYSTEMPATH\Database\BaseConnection.php(648): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN auth_groups_users agu ON agu.group_id = ug.id
+                JOIN users us ON us.id = agu.user_id
+                WHERE us.id = 2 AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut')
+ 4 APPPATH\Controllers\Sistem.php(22): CodeIgniter\Database\BaseConnection->query('SELECT 
+                    ha.*, "" as "children"
+                FROM sistem_otoritas ha
+                JOIN sistem_otoritas_user_group haug ON haug.otoritas_code = ha.code
+                JOIN auth_groups ug ON ug.id = haug.user_group_id
+                JOIN auth_groups_users agu ON agu.group_id = ug.id
+                JOIN users us ON us.id = agu.user_id
+                WHERE us.id = :id_user: AND ha.type="Menu" AND ha.status = "active"
+                ORDER BY ha.urut', [...])
+ 5 SYSTEMPATH\CodeIgniter.php(933): App\Controllers\Sistem->menu()
+ 6 SYSTEMPATH\CodeIgniter.php(509): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Sistem))
+ 7 SYSTEMPATH\CodeIgniter.php(355): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(325): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(67): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(56): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+11 SYSTEMPATH\rewrite.php(44): require_once('E:\\Kerjaan\\Venpillar\\CI4-Template\\public\\index.php')
+INFO - 2024-09-04 14:41:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 14:41:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 14:54:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 14:54:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 14:58:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 14:58:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 15:00:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2024-09-04 15:00:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

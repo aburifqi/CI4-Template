@@ -145,6 +145,7 @@ $(function() {
                 }
                 console.log(parentMenu)
             }
+            $("#data-display").html(res.tes)
         }));
         // .then((res)=>{
         //     if(res.hasil == 1){
