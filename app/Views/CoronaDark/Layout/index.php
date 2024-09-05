@@ -52,9 +52,9 @@
         ::-webkit-scrollbar-thumb:hover {
             background: #555;
         }
-        .collapse:not(.show){
+        /* .collapse:not(.show){
           display:none !important;
-        }
+        } */
 
     </style>
     <?= $this->renderSection('style') ?>
@@ -109,7 +109,8 @@
       const baseURL = '<?= base_url(); ?>';
     </script>
 
-    <script src="<?= base_url(); ?>/coronadark/js/vendor.bundle.base.js"></script>
+    <!-- <script src="<?= base_url(); ?>/coronadark/js/vendor.bundle.base.js"></script> -->
+    <script src="<?= base_url(); ?>/standard/jquery/jquery.min.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/index.js"></script>
   </body>
 </html>

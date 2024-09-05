@@ -18,7 +18,9 @@ class WidgetMenu
         ';
         $query = $this->db->query($sql);
         $data = $query->getResultArray();
-        $data = $this->getMenuAnak($data, 1);
+        if(sizeof($data)){
+            $data = $this->getMenuAnak($data, 1);
+        }
         return view(getenv("TEMA").'/widget/menu',["menu"=>$data]);
     }
 

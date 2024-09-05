@@ -9741,8 +9741,15 @@ input[type="button"].btn-block {
   .fade:not(.show) {
     opacity: 0; }
 
-.collapse:not(.show) {
-  display: none; }
+/* .collapse:not(.show) {
+  display: none; } */
+.menu-items>div.collapse{
+  display:none;
+}
+
+.menu-items.active >div.collapse{
+  display:block;
+}
 
 .collapsing {
   position: relative;
