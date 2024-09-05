@@ -6,7 +6,6 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('page-content') ?>
-    TES
 
 <?= $this->endSection() ?>
 

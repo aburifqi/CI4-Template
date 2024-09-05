@@ -11,12 +11,12 @@
     <link rel="stylesheet" href="<?= base_url(); ?>/standard/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/coronadark/css/vendor.bundle.base.css">
     <!-- endinject -->
-    <link href="<?= base_url(); ?>/fonts/font-awesome/css/all.min.css" rel="stylesheet" />
-    <link href="<?= base_url(); ?>/fonts/font-awesome/css/fontawesome.min.css" rel="stylesheet" />
-    <link href="<?= base_url(); ?>/standard/datepicker/bootstrap-datepicker3.min.css" rel="stylesheet" />
-    <link href="<?= base_url(); ?>/standard/toast/jquery.toast.min.css" rel="stylesheet" />
-    <link href="<?= base_url(); ?>/standard/sweetalert2/sweetalert2.min.css" rel="stylesheet" />
-    <link href="<?= base_url(); ?>/standard/datatables/datatables.min.css" rel="stylesheet" />
+    <!-- <link href="<?= base_url(); ?>/fonts/font-awesome/css/all.min.css" rel="stylesheet" /> -->
+    <!-- <link href="<?= base_url(); ?>/fonts/font-awesome/css/fontawesome.min.css" rel="stylesheet" /> -->
+    <!-- <link href="<?= base_url(); ?>/standard/datepicker/bootstrap-datepicker3.min.css" rel="stylesheet" /> -->
+    <!-- <link href="<?= base_url(); ?>/standard/toast/jquery.toast.min.css" rel="stylesheet" /> -->
+    <!-- <link href="<?= base_url(); ?>/standard/sweetalert2/sweetalert2.min.css" rel="stylesheet" /> -->
+    <!-- <link href="<?= base_url(); ?>/standard/datatables/datatables.min.css" rel="stylesheet" /> -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?= base_url(); ?>/coronadark/css/style.css">
     <!-- End layout styles -->
@@ -110,22 +110,6 @@
     </script>
 
     <script src="<?= base_url(); ?>/coronadark/js/vendor.bundle.base.js"></script>
-    <script src="<?= base_url(); ?>/coronadark/js/off-canvas.js"></script>
-    <script src="<?= base_url(); ?>/coronadark/js/hoverable-collapse.js"></script>
-    <script src="<?= base_url(); ?>/coronadark/js/misc.js"></script>
-    <script src="<?= base_url(); ?>/coronadark/js/settings.js"></script>
-    <script src="<?= base_url(); ?>/standard/jquery-cookie/jquery-cookie.js"></script>
-    <script src="<?= base_url(); ?>/coronadark/js/menu.js"></script>
-    <!-- <script src="app/scripts/common/common.js"></script> -->
-    <script src="<?= base_url(); ?>/standard/jquery-auto-numeric/autoNumeric.js"></script>
-
-    <script src="<?= base_url(); ?>/standard/jquery-validation/jquery.validate.min.js"></script>
-    <script src="<?= base_url(); ?>/standard/toast/jquery.toast.min.js"></script>
-    <script src="<?= base_url(); ?>/standard/sweetalert2/sweetalert2.all.min.js"></script>
-
-    <script src="<?= base_url(); ?>/standard/datepicker/bootstrap-datepicker.min.js"></script>
-    <script src="<?= base_url(); ?>/standard/moment/moment-with-locales.min.js"></script>
-    <script src="<?= base_url(); ?>/standard/datatables/datatables.min.js"></script>
-    <!-- <script src="<?= base_url(); ?>/scripts/index.js"></script> -->
+    <script src="<?= base_url(); ?>/coronadark/js/index.js"></script>
   </body>
 </html>

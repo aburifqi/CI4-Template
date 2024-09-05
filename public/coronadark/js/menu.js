@@ -12,7 +12,7 @@ $(function() {
     //     return;
     // }
     // //render side bar menu
-    renderSideBar();
+    // renderSideBar();
     // initPage = true;
     // if(!currentPage){
     //     currentPage = sessionStorage.getItem('current-page');//$.cookie('current-page');
@@ -27,7 +27,6 @@ $(function() {
 });
 //#region Functions
     function setActiveLinkMenu(obj){
-        return;
         if(obj){
             $(".navigasi-template-app li, .navigasi-template-app a").removeClass("active");
             $(obj).addClass("active");
