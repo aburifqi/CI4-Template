@@ -69,29 +69,8 @@
         <?=  $this->include('CoronaDark/Layout/Partials/navbar'); ?>
         <!-- partial -->
         <div class="main-panel">
-          <div class="content-wrapper">
-              <div id="page-element">
-                <div class="page-header">
-                  <h3 class="page-title"></h3>
-                  <nav aria-label="breadcrumb">
-                      <ol class="breadcrumb">
-                          <li class="breadcrumb-item"><a href="#">Manajemen Akun</a></li>
-                          <li class="breadcrumb-item active" aria-current="page">Grup Pengguna</li>
-                      </ol>
-                  </nav>
-              </div>
-              <div class="row">
-                  <div class="col grid-margin stretch-card">
-                      <div class="card">
-                          <div class="card-body">
-                            <div id="data-display">
-                              
-                            </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-            </div>
+          <div  id="page-element" class="content-wrapper">
+            
           </div>
           <!-- partial:partials/_footer.html -->
           <?= $this->include('CoronaDark/Layout/Partials/footer'); ?>
@@ -109,8 +88,12 @@
       const baseURL = '<?= base_url(); ?>';
     </script>
 
-    <!-- <script src="<?= base_url(); ?>/coronadark/js/vendor.bundle.base.js"></script> -->
-    <script src="<?= base_url(); ?>/standard/jquery/jquery.min.js"></script>
+    <script src="<?= base_url(); ?>/coronadark/js/vendor.bundle.base.js"></script>
+    <!-- <script src="<?= base_url(); ?>/standard/jquery/jquery.min.js"></script> -->
+    <!-- <script src="<?= base_url(); ?>/coronadark/js/hoverable-collapse.js"></script> -->
+    <script src="<?= base_url(); ?>/coronadark/js/misc.js"></script>
+    <script src="<?= base_url(); ?>/coronadark/js/custom.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/index.js"></script>
+    <?= $this->renderSection('scripts') ?>
   </body>
 </html>

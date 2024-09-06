@@ -3,9 +3,8 @@
 class Page
 {
 
-    public function beranda()
+    public function openPage($param)
     {
-
-        return view(getenv("TEMA").'/pages/beranda');
+        return view(getenv("TEMA").'/pages/'.$param['page'], $param);
     }
 }

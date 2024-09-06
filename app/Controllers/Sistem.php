@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controllers;
-
 class Sistem extends BaseController
 {
     public function index(): string
@@ -28,5 +27,53 @@ class Sistem extends BaseController
             "data"=>$data,
             "tes"=>view_cell('\App\Libraries\Page::beranda')
         ]);
+    }
+
+    public function page(){
+        $request = request();
+
+        $page = $request->getPost('page');
+        $sql = '
+            SELECT 
+                so.*,
+                ap.name,
+                ap.description
+            FROM sistem_otoritas so
+            JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
+            WHERE so.id = :id:
+        ';
+        $query = $this->db->query($sql, [
+            'id'     => $page,
+        ]);
+        $data = $query->getFirstRow();
+        $data = $this->getMenuInduk($data);
+        $renderView = '';
+        try {
+            $renderView = view_cell('\App\Libraries\Page::openPage', [
+                'page' => $data->name,
+                'data' => $data
+            ]);
+        }
+        catch(\Exception $e) {
+            $renderView = view_cell('\App\Libraries\Page::openPage', [
+                'page' => 'error-404',
+                'view'=> $data->judul
+            ]);
+        }
+        return json_encode([
+            "page" =>$page,
+            "view"=>$renderView,
+            "data"=>$data
+        ]);
+    }
+
+    public function linkPage($page){
+        $theme = getenv("TEMA");
+        return view($theme. '\\index',["page"=>$page]);
+    }
+
+    function getMenuInduk($menu){
+        $menu->induk = "cobak";
+        return $menu;
     }
 }

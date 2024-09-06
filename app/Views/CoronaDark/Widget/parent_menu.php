@@ -1,5 +1,5 @@
 <li class="nav-item menu-items">
-    <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+    <a class="nav-link" data-toggle="collapse" href="javascript:void(0);" aria-expanded="false" aria-controls="ui-basic" title = "<?= $menu['judul'] ?>">
         <?php if($menu['icon']): ?>
             <span class="menu-icon">
                 <i class="<?= $menu['icon'] ?>" <?= $menu['icon_color']?'style = "color:'.$menu['icon_color'].'"':''?>></i>

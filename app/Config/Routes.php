@@ -9,6 +9,8 @@ use Myth\Auth\Config\Auth as AuthConfig;
 
 $routes->get('/', 'Home::index');
 $routes->post('/menu', 'Sistem::menu');
+$routes->get('/page/(:num)', 'Sistem::linkPage/$1');
+$routes->post('/page', 'Sistem::page');
 // Myth:Auth routes file.
 $routes->group('', ['namespace' => 'App\Controllers'], static function ($routes) {
     // Load the reserved routes from Auth.php

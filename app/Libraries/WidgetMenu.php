@@ -11,8 +11,12 @@ class WidgetMenu
     public function index()
     {
         $sql = 'SELECT 
-                    so.*, 0 AS level
+                    so.*, 
+                    0 AS level,
+                    ap.name,
+                    ap.description
                 FROM sistem_otoritas so
+                JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
                 WHERE so.parent_id = 0 AND so.jenis="Menu" AND so.status = "active"
                 ORDER BY so.urut
         ';
@@ -36,8 +40,11 @@ class WidgetMenu
         $hasil = array_map(function($dt) use($level) {
             $sql = '
                 SELECT 
-                    so.*
+                    so.*,
+                    ap.name,
+                    ap.description
                 FROM sistem_otoritas so
+                JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
                 WHERE so.parent_id = :parent_id: AND so.jenis="Menu" AND so.status = "active"
                 ORDER BY so.urut
             ';
