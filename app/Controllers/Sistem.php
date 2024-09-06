@@ -73,6 +73,19 @@ class Sistem extends BaseController
     }
 
     function getMenuInduk($menu){
+        $sql = '
+            SELECT 
+                so.*,
+                ap.name,
+                ap.description
+            FROM sistem_otoritas so
+            JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
+            WHERE so.id = :id:
+        ';
+        $query = $this->db->query($sql, [
+            'id'     => $menu->id,
+        ]);
+        $data = $query->getFirstRow();
         $menu->induk = "cobak";
         return $menu;
     }
