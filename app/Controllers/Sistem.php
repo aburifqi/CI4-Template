@@ -46,12 +46,15 @@ class Sistem extends BaseController
             'id'     => $page,
         ]);
         $data = $query->getFirstRow();
-        $data = $this->getMenuInduk($data);
+        $breadCrumbs = [$data];
+        $data = $this->getMenuInduk($data, $breadCrumbs);
+        $breadCrumbs = array_reverse($breadCrumbs);
         $renderView = '';
         try {
             $renderView = view_cell('\App\Libraries\Page::openPage', [
                 'page' => $data->name,
-                'data' => $data
+                'data' => $data,
+                'breadCrumbs' => $breadCrumbs
             ]);
         }
         catch(\Exception $e) {
@@ -63,7 +66,8 @@ class Sistem extends BaseController
         return json_encode([
             "page" =>$page,
             "view"=>$renderView,
-            "data"=>$data
+            "data"=>$data,
+            "breadCrumbs" => $breadCrumbs
         ]);
     }
 
@@ -72,7 +76,7 @@ class Sistem extends BaseController
         return view($theme. '\\index',["page"=>$page]);
     }
 
-    function getMenuInduk($menu){
+    function getMenuInduk($menu, &$breadCrumbs){
         $sql = '
             SELECT 
                 so.*,
@@ -83,10 +87,14 @@ class Sistem extends BaseController
             WHERE so.id = :id:
         ';
         $query = $this->db->query($sql, [
-            'id'     => $menu->id,
+            'id'     => $menu->parent_id,
         ]);
         $data = $query->getFirstRow();
-        $menu->induk = "cobak";
+        if($data){
+            array_push($breadCrumbs, $data);
+            $data = $this->getMenuInduk($data, $breadCrumbs);
+        }
+        $menu->induk = $data;
         return $menu;
     }
 }

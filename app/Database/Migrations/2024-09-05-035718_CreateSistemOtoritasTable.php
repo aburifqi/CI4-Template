@@ -18,6 +18,7 @@ class CreateSistemOtoritasTable extends Migration
             'parent_id'                     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'null' => true, 'default' => 0],
             'urut'                          => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
             'url'                           => ['type' => 'varchar', 'constraint' => 191, 'null' => true],
+            'is_page'                       => ['type' => 'tinyint', 'constraint' => 1, 'null' => 0, 'default' => 0],
             'status'                        => ['type' => 'ENUM("active","inactive")', 'default' => 'active', 'null' => FALSE,],
             'created_at'                    => ['type' => 'datetime', 'null' => true],
             'created_by'                    => ['type' => 'datetime', 'null' => true],

@@ -8,8 +8,8 @@
         <span class="menu-title"><?= $menu['judul'] ?></span>
         <i class="menu-arrow"></i>
     </a>
-    <div class="collapse" id="ui-basic">
-        <ul class="nav flex-column sub-menu" <?= $menu['level']>0?'style="padding: 0 0 0 30px;"':'' ?>>
+    <div class="collapse">
+        <ul class="nav flex-column sub-menu">
             <?= $menuAnak ?>
         </ul>
     </div>

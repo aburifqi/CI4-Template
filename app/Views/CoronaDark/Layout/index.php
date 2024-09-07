@@ -90,8 +90,10 @@
 
     <script src="<?= base_url(); ?>/coronadark/js/vendor.bundle.base.js"></script>
     <!-- <script src="<?= base_url(); ?>/standard/jquery/jquery.min.js"></script> -->
-    <!-- <script src="<?= base_url(); ?>/coronadark/js/hoverable-collapse.js"></script> -->
+    <script src="<?= base_url(); ?>/coronadark/js/off-canvas.js"></script>
+    <script src="<?= base_url(); ?>/coronadark/js/hoverable-collapse.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/misc.js"></script>
+    <script src="<?= base_url(); ?>/coronadark/js/settings.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/custom.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/index.js"></script>
     <?= $this->renderSection('scripts') ?>

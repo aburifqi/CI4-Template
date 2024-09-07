@@ -20896,7 +20896,8 @@ div.tagsinput {
     .sidebar .nav.sub-menu {
       margin-bottom: 0;
       margin-top: 0;
-      padding: 0 0 0 3.25rem;
+      /* padding: 0 0 0 3.25rem; */
+      padding: 0 0 0 30px;
       list-style: none; }
       .sidebar .nav.sub-menu .nav-item {
         padding: 0; }
@@ -21143,3 +21144,19 @@ div.tagsinput {
   flex-grow: 1; }
 
 /*# sourceMappingURL=maps/style.css.map */
+/* 21071 */
+body.sidebar-icon-only .menu-items.hover-open>.collapse .menu-items>.collapse{
+  display:none !important;
+}
+
+body.sidebar-icon-only .menu-items.hover-open>.collapse .menu-items.active>.collapse{
+  display:block !important;
+}
+
+body.sidebar-icon-only .menu-items.hover-open .collapse ul{
+  padding:0;
+}
+
+body.sidebar-icon-only .menu-items.hover-open .collapse a>span{
+  left:0!important;
+}

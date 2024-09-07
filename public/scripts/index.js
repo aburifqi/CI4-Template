@@ -7,7 +7,7 @@ $(function() {
 //#region Fungsi-fungsi
     function openPage(page){
         if(event)event.preventDefault();
-        console.log(page)
+
         $.ajax({
             url :`${baseURL}/page`,
             type: 'POST',
@@ -16,7 +16,6 @@ $(function() {
                 page:page
             },
             success :(res)=>{
-                console.log(res)
                 $("#page-element").html(res.view);
             },
             error : (_xhr, _status, _err)=>{
