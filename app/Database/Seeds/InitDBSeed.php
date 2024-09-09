@@ -11,5 +11,10 @@ class InitDBSeed extends Seeder
         $this->call('AuthGroupSeed');
         $this->call('UserSeed');
         $this->call('AuthGroupUserSeed');
+        $this->call('PermissionsSeed');
+        $this->call('AuthGroupPermissionsSeed');
+        $this->call('AuthUserPermissionsSeed');
+        $this->call('SistemOtoritasSeed');
+        $this->call('IconsSeed');
     }
 }

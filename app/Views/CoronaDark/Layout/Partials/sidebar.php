@@ -48,6 +48,6 @@
     <li class="nav-item nav-category">
       <span class="nav-link">Navigasi</span>
     </li>
-    <?= view_cell('\App\Libraries\WidgetMenu::index') ?>
+    <?= view_cell('\App\Libraries\Widget::menu') ?>
   </ul>
 </nav>

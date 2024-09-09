@@ -7,16 +7,9 @@
     <!--favicon-->
     <link rel="icon" href="<?= base_url(); ?>/coronadark/images/favicon.png" type="image/x-icon">
     <title><?= getenv("APPNAME"); ?></title>
-    <!-- plugins:css -->
-    <link rel="stylesheet" href="<?= base_url(); ?>/standard/mdi/css/materialdesignicons.min.css">
+
+    <link rel="stylesheet" href="<?= base_url(); ?>/libs/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/coronadark/css/vendor.bundle.base.css">
-    <!-- endinject -->
-    <!-- <link href="<?= base_url(); ?>/fonts/font-awesome/css/all.min.css" rel="stylesheet" /> -->
-    <!-- <link href="<?= base_url(); ?>/fonts/font-awesome/css/fontawesome.min.css" rel="stylesheet" /> -->
-    <!-- <link href="<?= base_url(); ?>/standard/datepicker/bootstrap-datepicker3.min.css" rel="stylesheet" /> -->
-    <!-- <link href="<?= base_url(); ?>/standard/toast/jquery.toast.min.css" rel="stylesheet" /> -->
-    <!-- <link href="<?= base_url(); ?>/standard/sweetalert2/sweetalert2.min.css" rel="stylesheet" /> -->
-    <!-- <link href="<?= base_url(); ?>/standard/datatables/datatables.min.css" rel="stylesheet" /> -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?= base_url(); ?>/coronadark/css/style.css">
     <!-- End layout styles -->
@@ -58,6 +51,7 @@
 
     </style>
     <?= $this->renderSection('style') ?>
+    <injectstyle></injectstyle>
   </head>
   <body>
     <div class="container-scroller">
@@ -79,9 +73,6 @@
       </div>
       <!-- page-body-wrapper ends -->
     </div>
-    <modals>
-      
-    </modals>
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script>
@@ -89,7 +80,6 @@
     </script>
 
     <script src="<?= base_url(); ?>/coronadark/js/vendor.bundle.base.js"></script>
-    <!-- <script src="<?= base_url(); ?>/standard/jquery/jquery.min.js"></script> -->
     <script src="<?= base_url(); ?>/coronadark/js/off-canvas.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/hoverable-collapse.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/misc.js"></script>
@@ -97,5 +87,6 @@
     <script src="<?= base_url(); ?>/coronadark/js/custom.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/index.js"></script>
     <?= $this->renderSection('scripts') ?>
+    <injectscript></injectscript>
   </body>
 </html>

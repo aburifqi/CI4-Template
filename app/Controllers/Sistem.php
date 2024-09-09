@@ -47,11 +47,14 @@ class Sistem extends BaseController
         ]);
         $data = $query->getFirstRow();
         $breadCrumbs = [$data];
-        $data = $this->getMenuInduk($data, $breadCrumbs);
-        $breadCrumbs = array_reverse($breadCrumbs);
+        if($data){
+            $data = $this->getMenuInduk($data, $breadCrumbs);
+            $breadCrumbs = array_reverse($breadCrumbs);
+        }
         $renderView = '';
         try {
             $renderView = view_cell('\App\Libraries\Page::openPage', [
+                'url'=> $data->url,
                 'page' => $data->name,
                 'data' => $data,
                 'breadCrumbs' => $breadCrumbs
@@ -60,7 +63,7 @@ class Sistem extends BaseController
         catch(\Exception $e) {
             $renderView = view_cell('\App\Libraries\Page::openPage', [
                 'page' => 'error-404',
-                'view'=> $data->judul
+                'view'=> $data->judul ?? ''
             ]);
         }
         return json_encode([

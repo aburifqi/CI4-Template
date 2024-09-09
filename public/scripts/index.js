@@ -16,7 +16,14 @@ $(function() {
                 page:page
             },
             success :(res)=>{
-                $("#page-element").html(res.view);
+                const elemen = $('<div></div>');
+                $(elemen).html(res.view);
+                const injectStyle = $(elemen).find("injectstyle");
+                const injectPage = $(elemen).find("injectpage");
+                const injectScript = $(elemen).find("injectscript");
+                $("#page-element").html($(injectPage).html());
+                $("injectstyle").html($(injectStyle).html());
+                $("injectscript").html($(injectScript).html());
             },
             error : (_xhr, _status, _err)=>{
                 console.log(_xhr);

@@ -11,6 +11,7 @@ class CreateThemeTable extends Migration
         // Themes
         $this->forge->addField([
             'id' => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'auto_increment' => true],
+            'logo' => ['type' => 'varchar', 'constraint' => 50],
             'theme' => ['type' => 'varchar', 'constraint' => 50],
             'is_default' => ['type' => 'tinyint', 'default' => '0'],
         ]);

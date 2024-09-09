@@ -4,12 +4,12 @@
         if(sizeof($menu)){
             foreach($menu as $mn){
                 if(sizeof($mn['anak'])){
-                    $strMenu .= view_cell('\App\Libraries\WidgetMenu::parentMenu', [
+                    $strMenu .= view_cell('\App\Libraries\Widget::parentMenu', [
                         'menu' => $mn,
                         'menuAnak' => renderMenu($mn['anak'])
                     ]);
                 }else{
-                    $strMenu.= view_cell('\App\Libraries\WidgetMenu::actionMenu', $mn);
+                    $strMenu.= view_cell('\App\Libraries\Widget::actionMenu', $mn);
                 }
             }
         }
