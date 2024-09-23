@@ -302,8 +302,8 @@
 
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-xs-12" style="height:60vh; overflow:auto">
-                                <div class="form-group row">
+                            <div class="col" style="height:60vh; overflow:auto">
+                                <div class="form-group">
                                     <div class="col-xs-9">
                                         <label for="icon">Icon</label>
                                         <div style="display:flex; align-items: center;justify-content: space-between;width:100%;">
@@ -322,7 +322,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group row">
+                                <div class="form-group">
                                     <div class="col-xs-9">
                                         <label for="color">Warna Icon</label>
                                         <div style="display:flex; align-items: center;justify-content: space-between;width:100%;">

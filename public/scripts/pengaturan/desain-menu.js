@@ -111,8 +111,20 @@ function renderTree(){
         dataType:"JSON",
         
         success:(res)=>{
-            console.log(res); return;
             var zNode=[];
+            console.log(res); 
+            if(res.data.length){
+                let id = 1;
+                $.each(res.data, (i, menu)=>{
+                    zNode.push({ id:menu.id, pId:menu.parent_id, name:menu.name, isParent:menu.anak.length>0?true:false,db:menu, nocheck:true});
+                    if (menu.anak.length){
+                        getChildMenu(menu, zNode, id);
+                    }
+                    id++;
+                });
+                $.fn.zTree.init($("#treeMenu"), setting, zNode);
+            }
+            return;
 
             let parentMenu = $.grep(data.menu,(d, i)=>{
                 return d.parent_code == 0;
@@ -190,14 +202,14 @@ function showIconForTree(treeId, treeNode) {
 
 function getChildMenu(menu, zNode, id){
     var kid = 0;
-    $.each(menu.children, (n, ch)=>{
+    $.each(menu.anak, (n, ch)=>{
         kid++;
         var strID = id.toString() + kid.toString();
-        zNode.push({ id: ch.otoritas_child.code, pId:ch.otoritas_child.parent_code, name:ch.otoritas_child.title,db:ch.otoritas_child, nocheck:true});
-        if (ch.otoritas_child.type == "Menu"){
-            menu.children[n] = ch.otoritas_child;
-            if (ch.otoritas_child.children.length){
-                getChildMenu(ch.otoritas_child, zNode, parseInt(strID));
+        zNode.push({ id: ch.id, pId:ch.parent_id, name:ch.name,db:ch, nocheck:true});
+        if (ch.jenis == "Menu"){
+            // menu.children[n] = ch.otoritas_child;
+            if (ch.anak.length){
+                getChildMenu(ch.anak, zNode, parseInt(strID));
             }
         }
         kid++;
