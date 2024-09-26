@@ -8,6 +8,7 @@
     <link rel="icon" href="<?= base_url(); ?>/coronadark/images/favicon.png" type="image/x-icon">
     <title><?= getenv("APPNAME"); ?></title>
 
+    <link href="<?= base_url(); ?>/fonts/font-awesome/css/fontawesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url(); ?>/libs/mdi/css/materialdesignicons.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/coronadark/css/vendor.bundle.base.css">
     <!-- Layout styles -->

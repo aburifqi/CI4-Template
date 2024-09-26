@@ -94,6 +94,22 @@ $(function () {
         }
     });
 
+    initDataTable(
+        $("#tbl-icons"),
+        baseURL+'get-icons',
+        function (data) {
+        },
+        true,
+        {
+            columnDefs:[{
+                        orderable: false,
+                        targets: 0,
+                    },
+                ],
+            order  : [[1, 'desc']],
+        
+        }
+    );
     // Buang ini untuk ngilangin data di footer
     $("#el-footer").html(`
         <button class="btn btn-dark" onclick="batal(this)">Batal</button>

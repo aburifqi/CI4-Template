@@ -1,12 +1,11 @@
 <injectstyle>
     <link href="<?= base_url() ?>libs/spectrum/spectrum.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url() ?>libs/zTreeV3/css/metroStyle/metroStyle.css" type="text/css">
+    <link rel="stylesheet" href="<?= base_url() ?>libs/datatables/datatables.css" type="text/css">
     <style>
         #treeMenu i{
             font-family: "Font Awesome 6 Brands";
         }
-    </style>
-    <style>
         .tombol-expand:before {
             margin-top: 2px!important;
         }
@@ -187,8 +186,7 @@
             right: 0px;
         }
     
-    </style>
-    <style>
+
         .container-icon {
             min-height: 50vh;
             max-height: 50vh;
@@ -284,23 +282,24 @@
 
     <modal id="modal-menu" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-md">
-            <form id="frm-data">
-                <input type="hidden" name="id" value="0">
-                <input type="hidden" name="created_by" value="">
-                <input type="hidden" name="created_at" value="">
-                <input type="hidden" name="updated_by" value="">
-                <input type="hidden" name="updated_at" value="">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+                    </button>
+                    <h4 class="modal-title" id="myModalLabel">Data Menu</h4>
+                </div>
 
-                <input type="hidden" name="crud_state" value="saved">
-                <input type="hidden" name="status" value="active">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
-                        </button>
-                        <h4 class="modal-title" id="myModalLabel">Data Menu</h4>
-                    </div>
+                <div class="modal-body">
+                    <form id="frm-data">
+                        <input type="hidden" name="id" value="0">
+                        <input type="hidden" name="created_by" value="">
+                        <input type="hidden" name="created_at" value="">
+                        <input type="hidden" name="updated_by" value="">
+                        <input type="hidden" name="updated_at" value="">
 
-                    <div class="modal-body">
+                        <input type="hidden" name="crud_state" value="saved">
+                        <input type="hidden" name="status" value="active">
+
                         <div class="row">
                             <div class="col" style="height:60vh; overflow:auto">
                                 <div class="form-group">
@@ -355,14 +354,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </form>
 
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-dark" data-dismiss="modal">Batal</button>
-                        <button type="button" class="btn btn-primary btn-save" onclick="simpanMenu(this);">Simpan</button>
-                    </div>
                 </div>
-            </form>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-dark" data-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary btn-save" onclick="simpanMenu(this);">Simpan</button>
+                </div>
+            </div>
         </div>
     </modal>
     <modal id="modal-pick-icon" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1"
@@ -410,6 +410,8 @@
     <script type="text/javascript" src="<?= base_url() ?>libs/zTreeV3/js/jquery.ztree.excheck.js"></script>
     <script type="text/javascript" src="<?= base_url() ?>libs/zTreeV3/js/jquery.ztree.exedit.js"></script>
     <script src="<?= base_url(); ?>/libs/jquery-validation/jquery.validate.min.js"></script>
+    <script src="<?= base_url(); ?>/libs/datatables/datatables.min.js"></script>
+    <script src="<?= base_url(); ?>/libs/datatables/custom-data-tables.js"></script>
     <script src="<?= base_url() ?>/scripts/pengaturan/desain-menu.js"></script>
 
 </injectscript>

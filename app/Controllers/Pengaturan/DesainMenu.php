@@ -33,6 +33,18 @@ class DesainMenu extends BaseController
         ]);
     }
 
+    public function getIcons(){
+        $selectQueryList = "SELECT 
+            *
+        ";
+        $fromQuery = 
+            " FROM icons
+            "
+        ;
+
+        return $this->loadDataTable($selectQueryList, $fromQuery);
+    }
+
     function getMenuAnak($data, $level){
         $hasil = array_map(function($dt) use($level) {
             $sql = '
