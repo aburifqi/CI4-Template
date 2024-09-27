@@ -303,7 +303,7 @@ function initDataTable(
     //   [5, 10, -1],
     //   [5, 10, "All"],
     // ],
-    pageLength: listItemPerPage? listItemPerPage:5,
+    pageLength: 5,//listItemPerPage? listItemPerPage:5,
     // order: [[0, "desc"]],
     orderCellsTop: true,
     serverSide: true,

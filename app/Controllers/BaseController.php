@@ -69,9 +69,11 @@ abstract class BaseController extends Controller
         "having" => "",
         "order" => "",
     ]]){
+        $request = request();
+
         if(!sizeof($sumberData)){
             $json_data = array(
-                "draw"            => intval($_POST['draw']),  
+                "draw"            => intval($request->getPost('draw')),  
                 "recordsTotal"    => 0,  
                 "recordsFiltered" => 0, 
                 "data"            => [],
@@ -101,19 +103,19 @@ abstract class BaseController extends Controller
         }
         $queryAll .= ') all_data';
         $queryCountAll .= ') all_data';
-        $limit = $_POST['length'] ?? -1;
-        $start = $_POST['start'];
-        $order = $_POST['columns'][0]['name'];
-        if(!empty($_POST['order'])){
-            $order = $_POST['columns'][$_POST['order']['0']['column']]['name'];
+        $limit = $request->getPost('length') ?? -1;
+        $start = $request->getPost('start');
+        $order = $request->getPost('columns')[0]['name'];
+        if(!empty($request->getPost('order'))){
+            $order = $request->getPost('columns')[$request->getPost('order')['0']['column']]['name'];
         }
         if($order){
             $order = explode('|', $order);
             $order =$order[0];
         }
         $dir = 'asc';
-        if(!empty($_POST['order'])){
-            $dir = $_POST['order']['0']['dir'];
+        if(!empty($request->getPost('order'))){
+            $dir = $request->getPost('order')['0']['dir'];
         }
         $strOrder = '';
         if ($order && $dir) $strOrder = "ORDER BY $order $dir ";
@@ -124,14 +126,14 @@ abstract class BaseController extends Controller
         }
         // Filter
         $strWhere = '';
-        $searchFromFront = $_POST['searchmode']=='front'?'':'%';
+        $searchFromFront = $request->getPost('searchmode')=='front'?'':'%';
         // Filter dari satu input box
-        if(!empty($_POST['search']['value']))
+        if(!empty($request->getPost('search')['value']))
         {    
-            $search = $_POST['search']['value'];
+            $search = $request->getPost('search')['value'];
             $strCondition = "";
-            if (sizeof($_POST['columns'])>0){
-                foreach($_POST['columns'] as $column){
+            if (sizeof($request->getPost('columns'))>0){
+                foreach($request->getPost('columns') as $column){
                     if ($column['name']){
                         $fieldName = explode('|',$column['name']);
                         if ($fieldName[0]){
@@ -160,9 +162,9 @@ abstract class BaseController extends Controller
             $strWhere .= $strCondition;
         }
         //Cek saring per kolom
-        if (sizeof($_POST['columns'])>0){
+        if (sizeof($request->getPost('columns'))>0){
             $strCondition = "";
-            foreach($_POST['columns'] as $column){
+            foreach($request->getPost('columns') as $column){
                 if ($column['name'] && strlen($column['search']['value'])>0){
                     $fieldName = explode('|',$column['name']);
                     if (!empty($fieldName[2])){
@@ -259,14 +261,14 @@ abstract class BaseController extends Controller
         
         $queryData = "$queryAll $strWhere $strOrder $strLimit";
         $queryCountFilter = "$queryCountAll $strWhere";
-        $data = $db->fetch_all($queryData);
+        $data = $this->db->query($queryData)->getResultArray();//$db->fetch_all($queryData);
         $totalData = $db->fetch_one($queryCountAll)['total'];
         $totalFiltered = $db->fetch_one($queryCountFilter)['total'];
 
         $json_data = array(
-            "draw"            => intval($_POST['draw']),  
-            "recordsTotal"    => !empty($_POST['length']) && $totalData > $_POST['length'] ? intval($totalData) : $_POST['length'],  
-            "recordsFiltered" => !empty($_POST['length']) && $totalFiltered > $_POST['length'] ? intval($totalFiltered): $_POST['length'] , 
+            "draw"            => intval($request->getPost('draw')),  
+            "recordsTotal"    => !empty($request->getPost('length')) && $totalData > $request->getPost('length') ? intval($totalData) : $request->getPost('length'),  
+            "recordsFiltered" => !empty($request->getPost('length')) && $totalFiltered > $request->getPost('length') ? intval($totalFiltered): $request->getPost('length') , 
             "data"            => $data,
             // "post"			  => $_POST,
             // "limit"			  => $limit,

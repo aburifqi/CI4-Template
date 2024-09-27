@@ -1,7 +1,7 @@
 <injectstyle>
     <link href="<?= base_url() ?>libs/spectrum/spectrum.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url() ?>libs/zTreeV3/css/metroStyle/metroStyle.css" type="text/css">
-    <link rel="stylesheet" href="<?= base_url() ?>libs/datatables/datatables.css" type="text/css">
+    <link rel="stylesheet" href="<?= base_url() ?>libs/datatables/datatables.min.css" type="text/css">
     <style>
         #treeMenu i{
             font-family: "Font Awesome 6 Brands";

@@ -23,6 +23,7 @@ class DesainMenu extends BaseController
                 WHERE so.parent_id = 0 AND so.jenis="Menu" AND so.status = "active"
                 ORDER BY so.urut
         ';
+
         $query = $this->db->query($sql);
         $data = $query->getResultArray();
         if(sizeof($data)){
@@ -34,15 +35,16 @@ class DesainMenu extends BaseController
     }
 
     public function getIcons(){
-        $selectQueryList = "SELECT 
-            *
-        ";
-        $fromQuery = 
-            " FROM icons
-            "
-        ;
+        $sumberData = [[
+            "tables" => "icons",
+            "fields" => "*",
+            "where" => "",
+            "group" => "",
+            "having" => "",
+            "order" => "",
+        ]];
 
-        return $this->loadDataTable($selectQueryList, $fromQuery);
+        return $this->loadDataTable($sumberData);
     }
 
     function getMenuAnak($data, $level){
