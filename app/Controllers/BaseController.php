@@ -126,11 +126,16 @@ abstract class BaseController extends Controller
         }
         // Filter
         $strWhere = '';
+        $bindings = [];
         $searchFromFront = $request->getPost('searchmode')=='front'?'':'%';
         // Filter dari satu input box
         if(!empty($request->getPost('search')['value']))
         {    
             $search = $request->getPost('search')['value'];
+            $bindings = [
+                "search"=>$search
+            ];
+
             $strCondition = "";
             if (sizeof($request->getPost('columns'))>0){
                 foreach($request->getPost('columns') as $column){
@@ -143,15 +148,15 @@ abstract class BaseController extends Controller
                                 case 'number-range':
                                     $strWhere = " WHERE ";
                                     $strCondition .= $strCondition? ' or ': '';
-                                    $strCondition .= $fieldName[0] . " LIKE '".$searchFromFront .$db->clean($search)."%'";
+                                    $strCondition .= $fieldName[0] . " LIKE '".$searchFromFront .":search:%'";
                                 break;
                                 case 'date-range-picker':
                                     if (is_numeric($search)){
                                         $strWhere = " WHERE ";
                                         $strCondition .= $strCondition? ' or ': '';
-                                        $strCondition .= ' Day('. $fieldName[0] . ") = ".$db->clean($search);
-                                        $strCondition .= ' or Month('. $fieldName[0] . ") = ".$db->clean($search);
-                                        $strCondition .= ' or Year('. $fieldName[0] . ") = ".$db->clean($search);
+                                        $strCondition .= ' Day('. $fieldName[0] . ") = :search:";
+                                        $strCondition .= ' or Month('. $fieldName[0] . ") = :search:";
+                                        $strCondition .= ' or Year('. $fieldName[0] . ") = :search:";
                                     }
                                 break;
                             }
@@ -169,37 +174,42 @@ abstract class BaseController extends Controller
                     $fieldName = explode('|',$column['name']);
                     if (!empty($fieldName[2])){
                         $search = $column['search']['value'];
+                        $bindings[$fieldName[0]] = $search;
                         switch($fieldName[2]){
                             case 'input-item':
                                 $strWhere = " WHERE ";
                                 $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= "(".$fieldName[0] . " LIKE '".$searchFromFront .$db->clean($search)."%' OR ".$fieldName[1] . " LIKE '".$searchFromFront .$db->clean($search)."%')";
+                                $strCondition .= "(".$fieldName[0] . " LIKE '".$searchFromFront .":".$fieldName[0].":%' OR ".$fieldName[1] . " LIKE '".$searchFromFront .":".$fieldName[0].":%')";
                                 break;
                         }
                     }
                     else if ($fieldName[0]){
                         $search = $column['search']['value'];
+                        
                         switch($fieldName[1]){
                             case 'input':
+                                $bindings[$fieldName[0]] = $search;
                                 $strWhere = " WHERE ";
                                 $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= $fieldName[0] . " LIKE '".$searchFromFront .$db->clean($search)."%'";
+                                $strCondition .= $fieldName[0] . " LIKE '".$searchFromFront .":".$fieldName[0].":%'";
                                 break;
                             case 'select':
+                                $bindings[$fieldName[0]] = $search;
                                 $strWhere = " WHERE ";
                                 $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= $fieldName[0] . " = '".$db->clean($search)."'";
+                                $strCondition .= $fieldName[0] . " = ':".$fieldName[0].":'";
                                 break;
                             case 'number-range':
                                 $arrRange = array_map('trim', explode('-', $search));
 
                                 $from = $arrRange[0];
                                 $to = $arrRange[1];
-
+                                $bindings[$fieldName[0]."-from"] = $from;
+                                $bindings[$fieldName[0]."-to"] = $to;
                                 $strWhere = " WHERE ";
                                 $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= $fieldName[0] . " >= '".$db->clean($from)."'";
-                                $strCondition .= ' and '.$fieldName[0] . " <= '".$db->clean($to)."'";
+                                $strCondition .= $fieldName[0] . " >= ':".$fieldName[0]."-from:'";
+                                $strCondition .= ' and '.$fieldName[0] . " <= ':".$fieldName[0]."-to:'";
                                 break;
                             case 'date-range-picker':
                                 $arrRange = array_map('trim', explode('-', $search));
@@ -209,10 +219,13 @@ abstract class BaseController extends Controller
                                 $tanggal = str_replace('/', '-', $arrRange[1]);
                                 $tglAkhir = date('Y-m-d', strtotime($tanggal));
 
+                                $bindings[$fieldName[0]."-tgl-mulai"] = $tglMulai;
+                                $bindings[$fieldName[0]."-tgl-akhir"] = $tglAkhir;
+
                                 $strWhere = " WHERE ";
                                 $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= ' DATE (' .$fieldName[0] . ") >= '".$db->clean($tglMulai)."'";
-                                $strCondition .= ' and DATE('.$fieldName[0] . ") <= '".$db->clean($tglAkhir)."'";
+                                $strCondition .= ' DATE (' .$fieldName[0] . ") >= ':".$fieldName[0]."-tgl-mulai:'";
+                                $strCondition .= ' and DATE('.$fieldName[0] . ") <= ':".$fieldName[0]."-tgl-akhir:'";
                                 break;
                             case 'date-range-picker-integer':
                                 $arrRange = array_map('trim', explode('-', $search));
@@ -222,23 +235,13 @@ abstract class BaseController extends Controller
                                 $tanggal = str_replace('/', '-', $arrRange[1]);
                                 $tglAkhir = date('Y-m-d', strtotime($tanggal));
 
-                                $strWhere = " WHERE ";
-                                $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= ' (' .$fieldName[0] . ") >= '".strtotime($tglMulai)."'";
-                                $strCondition .= ' and ('.$fieldName[0] . ") <= '".strtotime($tglAkhir.' 23:59:59')."'";
-                                break;
-                            case 'empty-date-range-picker-integer':
-                                $arrRange = array_map('trim', explode('-', $search));
-
-                                $tanggal = str_replace('/', '-', $arrRange[0]);
-                                $tglMulai = date('Y-m-d', strtotime($tanggal));
-                                $tanggal = str_replace('/', '-', $arrRange[1]);
-                                $tglAkhir = date('Y-m-d', strtotime($tanggal));
+                                $bindings[$fieldName[0]."-tgl-mulai"] = strtotime($tglMulai);
+                                $bindings[$fieldName[0]."-tgl-akhir"] = strtotime($tglAkhir.' 23:59:59');
 
                                 $strWhere = " WHERE ";
                                 $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= ' (' .$fieldName[0] . ") >= '".strtotime($tglMulai)."'";
-                                $strCondition .= ' and ('.$fieldName[0] . ") <= '".strtotime($tglAkhir.' 23:59:59')."'";
+                                $strCondition .= ' (' .$fieldName[0] . ") >= ':".$fieldName[0]."-tgl-mulai:'";
+                                $strCondition .= ' and ('.$fieldName[0] . ") <= ':".$fieldName[0]."-tgl-akhir:'";
                                 break;
                             
                         }
@@ -261,9 +264,10 @@ abstract class BaseController extends Controller
         
         $queryData = "$queryAll $strWhere $strOrder $strLimit";
         $queryCountFilter = "$queryCountAll $strWhere";
-        $data = $this->db->query($queryData)->getResultArray();//$db->fetch_all($queryData);
-        $totalData = $db->fetch_one($queryCountAll)['total'];
-        $totalFiltered = $db->fetch_one($queryCountFilter)['total'];
+        $data = $this->db->query($queryData, $bindings)->getResultArray();
+        // return json_encode($this->db->query($queryCountAll, $bindings)->getResultArray());
+        $totalData = $this->db->query($queryCountAll, $bindings)->getResultArray()[0]['total'];
+        $totalFiltered = $this->db->query($queryCountFilter, $bindings)->getResultArray()[0]['total'];
 
         $json_data = array(
             "draw"            => intval($request->getPost('draw')),  
