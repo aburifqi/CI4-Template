@@ -148,7 +148,7 @@ abstract class BaseController extends Controller
                                 case 'number-range':
                                     $strWhere = " WHERE ";
                                     $strCondition .= $strCondition? ' or ': '';
-                                    $strCondition .= $fieldName[0] . " LIKE '".$searchFromFront .":search:%'";
+                                    $strCondition .= $fieldName[0] . " LIKE ".$searchFromFront .":search:%";
                                 break;
                                 case 'date-range-picker':
                                     if (is_numeric($search)){
@@ -179,7 +179,7 @@ abstract class BaseController extends Controller
                             case 'input-item':
                                 $strWhere = " WHERE ";
                                 $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= "(".$fieldName[0] . " LIKE '".$searchFromFront .":".$fieldName[0].":%' OR ".$fieldName[1] . " LIKE '".$searchFromFront .":".$fieldName[0].":%')";
+                                $strCondition .= "(".$fieldName[0] . " LIKE '".$searchFromFront .":".$fieldName[0].":%' OR ".$fieldName[1] . " LIKE ".$searchFromFront .":".$fieldName[0].":%)";
                                 break;
                         }
                     }
@@ -188,16 +188,16 @@ abstract class BaseController extends Controller
                         
                         switch($fieldName[1]){
                             case 'input':
-                                $bindings[$fieldName[0]] = $search;
+                                $bindings[$fieldName[0]] = $searchFromFront . $search ."%";
                                 $strWhere = " WHERE ";
                                 $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= $fieldName[0] . " LIKE '".$searchFromFront .":".$fieldName[0].":%'";
+                                $strCondition .= $fieldName[0] . " LIKE :".$fieldName[0].":";
                                 break;
                             case 'select':
                                 $bindings[$fieldName[0]] = $search;
                                 $strWhere = " WHERE ";
                                 $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= $fieldName[0] . " = ':".$fieldName[0].":'";
+                                $strCondition .= $fieldName[0] . " = :".$fieldName[0].":";
                                 break;
                             case 'number-range':
                                 $arrRange = array_map('trim', explode('-', $search));
@@ -208,8 +208,8 @@ abstract class BaseController extends Controller
                                 $bindings[$fieldName[0]."-to"] = $to;
                                 $strWhere = " WHERE ";
                                 $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= $fieldName[0] . " >= ':".$fieldName[0]."-from:'";
-                                $strCondition .= ' and '.$fieldName[0] . " <= ':".$fieldName[0]."-to:'";
+                                $strCondition .= $fieldName[0] . " >= :".$fieldName[0]."-from:";
+                                $strCondition .= ' and '.$fieldName[0] . " <= :".$fieldName[0]."-to:";
                                 break;
                             case 'date-range-picker':
                                 $arrRange = array_map('trim', explode('-', $search));
@@ -224,8 +224,8 @@ abstract class BaseController extends Controller
 
                                 $strWhere = " WHERE ";
                                 $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= ' DATE (' .$fieldName[0] . ") >= ':".$fieldName[0]."-tgl-mulai:'";
-                                $strCondition .= ' and DATE('.$fieldName[0] . ") <= ':".$fieldName[0]."-tgl-akhir:'";
+                                $strCondition .= ' DATE (' .$fieldName[0] . ") >= :".$fieldName[0]."-tgl-mulai:";
+                                $strCondition .= ' and DATE('.$fieldName[0] . ") <= :".$fieldName[0]."-tgl-akhir:";
                                 break;
                             case 'date-range-picker-integer':
                                 $arrRange = array_map('trim', explode('-', $search));
@@ -240,8 +240,8 @@ abstract class BaseController extends Controller
 
                                 $strWhere = " WHERE ";
                                 $strCondition .= $strCondition? ' and ': '';
-                                $strCondition .= ' (' .$fieldName[0] . ") >= ':".$fieldName[0]."-tgl-mulai:'";
-                                $strCondition .= ' and ('.$fieldName[0] . ") <= ':".$fieldName[0]."-tgl-akhir:'";
+                                $strCondition .= ' (' .$fieldName[0] . ") >= :".$fieldName[0]."-tgl-mulai:";
+                                $strCondition .= ' and ('.$fieldName[0] . ") <= :".$fieldName[0]."-tgl-akhir:";
                                 break;
                             
                         }
