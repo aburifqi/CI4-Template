@@ -12194,9 +12194,10 @@ input[type="button"].btn-block {
   font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
-  color: #000;
+  color: white; /*#000;*/
   text-shadow: 0 1px 0 #fff;
-  opacity: .5; }
+  /* opacity: .5;  */
+}
   .close:hover {
     color: #000;
     text-decoration: none; }
@@ -12342,8 +12343,9 @@ a.close.disabled {
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px); }
   .modal-header .close {
-    padding: 1rem 1rem;
-    margin: -25px -26px -25px auto; }
+    /* padding: 1rem 1rem; */
+    /* margin: -25px -26px -25px auto;  */
+  }
 
 .modal-title {
   margin-bottom: 0;
@@ -19652,8 +19654,9 @@ body.avgrund-active {
     margin-bottom: 0; }
   .swal2-modal .swal2-icon,
   .swal2-modal .swal2-success-ring {
-    margin-top: 0;
-    margin-bottom: 42px; }
+    /* margin-top: 0;
+    margin-bottom: 42px;  */
+  }
   .swal2-modal .swal2-buttonswrapper {
     margin-top: 0;
     padding: 0; }

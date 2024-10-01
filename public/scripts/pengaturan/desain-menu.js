@@ -1,4 +1,3 @@
-var urlController = "app/controller/pengaturan/desain-menu.php";
 var newCount = 1;
 var rulesForm = {
     code: {
@@ -310,43 +309,44 @@ async function simpan(obj) {
             getChildData(data, item.children);
         }
     });
+    console.log(data)
 
-    $.ajax({
-        url: urlController,
-        type: "POST",
-        dataType: "JSON",
-        data: {
-            action:"save",
-            data:data
-        },
-        success: (data) => {
-            if (data.success) {
-                $.toast({
-                    heading: "Berhasil",
-                    text: data.message,
-                    showHideTransition: "slide",
-                    position: "bottom-right",
-                    hideAfter: 1500,
-                    icon: "success",
-                });
-                $(obj).prop("disabled", false);
-            } else {
-                $.toast({
-                    heading: "Gagal",
-                    text: data.message,
-                    showHideTransition: "slide",
-                    position: "bottom-right",
-                    hideAfter: 1500,
-                    icon: "error",
-                });
-                $(obj).prop("disabled", false);
-            }
-        },
-        error: (_xhr, status, err) => {
-            console.log(_xhr);
-            $(obj).prop("disabled", false);
-        },
-    });
+    // $.ajax({
+    //     url: urlController,
+    //     type: "POST",
+    //     dataType: "JSON",
+    //     data: {
+    //         action:"save",
+    //         data:data
+    //     },
+    //     success: (data) => {
+    //         if (data.success) {
+    //             $.toast({
+    //                 heading: "Berhasil",
+    //                 text: data.message,
+    //                 showHideTransition: "slide",
+    //                 position: "bottom-right",
+    //                 hideAfter: 1500,
+    //                 icon: "success",
+    //             });
+    //             $(obj).prop("disabled", false);
+    //         } else {
+    //             $.toast({
+    //                 heading: "Gagal",
+    //                 text: data.message,
+    //                 showHideTransition: "slide",
+    //                 position: "bottom-right",
+    //                 hideAfter: 1500,
+    //                 icon: "error",
+    //             });
+    //             $(obj).prop("disabled", false);
+    //         }
+    //     },
+    //     error: (_xhr, status, err) => {
+    //         console.log(_xhr);
+    //         $(obj).prop("disabled", false);
+    //     },
+    // });
 
     return;
     $(obj).prop("disabled", true);

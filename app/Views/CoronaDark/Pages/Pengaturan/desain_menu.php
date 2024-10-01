@@ -2,6 +2,7 @@
     <link href="<?= base_url() ?>libs/spectrum/spectrum.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url() ?>libs/zTreeV3/css/metroStyle/metroStyle.css" type="text/css">
     <link rel="stylesheet" href="<?= base_url() ?>libs/datatables/datatables.min.css" type="text/css">
+    <link rel="stylesheet" href="<?= base_url() ?>libs/sweetalert2/sweetalert2.min.css" type="text/css">
     <style>
         #treeMenu i{
             font-family: "Font Awesome 6 Brands";
@@ -284,9 +285,9 @@
         <div class="modal-dialog modal-dialog-centered modal-md">
             <div class="modal-content">
                 <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">Data Menu</h4>
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
                     </button>
-                    <h4 class="modal-title" id="myModalLabel">Data Menu</h4>
                 </div>
 
                 <div class="modal-body">
@@ -375,23 +376,23 @@
                 </div>
 
                 <div class="modal-body" align="center">
+                    <table id="tbl-icons" level="0" class="table table-striped table-hover jambo_table" width="100%">
+                        <thead>
+                            <tr>
+                                <th field-data="null" field-name="id" format-data="row-number" filter-type="toggle-filter"  class-name="dt-body-right" width="50px"><center>No</center></th>
+
+                                <th field-data="nama" field-name="nama" filter-type="input" format-data="custom" format-custom="columnIcon" class-name="dt-body-center"><center>Icon</center></th>
+
+                                <th field-data="font" field-name="font" filter-type="select" filter-option="optionFonts" ><center>Font</center></th>
+
+                                <th field-data="kode" field-name="kode" filter-type="input"><center>Kode Icon</center></th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                     <div class="table-responsive">
-                        <table id="tbl-icons" level="0" class="table table-striped table-hover jambo_table" width="100%">
-                            <thead>
-                                <tr>
-                                    <th field-data="null" field-name="id" format-data="row-number" filter-type="toggle-filter"  class-name="dt-body-right" width="50px"><center>No</center></th>
-
-                                    <th field-data="nama" field-name="nama" filter-type="input" format-data="custom" format-custom="columnIcon" class-name="dt-body-center"><center>Icon</center></th>
-
-                                    <th field-data="font" field-name="font" filter-type="select" filter-option="optionFonts" ><center>Font</center></th>
-
-                                    <th field-data="kode" field-name="kode" filter-type="input"><center>Kode Icon</center></th>
-
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
                     </div>
                 </div>
 
@@ -410,6 +411,7 @@
     <script type="text/javascript" src="<?= base_url() ?>libs/zTreeV3/js/jquery.ztree.excheck.js"></script>
     <script type="text/javascript" src="<?= base_url() ?>libs/zTreeV3/js/jquery.ztree.exedit.js"></script>
     <script src="<?= base_url(); ?>/libs/jquery-validation/jquery.validate.min.js"></script>
+    <script src="<?= base_url(); ?>/libs/sweetalert2/sweetalert2.min.js"></script>
     <script src="<?= base_url(); ?>/libs/datatables/datatables.min.js"></script>
     <script src="<?= base_url(); ?>/libs/datatables/custom-data-tables.js"></script>
     <script src="<?= base_url() ?>/scripts/pengaturan/desain-menu.js"></script>
