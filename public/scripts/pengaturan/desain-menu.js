@@ -78,7 +78,7 @@ $(function () {
                 data.db[item.name]=item.value;
             });
             data.db.status = $("#status").is(":checked")?'active':'inactive';
-            data.db.type = $("#type").is(":checked")?'Menu':'Action';
+            data.db.jenis = $("#jenis").is(":checked")?'Menu':'Action';
 
             var zTree = $.fn.zTree.getZTreeObj("treeMenu");
             var nodes = zTree.getNodes();
@@ -206,9 +206,6 @@ function addDiyDom(treeId, treeNode) {
         // console.log(treeNode)
     });
     aObj.before(editStr);
-    // var btn = $("#diyBtn_"+treeNode.id);
-    // if (btn) btn.bind("click", function(){alert("diy Button for " + treeNode.name);});
-    
 }
 
 function showIconForTree(treeId, treeNode) {
@@ -233,17 +230,40 @@ function getChildMenu(menu, zNode, id){
 
 function tambahMenu( parent_code){
     $("#frm-data").trigger("reset");
-    var data ={
-        db:{
-            id:0,
-            code:"",
-            parent_code:parent_code,
-            title:"",
-            icon:"",
-            icon_color:"",
-            type:"Menu"
-        }
-    }
+    const data = {db:{
+        "id": 0,
+        "auth_permissions_id": 0,
+        "judul": "",
+        "icon": "",
+        "icon_color": "",
+        "jenis": "Menu",
+        "parent_id": "0",
+        "urut": 0,
+        "url": "",
+        "is_page": "0",
+        "status": "active",
+        "created_at": null,
+        "created_by": null,
+        "updated_at": null,
+        "updated_by": null,
+        "level": 0,
+        "name": "",
+        "description": "",
+        "anak": [],
+        "code": 0,
+        "title": ""
+    }}
+    // var data ={
+    //     db:{
+    //         id:0,
+    //         code:"",
+    //         parent_code:parent_code,
+    //         title:"",
+    //         icon:"",
+    //         icon_color:"",
+    //         type:"Menu"
+    //     }
+    // }
     $("#modal-menu").data("data",data).modal("show");
 }
 
@@ -255,17 +275,19 @@ function getChildData(data, children){
     $.each(children, function(i, item){
         if(!item.db){
             data.push({
-                id:0,
-                code: item.id,
-                title: item.name,
-                parent_code: item.pId,
-                icon: '',
-                icon_color:'',
-                type:'Menu',
-                crud_state:'saved',
-                url:'',
-                urut:item.getIndex(),
-                status:'active'
+                "id": 0,
+                "judul": item.name,
+                "icon": "",
+                "icon_color": "",
+                "jenis": "Menu",
+                "parent_id": item.pId,
+                "urut": item.getIndex(),
+                "url": "",
+                "status": "active",
+                "level": 0,
+                "name": item.name,
+                "code":item.id,
+                "title": item.name,
             });
         }else{
             var db = item.db;
@@ -363,7 +385,7 @@ async function simpan(obj) {
         "";
     data.title = $(row).find(".title").length ? $(row).find(".title").val() : "";
     data.code = $(row).find(".kode").length ? $(row).find(".kode").val() : "";
-    data.type = $(row).find(".type").length ? $(row).find(".type").val() : "";
+    data.jenis = $(row).find(".jenis").length ? $(row).find(".jenis").val() : "";
     data.url = $(row).find(".url").length ? $(row).find(".url").val() : "";
     data.status = $(row).find(".status").length ? $(row).find(".status").val() : "";
     data.crud_state = "saved";
@@ -553,16 +575,13 @@ async function newData(obj,parentCode) {
             action: "save",
             data: {
                 id: 0,
-                code: "",
+                code: data.code,
                 title: "",
                 icon: "",
                 icon_color: "",
-                type: "Menu",
-                parent_code: data.code,
+                jenis: "Menu",
                 urut: 0,
                 url: "",
-                children: 0,
-                crud_state: "new",
             },
         },
         success: (res) => {
@@ -616,22 +635,22 @@ function cariMDI(){
 //#endregion
 
 //#region Events
-$("#tbl-data>tbody").on("click", "div.tombol-expand", function (e) {
-    e.stopPropagation();
-    var tr = $(this).closest("tr");
-    var curTabel = $(tr).closest("table");
-    var row = $(curTabel).DataTable().row(tr);
-    var level = parseInt($(curTabel).attr("level")) + 1;
+// $("#tbl-data>tbody").on("click", "div.tombol-expand", function (e) {
+//     e.stopPropagation();
+//     var tr = $(this).closest("tr");
+//     var curTabel = $(tr).closest("table");
+//     var row = $(curTabel).DataTable().row(tr);
+//     var level = parseInt($(curTabel).attr("level")) + 1;
 
-    if (row.child.isShown()) {
-        row.child.hide();
-        tr.removeClass("shown");
-    } else {
-        row.child(formatDetail(row.data(), level)).show();
-        tr.next("tr").addClass("row-child");
-        tr.addClass("shown");
-    }
-});
+//     if (row.child.isShown()) {
+//         row.child.hide();
+//         tr.removeClass("shown");
+//     } else {
+//         row.child(formatDetail(row.data(), level)).show();
+//         tr.next("tr").addClass("row-child");
+//         tr.addClass("shown");
+//     }
+// });
 
 $('#modal-menu').on('show.bs.modal', function (event) {
     // var btnDB = $(event.relatedTarget);
@@ -642,19 +661,20 @@ $('#modal-menu').on('show.bs.modal', function (event) {
     }
     if(!data.db){
        data.db={
-        id:0,
-        icon:"",
-        icon_color:"",
-        parent_code:data.pId,
-        code:data.id,
-        title:data.name,
+        "id": 0,
+        "judul": data.name,
+        "icon": "",
+        "icon_color": "",
+        "parent_id": data.pId,
+        "code": data.id,
+        "title": data.name,
        }
     }
     $.each(data.db, function(key, item){
         $(`#frm-data input[name=${key}]`).val(item);
     });
     $(this).find("input[name=status]").val('active').prop("checked",data.db.status=='active'?true:false).trigger("change");
-    $(this).find("input[name=type]").val('Menu').prop("checked",data.db.type=='Menu'?true:false).trigger("change");
+    $(this).find("input[name=jenis]").val('Menu').prop("checked",data.db.jenis=='Menu'?true:false).trigger("change");
     $("#btn-pick-icon i").attr("class", data.db.icon);
     $("#btn-pick-warna").css("background-color", data.db.icon_color);
 });

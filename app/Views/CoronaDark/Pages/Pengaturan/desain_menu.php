@@ -331,10 +331,10 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-3">
-                                        <label for="type">Jenis</label>
+                                        <label for="jenis">Jenis</label>
                                         <div class="switch-menu">
-                                            <input type="checkbox" name="type" class="switch-menu-checkbox" id="type" checked>
-                                            <label class="switch-menu-label" for="type">
+                                            <input type="checkbox" name="jenis" class="switch-menu-checkbox" id="jenis" checked>
+                                            <label class="switch-menu-label" for="jenis">
                                                 <span class="switch-menu-inner"></span>
                                                 <span class="switch-menu-switch"></span>
                                             </label>
@@ -366,6 +366,7 @@
             </div>
         </div>
     </modal>
+    
     <modal id="modal-pick-icon" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">

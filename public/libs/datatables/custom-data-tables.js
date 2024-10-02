@@ -296,7 +296,7 @@ function initDataTable(
     processing: true,
     // pagingType       : "full", //"numbers",//"full_numbers",//"simple",//"first_last_numbers",//"simple_numbers",//
     // tableStyle      : "hover stripe nowrap",
-    scrollY         : $(tabel).parents(".modal").length? "30vh":"60vh",
+    // scrollY         : $(tabel).parents(".modal").length? "30vh":"60vh",
     // // scrollX         : true,
     // responsive      : true,
     // lengthMenu: [
