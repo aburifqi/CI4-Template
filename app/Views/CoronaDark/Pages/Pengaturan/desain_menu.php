@@ -303,6 +303,18 @@
 
                         <div class="row">
                             <div class="col" style="height:60vh; overflow:auto">
+                            <div class="form-group">
+                                    <label for="code">Kode</label><sup style="color:red">* wajib diisi</sup>
+                                    <input type="text" class="form-control" name="code" placeholder="Kode" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">Judul</label><sup style="color:red">* wajib diisi</sup>
+                                    <input type="text" class="form-control" name="title" placeholder="Judul" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="url">URL</label>
+                                    <input type="text" class="form-control" name="url" placeholder="URL">
+                                </div>
                                 <div class="form-group">
                                     <div class="col-xs-9">
                                         <label for="icon">Icon</label>
@@ -340,18 +352,6 @@
                                             </label>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <label for="code">Kode</label><sup style="color:red">* wajib diisi</sup>
-                                    <input type="text" class="form-control" name="code" placeholder="Kode" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="title">Judul</label><sup style="color:red">* wajib diisi</sup>
-                                    <input type="text" class="form-control" name="title" placeholder="Judul" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="url">URL</label>
-                                    <input type="text" class="form-control" name="url" placeholder="URL">
                                 </div>
                             </div>
                         </div>

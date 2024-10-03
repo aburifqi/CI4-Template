@@ -151,8 +151,8 @@ function renderTree(){
             if (parentMenu.length){
                 var id = 1;
                 $.each(parentMenu, (i, pm)=>{
-                    zNode.push({ id:pm.code, pId:pm.parent_code, name:pm.title, isParent:pm.children>0?true:false,db:pm, nocheck:true});
-                    if (pm.children.length){
+                    zNode.push({ id:pm.code, pId:pm.parent_code, name:pm.title, isParent:pm.anak.length>0?true:false,db:pm, nocheck:true});
+                    if (pm.anak.length){
                         getChildMenu(pm, zNode, id);
                     }
                     id++;
@@ -219,7 +219,6 @@ function getChildMenu(menu, zNode, id){
         var strID = id.toString() + kid.toString();
         zNode.push({ id: ch.id, pId:ch.parent_id, name:ch.name,db:ch, nocheck:true});
         if (ch.jenis == "Menu"){
-            // menu.children[n] = ch.otoritas_child;
             if (ch.anak.length){
                 getChildMenu(ch.anak, zNode, parseInt(strID));
             }
@@ -271,8 +270,8 @@ function simpanMenu(obj) {
     $("#frm-data").submit();
 }
 
-function getChildData(data, children){
-    $.each(children, function(i, item){
+function getChildData(data, anak){
+    $.each(anak, function(i, item){
         if(!item.db){
             data.push({
                 "id": 0,
@@ -297,8 +296,8 @@ function getChildData(data, children){
             db.urut = item.getIndex();
             data.push(db);
         }
-        if(item.children && item.children.length){
-            getChildData(data, item.children);
+        if(item.anak && item.anak.length){
+            getChildData(data, item.anak);
         }
     })
 }
@@ -327,8 +326,8 @@ async function simpan(obj) {
         db.title = item.name;
         db.urut = i;
         data.push(db);
-        if(item.children && item.children.length){
-            getChildData(data, item.children);
+        if(item.anak && item.anak.length){
+            getChildData(data, item.anak);
         }
     });
     console.log(data)
@@ -560,64 +559,64 @@ async function edit(obj) {
     });
 }
 
-async function newData(obj,parentCode) {
-    var row = $(obj).closest("tr");
-    var table = $(row).closest("table");
-    var data = $(table).DataTable().row(row).data();
+// async function newData(obj,parentCode) {
+//     var row = $(obj).closest("tr");
+//     var table = $(row).closest("table");
+//     var data = $(table).DataTable().row(row).data();
 
-   if(!data) data ={code:'0'};
+//    if(!data) data ={code:'0'};
 
-    $.ajax({
-        url: "app/controller/pengaturan/desain-menu.php",
-        type: "POST",
-        dataType: "JSON",
-        data: {
-            action: "save",
-            data: {
-                id: 0,
-                code: data.code,
-                title: "",
-                icon: "",
-                icon_color: "",
-                jenis: "Menu",
-                urut: 0,
-                url: "",
-            },
-        },
-        success: (res) => {
-            if (res.success) {
-                if (!data.id){
-                    $(table).DataTable().ajax.reload();
-                    return;
-                }
-                // $(table).DataTable().ajax.reload();
-                if ($(row).hasClass("shown")) {
-                    $(row).next(".row-child").find("table").DataTable().ajax.reload();
-                }else{
-                    let curTombolExpand = $(row).find(".tombol-expand");
-                    if ($(curTombolExpand).length){
-                        $(curTombolExpand).trigger("click");
-                    }else{
-                        $(row).find(".kolom-expand").append('<div class="tombol-expand"></div>');
-                        $(row).find(".kolom-expand .tombol-expand").trigger("click");
-                    }
-                }
-            } else {
-                $.toast({
-                    heading: "Gagal",
-                    text: data.message,
-                    showHideTransition: "slide",
-                    position: "bottom-right",
-                    hideAfter: 1500,
-                    icon: "error",
-                });
-            }
-        },
-        error: (_xhr, status, err) => {
-            console.log(_xhr);
-        },
-    });
-}
+//     $.ajax({
+//         url: "app/controller/pengaturan/desain-menu.php",
+//         type: "POST",
+//         dataType: "JSON",
+//         data: {
+//             action: "save",
+//             data: {
+//                 id: 0,
+//                 code: data.code,
+//                 title: "",
+//                 icon: "",
+//                 icon_color: "",
+//                 jenis: "Menu",
+//                 urut: 0,
+//                 url: "",
+//             },
+//         },
+//         success: (res) => {
+//             if (res.success) {
+//                 if (!data.id){
+//                     $(table).DataTable().ajax.reload();
+//                     return;
+//                 }
+//                 // $(table).DataTable().ajax.reload();
+//                 if ($(row).hasClass("shown")) {
+//                     $(row).next(".row-child").find("table").DataTable().ajax.reload();
+//                 }else{
+//                     let curTombolExpand = $(row).find(".tombol-expand");
+//                     if ($(curTombolExpand).length){
+//                         $(curTombolExpand).trigger("click");
+//                     }else{
+//                         $(row).find(".kolom-expand").append('<div class="tombol-expand"></div>');
+//                         $(row).find(".kolom-expand .tombol-expand").trigger("click");
+//                     }
+//                 }
+//             } else {
+//                 $.toast({
+//                     heading: "Gagal",
+//                     text: data.message,
+//                     showHideTransition: "slide",
+//                     position: "bottom-right",
+//                     hideAfter: 1500,
+//                     icon: "error",
+//                 });
+//             }
+//         },
+//         error: (_xhr, status, err) => {
+//             console.log(_xhr);
+//         },
+//     });
+// }
 
 //PICK icon
 function cariMDI(){
