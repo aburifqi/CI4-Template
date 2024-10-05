@@ -139,26 +139,6 @@ function renderTree(){
                 });
                 $.fn.zTree.init($("#treeMenu"), setting, zNode);
             }
-            return;
-
-            let parentMenu = $.grep(data.menu,(d, i)=>{
-                return d.parent_code == 0;
-            });
-            parentMenu = parentMenu.sort((a, b)=>{
-                return a.urut - b.urut;
-            });
-
-            if (parentMenu.length){
-                var id = 1;
-                $.each(parentMenu, (i, pm)=>{
-                    zNode.push({ id:pm.code, pId:pm.parent_code, name:pm.title, isParent:pm.anak.length>0?true:false,db:pm, nocheck:true});
-                    if (pm.anak.length){
-                        getChildMenu(pm, zNode, id);
-                    }
-                    id++;
-                });
-            }
-            $.fn.zTree.init($("#treeMenu"), setting, zNode);
         }
     });
 }
@@ -296,8 +276,8 @@ function getChildData(data, anak){
             db.urut = item.getIndex();
             data.push(db);
         }
-        if(item.anak && item.anak.length){
-            getChildData(data, item.anak);
+        if(item.children && item.children.length){
+            getChildData(data, item.children);
         }
     })
 }
@@ -320,14 +300,15 @@ async function simpan(obj) {
     var nodes =zTree.getNodes();
     
     var data = [];
+    console.log(nodes)
     $.each(nodes, function (i, item){
         var db = item.db;
         db.code = item.id;
         db.title = item.name;
         db.urut = i;
         data.push(db);
-        if(item.anak && item.anak.length){
-            getChildData(data, item.anak);
+        if(item.children && item.children.length){
+            getChildData(data, item.children);
         }
     });
     console.log(data)
