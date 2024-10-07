@@ -131,7 +131,8 @@ function renderTree(){
             if(res.data.length){
                 let id = 1;
                 $.each(res.data, (i, menu)=>{
-                    zNode.push({ id:menu.id, pId:menu.parent_id, name:menu.name, isParent:menu.anak.length>0?true:false,db:menu, nocheck:true});
+
+                    zNode.push({ id:menu.name, pId:0, name:menu.judul, isParent:menu.anak.length>0?true:false,db:menu, nocheck:true});
                     if (menu.anak.length){
                         getChildMenu(menu, zNode, id);
                     }
@@ -230,19 +231,7 @@ function tambahMenu( parent_code){
         "description": "",
         "anak": [],
         "code": 0,
-        "title": ""
     }}
-    // var data ={
-    //     db:{
-    //         id:0,
-    //         code:"",
-    //         parent_code:parent_code,
-    //         title:"",
-    //         icon:"",
-    //         icon_color:"",
-    //         type:"Menu"
-    //     }
-    // }
     $("#modal-menu").data("data",data).modal("show");
 }
 
@@ -254,7 +243,7 @@ function getChildData(data, anak){
     $.each(anak, function(i, item){
         if(!item.db){
             data.push({
-                "id": 0,
+                "id": item.id,
                 "judul": item.name,
                 "icon": "",
                 "icon_color": "",
@@ -266,12 +255,11 @@ function getChildData(data, anak){
                 "level": 0,
                 "name": item.name,
                 "code":item.id,
-                "title": item.name,
             });
         }else{
             var db = item.db;
             db.code = item.id;
-            db.title = item.name;
+            db.judul = item.name;
             db.parent_code = item.pId;
             db.urut = item.getIndex();
             data.push(db);
