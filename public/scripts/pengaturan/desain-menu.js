@@ -1,17 +1,17 @@
 var newCount = 1;
 var rulesForm = {
-    code: {
+    id: {
         required: true,
     },
-    title: {
+    judul: {
         required: true,
     },
 };
 var messageErrorForm = {
-    code: {
+    id: {
         required: "Kode menu belum diisi",
     },
-    title: {
+    judul: {
         required: "Judul menu belum diisi",
     },
 };
@@ -83,10 +83,10 @@ $(function () {
             var zTree = $.fn.zTree.getZTreeObj("treeMenu");
             var nodes = zTree.getNodes();
             if(!data.id){
-                nodes.push({ id:data.db.code, pId:0, name:data.db.title, isParent:false,db:data.db, nocheck:true});
+                nodes.push({ id:data.db.name, pId:0, name:data.db.judul, isParent:false,db:data.db, nocheck:true});
             }else{
-                data.id = data.db.code;
-                data.name = data.db.title;
+                data.id = data.db.name;
+                data.name = data.db.judul;
             }
             $.fn.zTree.init($("#treeMenu"), setting, nodes);
             $("#modal-menu").modal("toggle");
@@ -131,9 +131,9 @@ function renderTree(){
             if(res.data.length){
                 let id = 1;
                 $.each(res.data, (i, menu)=>{
-                    zNode.push({ id:menu.id, pId:menu.parent_id, name:menu.name, isParent:menu.anak.length>0?true:false,db:menu, nocheck:true});
+                    zNode.push({ id:menu.name, pId:0, name:menu.judul, isParent:menu.anak.length>0?true:false,db:menu, nocheck:true});
                     if (menu.anak.length){
-                        getChildMenu(menu, zNode, id);
+                        getChildMenu(res.data, menu.anak, menu, zNode, id);
                     }
                     id++;
                 });
@@ -192,15 +192,19 @@ function showIconForTree(treeId, treeNode) {
     return !treeNode.isParent;
 };
 
-function getChildMenu(menu, zNode, id){
+function getChildMenu(listParent, listSibling, menu, zNode, id){
     var kid = 0;
     $.each(menu.anak, (n, ch)=>{
         kid++;
         var strID = id.toString() + kid.toString();
-        zNode.push({ id: ch.id, pId:ch.parent_id, name:ch.name,db:ch, nocheck:true});
+        const parent = $.grep(listParent, (pr)=>{
+            return pr.id == ch.parent_id;
+        });
+
+        zNode.push({ id: ch.name, pId:parent[0].name, name:ch.judul, db:ch, nocheck:true});
         if (ch.jenis == "Menu"){
             if (ch.anak.length){
-                getChildMenu(ch.anak, zNode, parseInt(strID));
+                getChildMenu(listSibling, ch.anak, ch, zNode, parseInt(strID));
             }
         }
         kid++;
@@ -229,20 +233,8 @@ function tambahMenu( parent_code){
         "name": "",
         "description": "",
         "anak": [],
-        "code": 0,
-        "title": ""
     }}
-    // var data ={
-    //     db:{
-    //         id:0,
-    //         code:"",
-    //         parent_code:parent_code,
-    //         title:"",
-    //         icon:"",
-    //         icon_color:"",
-    //         type:"Menu"
-    //     }
-    // }
+
     $("#modal-menu").data("data",data).modal("show");
 }
 
@@ -259,20 +251,18 @@ function getChildData(data, anak){
                 "icon": "",
                 "icon_color": "",
                 "jenis": "Menu",
-                "parent_id": item.pId,
+                "parent_id": item.parent_id,
                 "urut": item.getIndex(),
                 "url": "",
                 "status": "active",
                 "level": 0,
-                "name": item.name,
-                "code":item.id,
-                "title": item.name,
+                "name": item.judul,
             });
         }else{
-            var db = item.db;
-            db.code = item.id;
-            db.title = item.name;
-            db.parent_code = item.pId;
+            let db = item.db;
+            db.name = item.id;
+            db.judul = item.name;
+            db.parent_name = item.pId;
             db.urut = item.getIndex();
             data.push(db);
         }
@@ -303,8 +293,8 @@ async function simpan(obj) {
     console.log(nodes)
     $.each(nodes, function (i, item){
         var db = item.db;
-        db.code = item.id;
-        db.title = item.name;
+        db.name = item.id;
+        db.judul = item.name;
         db.urut = i;
         data.push(db);
         if(item.children && item.children.length){
@@ -642,12 +632,11 @@ $('#modal-menu').on('show.bs.modal', function (event) {
     if(!data.db){
        data.db={
         "id": 0,
-        "judul": data.name,
+        "judul": data.judul,
         "icon": "",
         "icon_color": "",
-        "parent_id": data.pId,
-        "code": data.id,
-        "title": data.name,
+        "parent_id": 0,
+        "parent_name": data.pId,
        }
     }
     $.each(data.db, function(key, item){
@@ -706,7 +695,7 @@ $('#modal-pick-icon').on('hidden.bs.modal', function (e) {
     if(!$("#tbl-icons>tbody>tr.selected").length)return;
     var data = $("#tbl-icons").DataTable().row($("#tbl-icons>tbody>tr.selected")).data();
     if(!data)return;
-    let icon =data.kode;
+    let icon = data.kode;
     $(relatedTarget).find("i").attr("class",icon);
     $(relatedTarget).trigger('ubah');
 });
