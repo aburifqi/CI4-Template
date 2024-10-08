@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="<?= base_url() ?>libs/zTreeV3/css/metroStyle/metroStyle.css" type="text/css">
     <link rel="stylesheet" href="<?= base_url() ?>libs/datatables/datatables.min.css" type="text/css">
     <link rel="stylesheet" href="<?= base_url() ?>libs/sweetalert2/sweetalert2.min.css" type="text/css">
+    <link rel="stylesheet" href="<?= base_url() ?>libs/toast/jquery.toast.min.css" type="text/css">
     <style>
         #treeMenu i{
             font-family: "Font Awesome 6 Brands";
@@ -315,7 +316,7 @@
                                     <label for="url">URL</label>
                                     <input type="text" class="form-control" name="url" placeholder="URL">
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <div class="col-xs-9">
                                         <label for="icon">Icon</label>
                                         <div style="display:flex; align-items: center;justify-content: space-between;width:100%;">
@@ -334,7 +335,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group row">
                                     <div class="col-xs-9">
                                         <label for="color">Warna Icon</label>
                                         <div style="display:flex; align-items: center;justify-content: space-between;width:100%;">
@@ -413,6 +414,7 @@
     <script type="text/javascript" src="<?= base_url() ?>libs/zTreeV3/js/jquery.ztree.exedit.js"></script>
     <script src="<?= base_url(); ?>/libs/jquery-validation/jquery.validate.min.js"></script>
     <script src="<?= base_url(); ?>/libs/sweetalert2/sweetalert2.min.js"></script>
+    <script src="<?= base_url(); ?>/libs/toast/jquery.toast.min.js"></script>
     <script src="<?= base_url(); ?>/libs/datatables/datatables.min.js"></script>
     <script src="<?= base_url(); ?>/libs/datatables/custom-data-tables.js"></script>
     <script src="<?= base_url() ?>/scripts/pengaturan/desain-menu.js"></script>

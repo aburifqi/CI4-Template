@@ -87,9 +87,8 @@ $(function () {
             data.db.jenis = $("#jenis").is(":checked")?'Menu':'Action';
 
             const isNameEksis = $.grep(nodes, (nd)=>{
-                nd.id = data.db.name;
+                return nd.id == data.db.name;
             });
-            console.log (isNameEksis)
             if(isNameEksis.length){
                 $.toast({
                     heading: "Dibatalkan!",
@@ -146,7 +145,6 @@ function renderTree(){
         
         success:(res)=>{
             var zNode=[];
-            console.log(res); 
             if(res.data.length){
                 let id = 1;
                 $.each(res.data, (i, menu)=>{
@@ -173,7 +171,7 @@ function addHoverDom(treeId, treeNode) {
         // tambahMenu(treeNode, treeNode.id);
         var zTree = $.fn.zTree.getZTreeObj("treeMenu");
 
-        zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, name:"new node" + (newCount++)});
+        zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, judul:"new node" + (newCount++)});
         return false;
     });
 
