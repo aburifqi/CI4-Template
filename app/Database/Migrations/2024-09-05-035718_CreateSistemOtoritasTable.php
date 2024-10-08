@@ -15,7 +15,7 @@ class CreateSistemOtoritasTable extends Migration
             'icon'                          => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
             'icon_color'                    => ['type' => 'varchar', 'constraint' => 50, 'null' => true],
             'jenis'                         => ['type' => 'ENUM("Menu","Action")', 'default' => 'Menu', 'null' => FALSE,],
-            'parent_id'                     => ['type' => 'int', 'constraint' => 11, 'unsigned' => true, 'null' => true, 'default' => 0],
+            'parent_name'                   => ['type' => 'varchar', 'constraint' => 255, 'null' => true, 'default' => ''],
             'urut'                          => ['type' => 'int', 'constraint' => 11, 'unsigned' => true],
             'url'                           => ['type' => 'varchar', 'constraint' => 191, 'null' => true],
             'is_page'                       => ['type' => 'tinyint', 'constraint' => 1, 'null' => 0, 'default' => 0],

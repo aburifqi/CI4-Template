@@ -18,7 +18,7 @@ class Widget
                 FROM sistem_otoritas so
                 JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
                 JOIN auth_users_permissions aup ON aup.permission_id = ap.id
-                WHERE so.parent_id = 0 AND so.jenis="Menu" AND so.status = "active" AND aup.user_id = :user_id:
+                WHERE so.parent_name = "" AND so.jenis="Menu" AND so.status = "active" AND aup.user_id = :user_id:
                 ORDER BY so.urut
         ';
         $query = $this->db->query($sql, ["user_id"=>user()->id]);
@@ -51,12 +51,12 @@ class Widget
                 FROM sistem_otoritas so
                 JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
                 JOIN auth_users_permissions aup ON aup.permission_id = ap.id
-                WHERE so.parent_id = :parent_id: AND so.jenis="Menu" AND so.status = "active" AND aup.user_id = :user_id:
+                WHERE so.parent_name = :parent_name: AND so.jenis="Menu" AND so.status = "active" AND aup.user_id = :user_id:
                 ORDER BY so.urut
             ';
             $dt['level'] = $level;
             $dt['anak'] = $this->db->query($sql, [
-                'parent_id'     => $dt['id'],
+                'parent_name'     => $dt['name'],
                 "user_id"       => user()->id
             ])->getResultArray();
             if(sizeof($dt['anak'])){

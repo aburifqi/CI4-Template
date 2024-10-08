@@ -71,17 +71,36 @@ $(function () {
         submitHandler: function(form) {
             $("#loader").fadeIn();
            
-            var dataArr = $(form).serializeArray(); 
-            var data =$('#modal-menu').data("data");
+            let dataArr = $(form).serializeArray(); 
+            let data =$('#modal-menu').data("data");
+            let zTree = $.fn.zTree.getZTreeObj("treeMenu");
+            let nodes = zTree.getNodes();
 
             dataArr.forEach(item => {
-                data.db[item.name]=item.value;
+                if(item.name == 'id'){
+                    data.db.name = item.value;
+                }else{
+                    data.db[item.name]=item.value;
+                }
             });
             data.db.status = $("#status").is(":checked")?'active':'inactive';
             data.db.jenis = $("#jenis").is(":checked")?'Menu':'Action';
 
-            var zTree = $.fn.zTree.getZTreeObj("treeMenu");
-            var nodes = zTree.getNodes();
+            const isNameEksis = $.grep(nodes, (nd)=>{
+                nd.id = data.db.name;
+            });
+            console.log (isNameEksis)
+            if(isNameEksis.length){
+                $.toast({
+                    heading: "Dibatalkan!",
+                    text: `Menu ${data.db.name} sudah ada...`,
+                    showHideTransition: "slide",
+                    position: "bottom-right",
+                    hideAfter: 1500,
+                    icon: "warning",
+                });
+                return;
+            }
             if(!data.id){
                 nodes.push({ id:data.db.name, pId:0, name:data.db.judul, isParent:false,db:data.db, nocheck:true});
             }else{
@@ -146,8 +165,7 @@ function renderTree(){
 function addHoverDom(treeId, treeNode) {
     var sObj = $("#" + treeNode.tId + "_span");
     if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
-    var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
-        + "' title='add node' onfocus='this.blur();'></span>";
+    var addStr = "<span class='button add' id='addBtn_" + treeNode.tId + "' title='add node' onfocus='this.blur();'></span>";
     sObj.after(addStr);
 
     var btn = $("#addBtn_"+treeNode.tId);
@@ -198,7 +216,7 @@ function getChildMenu(listParent, listSibling, menu, zNode, id){
         kid++;
         var strID = id.toString() + kid.toString();
         const parent = $.grep(listParent, (pr)=>{
-            return pr.id == ch.parent_id;
+            return pr.name == ch.parent_name;
         });
 
         zNode.push({ id: ch.name, pId:parent[0].name, name:ch.judul, db:ch, nocheck:true});
@@ -220,7 +238,7 @@ function tambahMenu( parent_code){
         "icon": "",
         "icon_color": "",
         "jenis": "Menu",
-        "parent_id": "0",
+        "parent_name": "",
         "urut": 0,
         "url": "",
         "is_page": "0",
@@ -230,7 +248,7 @@ function tambahMenu( parent_code){
         "updated_at": null,
         "updated_by": null,
         "level": 0,
-        "name": "",
+        "name": "0",
         "description": "",
         "anak": [],
     }}
@@ -246,17 +264,17 @@ function getChildData(data, anak){
     $.each(anak, function(i, item){
         if(!item.db){
             data.push({
-                "id": item.id,
-                "judul": item.name,
+                "id": 0,
+                "name": item.id,
+                "judul": item.judul,
                 "icon": "",
                 "icon_color": "",
                 "jenis": "Menu",
-                "parent_id": item.parent_id,
+                "parent_name": item.parent_name,
                 "urut": item.getIndex(),
                 "url": "",
                 "status": "active",
                 "level": 0,
-                "name": item.judul,
             });
         }else{
             let db = item.db;
@@ -600,8 +618,6 @@ function cariMDI(){
         }
     });
 }
-
-
 //#endregion
 
 //#region Events
@@ -632,10 +648,10 @@ $('#modal-menu').on('show.bs.modal', function (event) {
     if(!data.db){
        data.db={
         "id": 0,
+        "name":data.id,
         "judul": data.judul,
         "icon": "",
         "icon_color": "",
-        "parent_id": 0,
         "parent_name": data.pId,
        }
     }

@@ -87,10 +87,10 @@ class Sistem extends BaseController
                 ap.description
             FROM sistem_otoritas so
             JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
-            WHERE so.id = :id:
+            WHERE ap.name = :name:
         ';
         $query = $this->db->query($sql, [
-            'id'     => $menu->parent_id,
+            'name'     => $menu->parent_name,
         ]);
         $data = $query->getFirstRow();
         if($data){
