@@ -8,6 +8,7 @@ class InitDBSeed extends Seeder
 {
     public function run()
     {
+        $this->call('ThemeSeed');
         $this->call('AuthGroupSeed');
         $this->call('UserSeed');
         $this->call('AuthGroupUserSeed');

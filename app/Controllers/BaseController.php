@@ -57,8 +57,15 @@ abstract class BaseController extends Controller
     }
 
     protected $db;
+    protected $tema;
     public function __construct(){
         $this->db      = \Config\Database::connect();
+        //Untuk tema, pilih ini
+        // $this->theme = getenv("TEMA");
+        //atau yang ini
+        $theme = $this->db->query("SELECT * FROM themes WHERE pilih = 1");
+        $theme = $theme->getResultArray()[0]['theme'] ;
+        $this->tema = $theme;
     }
 
     public function loadDataTable($sumberData =[[

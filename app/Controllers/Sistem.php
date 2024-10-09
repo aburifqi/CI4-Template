@@ -75,8 +75,7 @@ class Sistem extends BaseController
     }
 
     public function linkPage($page){
-        $theme = getenv("TEMA");
-        return view($theme. '\\index',["page"=>$page]);
+        return view($this->tema. '\\index',["page"=>$page]);
     }
 
     function getMenuInduk($menu, &$breadCrumbs){

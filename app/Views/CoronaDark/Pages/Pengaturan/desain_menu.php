@@ -336,14 +336,14 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-xs-9">
+                                    <div class="col-md-9">
                                         <label for="color">Warna Icon</label>
                                         <div style="display:flex; align-items: center;justify-content: space-between;width:100%;">
                                             <input type="text" class="form-control" name="icon_color" value="">
                                             <button type="button" id="btn-pick-warna" class="btn btn-primary" style="margin:0" title="Warna">&nbsp;</button>
                                         </div>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-md-3">
                                         <label for="jenis">Jenis</label>
                                         <div class="switch-menu">
                                             <input type="checkbox" name="jenis" class="switch-menu-checkbox" id="jenis" checked>

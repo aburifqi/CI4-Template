@@ -6,7 +6,6 @@ class Home extends BaseController
 {
     public function index(): string
     {
-        $theme = getenv("TEMA");
-        return view($theme. '\\index');
+        return view($this->tema. '\\index');
     }
 }

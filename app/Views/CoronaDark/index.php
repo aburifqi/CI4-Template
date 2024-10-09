@@ -1,4 +1,4 @@
-<?= $this->extend('coronadark/layout/index') ?>
+<?= $this->extend('coronadark/layout/layout') ?>
 
 <?= $this->section('style') ?>
     <style>

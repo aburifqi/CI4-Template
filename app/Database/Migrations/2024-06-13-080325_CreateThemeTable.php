@@ -14,6 +14,7 @@ class CreateThemeTable extends Migration
             'logo' => ['type' => 'varchar', 'constraint' => 50],
             'theme' => ['type' => 'varchar', 'constraint' => 50],
             'is_default' => ['type' => 'tinyint', 'default' => '0'],
+            'pilih' => ['type' => 'tinyint', 'default' => '0'],
         ]);
 
         $this->forge->addKey('id', true);
