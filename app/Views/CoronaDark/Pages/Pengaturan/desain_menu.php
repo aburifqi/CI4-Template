@@ -353,6 +353,10 @@
                                             </label>
                                         </div>
                                     </div>
+                                    <div class="col-md-3">
+                                        <label for="is_page">Ada Halaman</label>
+                                        <input type="checkbox" name="is_page" class="form_control" id="is_page" checked>
+                                    </div>
                                 </div>
                             </div>
                         </div>
