@@ -317,14 +317,14 @@
                                     <input type="text" class="form-control" name="url" placeholder="URL">
                                 </div>
                                 <div class="form-group row">
-                                    <div class="col-xs-9">
+                                    <div class="col-md-9">
                                         <label for="icon">Icon</label>
                                         <div style="display:flex; align-items: center;justify-content: space-between;width:100%;">
                                             <input type="text" class="form-control" name="icon" value="">
                                             <button type="button" id="btn-pick-icon" class="btn btn-primary" style="margin:0" data-toggle="modal" data-target="#modal-pick-icon"><i class="fa fa-plus"></i>&nbsp;Pilih Icon </button>
                                         </div>
                                     </div>
-                                    <div class="col-xs-3">
+                                    <div class="col-md-3">
                                         <label for="status">Status</label>
                                         <div class="switch-status">
                                             <input type="checkbox" name="status" class="switch-status-checkbox" id="status" checked>
@@ -353,7 +353,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
+                                    <div class="col-xs-3">
                                         <label for="is_page">Ada Halaman</label>
                                         <input type="checkbox" name="is_page" class="form_control" id="is_page" checked>
                                     </div>

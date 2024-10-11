@@ -10,6 +10,7 @@
 
     <link href="<?= base_url(); ?>/fonts/font-awesome/css/fontawesome.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url(); ?>/libs/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="<?= base_url(); ?>/libs/bootstrap-5.3.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url(); ?>/coronadark/css/vendor.bundle.base.css">
     <!-- Layout styles -->
     <link rel="stylesheet" href="<?= base_url(); ?>/coronadark/css/style.css">
@@ -80,6 +81,7 @@
       const baseURL = '<?= base_url(); ?>';
     </script>
 
+    <script src="<?= base_url(); ?>/libs/bootstrap-5.3.3/js/bootstrap.bundle.min.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/vendor.bundle.base.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/off-canvas.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/hoverable-collapse.js"></script>
