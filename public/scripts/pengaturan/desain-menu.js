@@ -171,7 +171,12 @@ function addHoverDom(treeId, treeNode) {
         // tambahMenu(treeNode, treeNode.id);
         var zTree = $.fn.zTree.getZTreeObj("treeMenu");
 
-        zTree.addNodes(treeNode, {id:(100 + newCount), pId:treeNode.id, judul:"new node" + (newCount++)});
+        console.log("KLIK")
+        zTree.addNodes(treeNode, {
+            id:(100 + newCount), 
+            pId:treeNode.id, 
+            name:"new node" + (newCount++),
+        });
         return false;
     });
 
@@ -264,11 +269,11 @@ function getChildData(data, anak){
             data.push({
                 "id": 0,
                 "name": item.id,
-                "judul": item.judul,
+                "judul": item.name,
                 "icon": "",
                 "icon_color": "",
                 "jenis": "Menu",
-                "parent_name": item.parent_name,
+                "parent_name": item.pId,
                 "urut": item.getIndex(),
                 "url": "",
                 "status": "active",
