@@ -288,4 +288,503 @@ abstract class BaseController extends Controller
 
         return json_encode($json_data); 
     }
+
+    function getClientIP() {
+        $ipaddress = '';
+        if (isset($_SERVER['HTTP_CLIENT_IP']))
+            $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+        else if(isset($_SERVER['HTTP_X_FORWARDED_FOR']))
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        else if(isset($_SERVER['HTTP_X_FORWARDED']))
+            $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+        else if(isset($_SERVER['HTTP_FORWARDED_FOR']))
+            $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+        else if(isset($_SERVER['HTTP_FORWARDED']))
+            $ipaddress = $_SERVER['HTTP_FORWARDED'];
+        else if(isset($_SERVER['REMOTE_ADDR']))
+            $ipaddress = $_SERVER['REMOTE_ADDR'];
+        else
+            $ipaddress = 'UNKNOWN';
+        return $ipaddress;
+    }
+
+    function cekValidasi($tabel="", $data=[], $aturan=[], $pesanError=[], $namaKolomId='id', $err = []){
+        global $db;
+        $errResult = [];
+        $isValid = true;
+
+        if(sizeof($aturan)){
+            foreach($aturan as $key => $atr){
+                if($key == "details"){
+                    foreach($atr as $tabelDetail=>$aturanDetail){
+                        if(!isset($data['details'][$tabelDetail])){
+                            $data['details'][$tabelDetail] = [];
+                        }
+                        if(sizeof($data['details'][$tabelDetail])){
+                            foreach($data['details'][$tabelDetail] as $row=>$rowData){
+                                $validasiDetail = cekValidasi($tabelDetail, $rowData, $aturanDetail, $pesanError['details'][$tabelDetail] ?? [],'id',$err);
+                                if($validasiDetail['hasil']>0){
+                                    $isValid = false;
+                                    array_push($errResult,[$tabelDetail => [$row => $validasiDetail['error']]]);
+                                }else{
+                                    $data['details'][$tabelDetail][$row] =  $validasiDetail['data'];
+                                }
+                            }
+                        }
+                    }
+                }else{
+                    foreach($atr as $hukum => $prop){
+                        if(is_array($prop)){
+                            switch($hukum){
+                                case "auto":
+                                    if(!(int)$data[$namaKolomId]){
+                                        // Generate kode baru
+                                        $format = $prop['format'];
+                                        $resetPer = $prop['reset_per'] ?? '';
+                                        $fieldTanggal = $prop['field_tanggal'] ?? '';
+    
+                                        $startIndex = strpos($format, "#");
+                                        $isCukup = false;
+                                        $panjangIndex = 1;
+                                        $strReplace = "";
+                                        for($i = ($startIndex+1); ($i<=strlen($format)||!$isCukup); $i++){
+                                            if(substr($format, $i, 1)!== "#"){
+                                                $isCukup =true;
+                                            }
+                                            $strReplace .= "#";
+                                            $panjangIndex++;
+                                        }
+                                        $queryMaks = "SELECT COALESCE(MAX($key),0) AS maks FROM $tabel";
+                                        if($resetPer){
+                                            $filter = '';
+                                            switch ($resetPer){
+                                                case "tahun":
+                                                    $filter = " WHERE YEAR(created_at) = ". date('Y');
+                                                    if($fieldTanggal){
+                                                        $filter = " WHERE YEAR($fieldTanggal) = ". date('Y', strtotime($data[$fieldTanggal]));
+                                                    }
+                                                break;
+                                                case "bulan":
+                                                    $filter = " WHERE YEAR(created_at) = ". date('Y') . " AND MONTH(created_at) = " . date('m');
+                                                    if($fieldTanggal){
+                                                        $filter = " WHERE YEAR($fieldTanggal) = ". date('Y') . " AND MONTH($fieldTanggal) = " . date('m', strtotime($data[$fieldTanggal]));
+                                                    }
+                                                break;
+                                                case "hari":
+                                                    $filter = " WHERE DATE(created_at) = '". date('Y-m-d') . "'";
+                                                    if($fieldTanggal){
+                                                        $filter = " WHERE YEAR($fieldTanggal) = ". date('Y-m-d', strtotime($data[$fieldTanggal])) . "'";
+                                                    }
+                                                break;
+                                            }
+                                            $queryMaks .= $filter;
+                                        }
+                                        $maks = $db->fetch_one($queryMaks)['maks'];
+                                        $maks = $maks?(int) substr($maks, $startIndex, $panjangIndex):0;
+                                        $maks++;
+                                        $maks = sprintf("%0".$panjangIndex."d", $maks);
+    
+                                        $data[$key] = str_replace($strReplace, $maks, $format);
+                                        // Jika format mengandung sistem penanggalan
+                                        $monRome = "";
+                                        switch(!$fieldTanggal?date('m'): date('m', strtotime($data[$fieldTanggal]))){
+                                            case 1:
+                                                $monRome = "I";
+                                                break;
+                                            case 2:
+                                                $monRome = "II";
+                                                break;
+                                            case 3:
+                                                $monRome = "III";
+                                                break;
+                                            case 4:
+                                                $monRome = "IV";
+                                                break;
+                                            case 5:
+                                                $monRome = "V";
+                                                break;
+                                            case 6:
+                                                $monRome = "VI";
+                                                break;
+                                            case 7:
+                                                $monRome = "VII";
+                                                break;
+                                            case 8:
+                                                $monRome = "VIII";
+                                                break;
+                                            case 9:
+                                                $monRome = "IX";
+                                                break;
+                                            case 10:
+                                                $monRome = "X";
+                                                break;
+                                            case 11:
+                                                $monRome = "XI";
+                                                break;
+                                            case 12:
+                                                $monRome = "XII";
+                                                break;
+                                        }
+                                        $data[$key] = str_replace('[YY]', (!$fieldTanggal?date('y'): date('y', strtotime($data[$fieldTanggal]))), $data[$key]);
+                                        $data[$key] = str_replace('[YYYY]', (!$fieldTanggal?date('Y'): date('Y', strtotime($data[$fieldTanggal]))), $data[$key]);
+                                        $data[$key] = str_replace('[M]', (!$fieldTanggal?date('n'): date('n', strtotime($data[$fieldTanggal]))), $data[$key]);
+                                        $data[$key] = str_replace('[MM]', (!$fieldTanggal?date('m'): date('m', strtotime($data[$fieldTanggal]))), $data[$key]);
+                                        $data[$key] = str_replace('[MR]', $monRome, $data[$key]);
+                                        $data[$key] = str_replace('[DD]', (!$fieldTanggal?date('d'): date('d', strtotime($data[$fieldTanggal]))), $data[$key]);
+                                        $data[$key] = str_replace('[D]', (!$fieldTanggal?date('j'): date('j', strtotime($data[$fieldTanggal]))), $data[$key]);
+                                    }
+                                break;
+                                case "compare":
+                                    foreach($prop as $comp=>$nilai){
+                                        switch($comp){
+                                            case ">":
+                                                if($data[$key] <= $nilai){
+                                                    $isValid = false;
+                                                    array_push($errResult, [$key => [$comp => $pesanError[$key] ?? "Data $key harus lebih besar dari $nilai"]]);
+                                                }
+                                            break;
+                                            case ">=":
+                                                if($data[$key] < $nilai){
+                                                    $isValid = false;
+                                                    array_push($errResult, [$key => [$comp => $pesanError[$key] ?? "Data $key harus lebih besar atau sama dengan $nilai"]]);
+                                                }
+                                            break;
+                                            case "<":
+                                                if($data[$key] >= $nilai){
+                                                    $isValid = false;
+                                                    array_push($errResult, [$key => [$comp => $pesanError[$key] ?? "Data $key harus lebih kecil dari $nilai"]]);
+                                                }
+                                            break;
+                                            case "<=":
+                                                if($data[$key] > $nilai){
+                                                    $isValid = false;
+                                                    array_push($errResult, [$key => [$comp => $pesanError[$key] ?? "Data $key harus lebih kecil atau sama dengan $nilai"]]);
+                                                }
+                                            break;
+                                        }
+                                    }
+                                break;
+                            }
+                        }else{											
+                            switch($prop){
+                                case "wajib":
+                                    if(!$data[$key]){
+                                        // Data kosong
+                                        $isValid = false;
+                                        array_push($errResult, [$key => [$prop => $pesanError[$key] ?? "Data $key belum diisi"]]);
+                                    }
+                                break;
+                                case "unik": 
+                                    $cekUnik = $db->fetch_one("SELECT COUNT($namaKolomId) AS jumlah FROM $tabel WHERE $key = '". $db->clean($data[$key]). "' AND $namaKolomId <> '". $db->clean($data[$namaKolomId])."'")['jumlah'];
+                                    if($cekUnik){
+                                        // Data tidak unik
+                                        $isValid = false;
+                                        array_push($errResult, [$key => [$prop => $pesanError[$key] ?? "Data $key sudah pernah diisi"]]);
+                                    }
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        if(!$isValid){
+            return [
+                "hasil" => 1,
+                "error"=> $errResult,
+                "data"=>$data
+            ];
+        }
+        
+        return [
+            "hasil" => 0,
+            "data"=>$data
+        ];
+    }
+
+    function simpanFile ($tabel, $field, $id, $img, $tmp, $ext){
+        global $db;
+        //Simpan file jenis gambar-----------------------
+        $lokasiUpload = realpath(lokasiBase . '/uploads');
+
+        // Pastikan folder ada 
+        if (!file_exists(lokasiBase . "/uploads")) {
+            mkdir(lokasiBase . "/uploads", 0777, true);
+        }
+
+        $fotoLama = '';
+        if($id){
+            $fotoLama = $db->fetch_one("SELECT $field FROM $tabel WHERE id = '".$db->clean($id)."'");
+            $fotoLama = $fotoLama[$field];
+        }
+        $dataFile= "";
+        $valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp', 'pdf'); // valid extensions
+        $path = $lokasiUpload; // upload directory
+
+        switch($ext){
+            case "image/jpeg":
+                $ext = "jpeg";
+            break;
+            case "image/jpg":
+                $ext = "jpg";
+            break;
+            case "image/png":
+                $ext = "png";
+            break;
+            case "image/gif":
+                $ext = "gif";
+            break;
+            case "application/pdf":
+                $ext = "pdf";
+            break;
+            default:
+                $ext = "jpg";
+        }
+
+        // can upload same image using rand function
+        $final_image = uniqid() . '_' . md5(uniqid()). "." . $ext;
+        $dataFile = $final_image;
+        $path = $lokasiUpload."/".strtolower($final_image);
+        // check's valid format
+        if (in_array($ext, $valid_extensions)) {
+            // $path = $strPathFoto;
+            $hasilMoveFile = move_uploaded_file($tmp, $path);
+            if (!$hasilMoveFile) {
+                // Gagal kopi file--Masih jadi misteri
+                // return [
+                //     "hasil" => 0,
+                //     "error" => $hasilMoveFile,
+                //     "message"=>"Proses upload file $dataFile gagal...",
+                //     "data" => $tabel,
+                // ];
+            }
+        } else {
+            // Ekstensi file tidak valid
+            return [
+                "hasil" => 0,
+                "error"=>[],
+                "message" => "Bukan jenis file yang valid...",
+                "data" => $tabel
+            ];
+        }
+
+        if($fotoLama && $dataFile){
+            if (is_file($lokasiUpload."/".$fotoLama)){
+                unlink($lokasiUpload."/".$fotoLama);
+            }
+        }
+        return [
+            "hasil" => 1,
+            "data" => $dataFile,
+            "message" => "Proses mengkopi file berhasil"
+        ];
+    }
+
+    function simpanLog ($menu, $tabel, $keterangan, $tipe){
+        global $db, $userid;
+        $dataLog = [
+            "ip_address" => getClientIP(),
+            "id_user" => $userid,
+            "menu" => $menu,
+            "tabel"=> $tabel,
+            "keterangan" => $keterangan,
+            "tipe" => $tipe,
+            "waktu" => date("Y-m-d H:i:s")
+        ];
+        $db->insert("logs", $dataLog);
+    }
+
+    function simpan($tabel="", $data=[], $aturan=[], $pesanError=[], $namaKolomId='id', $idxRow = 0){
+        global $db, $userid;
+
+        // Validasi data yang diinput 
+        $cekValidasi = cekValidasi($tabel, $data, $aturan, $pesanError, $namaKolomId, []);
+
+        if($cekValidasi['hasil']>0){ 
+            // Ada data yang tidak valid
+            return json_encode([
+                "hasil" => 2,
+                "data"=> $data,
+                "error"=> $cekValidasi['error'],
+                "message" => "Data yang diisi tidak valid!",
+            ]);
+        }else{
+            $data = $cekValidasi['data'];
+        }
+
+        if(!empty($_FILES) && sizeof($_FILES)){
+            foreach($_FILES as $key=>$file){
+                // if($key == 'details')continue;
+                if(is_array($file['name'])){
+                    // File yang ada dalam tabel detail
+                    foreach($file['name'] as $tbl=>$row){
+                        if($tabel !== $tbl)continue;
+                        foreach($row as $idx=>$jsn){
+                            if($idx !== $idxRow)continue;
+                            foreach($jsn as $fld=>$val){
+                                $img = $file['name'][$tbl][$idx][$fld];
+                                $tmp = $file['tmp_name'][$tbl][$idx][$fld];
+                                $ext = $file['type'][$tbl][$idx][$fld];
+
+                                $hasilSimpanFile = simpanFile($tabel, $fld, $data['id'], $img, $tmp, $ext);
+                                if(!$hasilSimpanFile['hasil']){
+                                    return json_encode([
+                                        "hasil" => 0,
+                                        "data"=> $hasilSimpanFile['data'],
+                                        "error"=> $hasilSimpanFile['error'],
+                                        "message" => "Proses upload file gagal!",
+                                    ]);
+                                }
+                                $data[$fld] = $hasilSimpanFile["data"];
+                            }
+                        }
+                    }
+                }else{
+                    $hasilSimpanFile = simpanFile($tabel, $key, $data['id'], $file['name'], $file['tmp_name'], $file['type']);
+                    unset($_FILES[$key]);
+                    if(!$hasilSimpanFile['hasil']){
+                        return json_encode([
+                            "hasil" => 0,
+                            "data"=> $hasilSimpanFile['data'],
+                            "error"=> $hasilSimpanFile['error'],
+                            "message" => "Proses upload file gagal!",
+                        ]);
+                    }
+                    $data[$key] = $hasilSimpanFile["data"];
+                }
+            }
+        }
+
+        $menu = $data['menu'];
+        $id = (int)$data[$namaKolomId];
+
+        // Buang inputan yang bukan bagian dari database
+        unset($data['action']);
+        unset($data[$namaKolomId]);
+        unset($data['menu']);
+        $details = $data['details'] ?? [];
+        if(!empty($data['details']))unset($data['details']);
+        // Simpan data utama/ data header
+        $data['updated_at']= date("Y-m-d H:i:s");
+        $data['updated_by']= $userid;
+
+        if($id){
+            $dataLama = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
+            $db->update($tabel, $data, "$namaKolomId = '".$db->clean($id)."'");
+            $dataBaru = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
+
+            $keteranganLog = "";
+            $strDataLama = "";
+            foreach($dataLama as $fldLog=>$valLog){
+                $strDataLama .= ($strDataLama?"|":"").$fldLog." : ".$valLog;
+            }
+            $strDataBaru = "";
+            foreach($dataBaru as $fldLog=>$valLog){
+                $strDataBaru .= ($strDataBaru?"|":"").$fldLog." : ".$valLog;
+            }
+            $keteranganLog .= "$strDataLama => $strDataBaru";
+            simpanLog($menu, $tabel, $keteranganLog, "edit");
+        }else{
+            $data['created_at']= date("Y-m-d H:i:s");
+            $data['created_by']= $userid;    
+            $id = $db->insert($tabel, $data);
+            $dataBaru = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
+
+            $keteranganLog = "";
+            $strDataBaru = "";
+            foreach($dataBaru as $fldLog=>$valLog){
+                $strDataBaru .= ($strDataBaru?"|":"").$fldLog." : ".$valLog;
+            }
+            $keteranganLog .= "$strDataBaru";
+            simpanLog($menu, $tabel, $keteranganLog, "create");
+        }
+
+        $data = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
+
+        // Simpan data details
+        if(sizeof($details)){
+            foreach($details as $tbl=>$det){
+                if(sizeof($det)){
+                    $strIDDetail = "";
+                    $idRelasi = "id_$tabel";
+                    $dataSimpan = [];
+                    foreach($det as $idx=>$dataDetail){
+                        $dataDetail[$idRelasi] = $id;
+                        $dataDetail['menu'] = $menu;
+                        $simpanDetail = simpan($tbl,$dataDetail,$aturan['details'][$tbl] ?? [], $pesanError['details'][$tbl] ?? [],'id', $idx);
+                        // Kalau data detail gagal disimpan, data header juga harus batal disimpan
+                        $simpanDetail = json_decode($simpanDetail, true);
+                        switch($simpanDetail['hasil']){
+                            case 0:
+                                return json_encode([
+                                    "hasil" => 0,
+                                    "data"=> $data,
+                                    "error"=> $simpanDetail,
+                                    "message" => "Terjadi kesalahan!",
+                                ]);
+                            break;
+                            case 2:
+                                return json_encode([
+                                    "hasil" => 2,
+                                    "data"=> $data,
+                                    "error"=> $simpanDetail['error'],
+                                    "message" => "Data yang diisi tidak valid!",
+                                ]);
+                            break;
+                        }
+                        array_push($dataSimpan, $simpanDetail['data']);
+                        // Kumpulkan id data yang ada diubah
+                        $strIDDetail .= ($strIDDetail?",":"").$simpanDetail['data']['id'];
+                    }
+                    $data['details'][$tbl]=$dataSimpan;
+                    // ID yang tidak ada di dalam daftar id yang diubah berarti sudah dihapus
+                    $queryDataHapus = "SELECT * FROM $tbl WHERE id NOT IN ( $strIDDetail ) AND $idRelasi = '" . $db->clean($id) . "' AND (deleted_by = 0 OR deleted_by IS NULL OR deleted_by = '')";
+                    $dataDetailHapus = $db->fetch_all($queryDataHapus);
+
+                    foreach($dataDetailHapus as $dataHapus){
+                        $dataHapus['menu'] = $menu;
+                        hapus($tbl, $dataHapus);
+                    }
+                }
+        
+            }
+        }
+
+        return json_encode([
+            "hasil" => 1,
+            "data"=> $data,
+            "message" => "Data $tabel berhasil disimpan!",
+        ]);
+    }
+
+    function hapus($tabel = "", $data = [], $dataDetail = [], $namaKolomId='id'){
+        global $db, $userid;
+        // Hapus data header
+        $update['deleted_at']= date("Y-m-d H:s:i");
+        $update['deleted_by']= $userid;
+        
+        $db->update($tabel, $update, "$namaKolomId = '".$db->clean($data[$namaKolomId])."'");
+
+        $dataHapus = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($data[$namaKolomId])."'");
+        $keteranganLog = "";
+        $strDataHapus = "";
+        foreach($dataHapus as $fldLog=>$valLog){
+            $strDataHapus .= ($strDataHapus?"|":"").$fldLog." : ".$valLog;
+        }
+        $keteranganLog .= "$strDataHapus";
+
+        simpanLog($data['menu'], $tabel, $keteranganLog, "delete");
+
+        // Jika ada data detail
+        if(sizeof($dataDetail)){
+            // Proses hapus data detail
+        }
+
+        return json_encode([
+            "hasil" => 1,
+            "data"=> $data,
+            "message" => "Data $tabel berhasil dihapus!"
+        ]);
+    }
 }
