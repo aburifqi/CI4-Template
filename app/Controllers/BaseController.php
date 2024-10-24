@@ -322,7 +322,7 @@ abstract class BaseController extends Controller
                         }
                         if(sizeof($data['details'][$tabelDetail])){
                             foreach($data['details'][$tabelDetail] as $row=>$rowData){
-                                $validasiDetail = cekValidasi($tabelDetail, $rowData, $aturanDetail, $pesanError['details'][$tabelDetail] ?? [],'id',$err);
+                                $validasiDetail = $this->cekValidasi($tabelDetail, $rowData, $aturanDetail, $pesanError['details'][$tabelDetail] ?? [],'id',$err);
                                 if($validasiDetail['hasil']>0){
                                     $isValid = false;
                                     array_push($errResult,[$tabelDetail => [$row => $validasiDetail['error']]]);
@@ -355,31 +355,41 @@ abstract class BaseController extends Controller
                                             $panjangIndex++;
                                         }
                                         $queryMaks = "SELECT COALESCE(MAX($key),0) AS maks FROM $tabel";
+                                        $bindingQueryMaks=[];
                                         if($resetPer){
                                             $filter = '';
                                             switch ($resetPer){
                                                 case "tahun":
-                                                    $filter = " WHERE YEAR(created_at) = ". date('Y');
+                                                    $filter = " WHERE YEAR(created_at) = :tahun_buat:";
+                                                    $bindingQueryMaks['tahun_buat'] = date('Y');
                                                     if($fieldTanggal){
-                                                        $filter = " WHERE YEAR($fieldTanggal) = ". date('Y', strtotime($data[$fieldTanggal]));
+                                                        $filter = " WHERE YEAR($fieldTanggal) = = :tahun_buat:";
+                                                        $bindingQueryMaks['tahun_buat'] = date('Y', strtotime($data[$fieldTanggal]));
                                                     }
                                                 break;
                                                 case "bulan":
-                                                    $filter = " WHERE YEAR(created_at) = ". date('Y') . " AND MONTH(created_at) = " . date('m');
+                                                    $filter = " WHERE YEAR(created_at) = :tahun_buat: AND MONTH(created_at) = :bulan_buat:";
+                                                    $bindingQueryMaks['tahun_buat'] = date('Y');
+                                                    $bindingQueryMaks['bulan_buat'] = date('m');
                                                     if($fieldTanggal){
-                                                        $filter = " WHERE YEAR($fieldTanggal) = ". date('Y') . " AND MONTH($fieldTanggal) = " . date('m', strtotime($data[$fieldTanggal]));
+                                                        $filter = " WHERE YEAR($fieldTanggal) = :tahun_buat: AND MONTH($fieldTanggal) = :bulan_buat:";
+                                                        $bindingQueryMaks['tahun_buat'] = date('Y', strtotime($data[$fieldTanggal]));
+                                                        $bindingQueryMaks['bulan_buat'] = date('m', strtotime($data[$fieldTanggal]));
+
                                                     }
                                                 break;
                                                 case "hari":
-                                                    $filter = " WHERE DATE(created_at) = '". date('Y-m-d') . "'";
+                                                    $filter = " WHERE DATE(created_at) = :tanggal_buat:";
+                                                    $bindingQueryMaks['tanggal_buat'] = date('Y-m-d');
                                                     if($fieldTanggal){
-                                                        $filter = " WHERE YEAR($fieldTanggal) = ". date('Y-m-d', strtotime($data[$fieldTanggal])) . "'";
+                                                        $filter = " WHERE YEAR($fieldTanggal) = :tanggal_buat:";
+                                                        $bindingQueryMaks['tanggal_buat'] = date('Y-m-d', strtotime($data[$fieldTanggal]));
                                                     }
                                                 break;
                                             }
                                             $queryMaks .= $filter;
                                         }
-                                        $maks = $db->fetch_one($queryMaks)['maks'];
+                                        $maks = $this->db->query($queryMaks, $bindingQueryMaks)->getRow()->maks;
                                         $maks = $maks?(int) substr($maks, $startIndex, $panjangIndex):0;
                                         $maks++;
                                         $maks = sprintf("%0".$panjangIndex."d", $maks);
@@ -475,7 +485,12 @@ abstract class BaseController extends Controller
                                     }
                                 break;
                                 case "unik": 
-                                    $cekUnik = $db->fetch_one("SELECT COUNT($namaKolomId) AS jumlah FROM $tabel WHERE $key = '". $db->clean($data[$key]). "' AND $namaKolomId <> '". $db->clean($data[$namaKolomId])."'")['jumlah'];
+                                    $queryUnik = "SELECT COUNT($namaKolomId) AS jumlah FROM $tabel WHERE $key = :kolom: AND $namaKolomId <> :id:";
+                                    $bindingQueryUnik=[
+                                        "kolom" => $data[$key],
+                                        "id" => $data[$namaKolomId],
+                                    ];
+                                    $cekUnik = $this->db->query($queryUnik, $bindingQueryUnik)->getRow()->jumlah;
                                     if($cekUnik){
                                         // Data tidak unik
                                         $isValid = false;
