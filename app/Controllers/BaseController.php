@@ -8,7 +8,7 @@ use CodeIgniter\HTTP\IncomingRequest;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
-
+use CodeIgniter\Files\File;
 /**
  * Class BaseController
  *
@@ -309,7 +309,6 @@ abstract class BaseController extends Controller
     }
 
     function cekValidasi($tabel="", $data=[], $aturan=[], $pesanError=[], $namaKolomId='id', $err = []){
-        global $db;
         $errResult = [];
         $isValid = true;
 
@@ -519,23 +518,22 @@ abstract class BaseController extends Controller
     }
 
     function simpanFile ($tabel, $field, $id, $img, $tmp, $ext){
-        global $db;
-        //Simpan file jenis gambar-----------------------
-        $lokasiUpload = realpath(lokasiBase . '/uploads');
+        // //Simpan file jenis gambar-----------------------
+        // $lokasiUpload = realpath(lokasiBase . '/uploads');
 
-        // Pastikan folder ada 
-        if (!file_exists(lokasiBase . "/uploads")) {
-            mkdir(lokasiBase . "/uploads", 0777, true);
-        }
+        // // Pastikan folder ada 
+        // if (!file_exists(lokasiBase . "/uploads")) {
+        //     mkdir(lokasiBase . "/uploads", 0777, true);
+        // }
 
         $fotoLama = '';
         if($id){
-            $fotoLama = $db->fetch_one("SELECT $field FROM $tabel WHERE id = '".$db->clean($id)."'");
+            $fotoLama = $this->db->query("SELECT $field FROM $tabel WHERE id = :id:", ["id"=>$id])->getRow();
             $fotoLama = $fotoLama[$field];
         }
         $dataFile= "";
         $valid_extensions = array('jpeg', 'jpg', 'png', 'gif', 'bmp', 'pdf'); // valid extensions
-        $path = $lokasiUpload; // upload directory
+        // $path = $lokasiUpload; // upload directory
 
         switch($ext){
             case "image/jpeg":
@@ -560,20 +558,28 @@ abstract class BaseController extends Controller
         // can upload same image using rand function
         $final_image = uniqid() . '_' . md5(uniqid()). "." . $ext;
         $dataFile = $final_image;
-        $path = $lokasiUpload."/".strtolower($final_image);
+        // $path = $lokasiUpload."/".strtolower($final_image);
         // check's valid format
         if (in_array($ext, $valid_extensions)) {
             // $path = $strPathFoto;
-            $hasilMoveFile = move_uploaded_file($tmp, $path);
-            if (!$hasilMoveFile) {
-                // Gagal kopi file--Masih jadi misteri
-                // return [
-                //     "hasil" => 0,
-                //     "error" => $hasilMoveFile,
-                //     "message"=>"Proses upload file $dataFile gagal...",
-                //     "data" => $tabel,
-                // ];
+            // $hasilMoveFile = move_uploaded_file($tmp, $path);
+            // if (!$hasilMoveFile) {
+            //     // Gagal kopi file--Masih jadi misteri
+            //     // return [
+            //     //     "hasil" => 0,
+            //     //     "error" => $hasilMoveFile,
+            //     //     "message"=>"Proses upload file $dataFile gagal...",
+            //     //     "data" => $tabel,
+            //     // ];
+            // }
+            if (! $tmp->hasMoved()) {
+                $filepath = WRITEPATH . 'uploads/' . $tmp->store();
+    
+                // $data = ['uploaded_fileinfo' => new File($filepath)];
+    
+                // return view('upload_success', $data);
             }
+    
         } else {
             // Ekstensi file tidak valid
             return [
@@ -585,9 +591,9 @@ abstract class BaseController extends Controller
         }
 
         if($fotoLama && $dataFile){
-            if (is_file($lokasiUpload."/".$fotoLama)){
-                unlink($lokasiUpload."/".$fotoLama);
-            }
+            // if (is_file($lokasiUpload."/".$fotoLama)){
+            //     unlink($lokasiUpload."/".$fotoLama);
+            // }
         }
         return [
             "hasil" => 1,
@@ -596,40 +602,40 @@ abstract class BaseController extends Controller
         ];
     }
 
-    function simpanLog ($menu, $tabel, $keterangan, $tipe){
-        global $db, $userid;
-        $dataLog = [
-            "ip_address" => getClientIP(),
-            "id_user" => $userid,
-            "menu" => $menu,
-            "tabel"=> $tabel,
-            "keterangan" => $keterangan,
-            "tipe" => $tipe,
-            "waktu" => date("Y-m-d H:i:s")
-        ];
-        $db->insert("logs", $dataLog);
-    }
+    // function simpanLog ($menu, $tabel, $keterangan, $tipe){
+    //     global $db, $userid;
+    //     $dataLog = [
+    //         "ip_address" => $this->getClientIP(),
+    //         "id_user" => $userid,
+    //         "menu" => $menu,
+    //         "tabel"=> $tabel,
+    //         "keterangan" => $keterangan,
+    //         "tipe" => $tipe,
+    //         "waktu" => date("Y-m-d H:i:s")
+    //     ];
+    //     $db->insert("logs", $dataLog);
+    // }
 
     function simpan($tabel="", $data=[], $aturan=[], $pesanError=[], $namaKolomId='id', $idxRow = 0){
-        global $db, $userid;
-
+        $request = request();
         // Validasi data yang diinput 
-        $cekValidasi = cekValidasi($tabel, $data, $aturan, $pesanError, $namaKolomId, []);
+        $cekValidasi = $this->cekValidasi($tabel, $data, $aturan, $pesanError, $namaKolomId, []);
 
         if($cekValidasi['hasil']>0){ 
             // Ada data yang tidak valid
-            return json_encode([
+            return [
                 "hasil" => 2,
                 "data"=> $data,
                 "error"=> $cekValidasi['error'],
                 "message" => "Data yang diisi tidak valid!",
-            ]);
+            ];
         }else{
             $data = $cekValidasi['data'];
         }
 
-        if(!empty($_FILES) && sizeof($_FILES)){
-            foreach($_FILES as $key=>$file){
+        $files = $request->getFiles();
+        if(!empty($files) && sizeof($files)){
+            foreach($files as $key=>$file){
                 // if($key == 'details')continue;
                 if(is_array($file['name'])){
                     // File yang ada dalam tabel detail
@@ -642,29 +648,29 @@ abstract class BaseController extends Controller
                                 $tmp = $file['tmp_name'][$tbl][$idx][$fld];
                                 $ext = $file['type'][$tbl][$idx][$fld];
 
-                                $hasilSimpanFile = simpanFile($tabel, $fld, $data['id'], $img, $tmp, $ext);
+                                $hasilSimpanFile = $this->simpanFile($tabel, $fld, $data['id'], $img, $tmp, $ext);
                                 if(!$hasilSimpanFile['hasil']){
-                                    return json_encode([
+                                    return [
                                         "hasil" => 0,
                                         "data"=> $hasilSimpanFile['data'],
                                         "error"=> $hasilSimpanFile['error'],
                                         "message" => "Proses upload file gagal!",
-                                    ]);
+                                    ];
                                 }
                                 $data[$fld] = $hasilSimpanFile["data"];
                             }
                         }
                     }
                 }else{
-                    $hasilSimpanFile = simpanFile($tabel, $key, $data['id'], $file['name'], $file['tmp_name'], $file['type']);
+                    $hasilSimpanFile = $this->simpanFile($tabel, $key, $data['id'], $file['name'], $file['tmp_name'], $file['type']);
                     unset($_FILES[$key]);
                     if(!$hasilSimpanFile['hasil']){
-                        return json_encode([
+                        return [
                             "hasil" => 0,
                             "data"=> $hasilSimpanFile['data'],
                             "error"=> $hasilSimpanFile['error'],
                             "message" => "Proses upload file gagal!",
-                        ]);
+                        ];
                     }
                     $data[$key] = $hasilSimpanFile["data"];
                 }
@@ -682,10 +688,10 @@ abstract class BaseController extends Controller
         if(!empty($data['details']))unset($data['details']);
         // Simpan data utama/ data header
         $data['updated_at']= date("Y-m-d H:i:s");
-        $data['updated_by']= $userid;
+        $data['updated_by']= user()->id;
 
         if($id){
-            $dataLama = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
+            $dataLama = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id]);
             $db->update($tabel, $data, "$namaKolomId = '".$db->clean($id)."'");
             $dataBaru = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
 
