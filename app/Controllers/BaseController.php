@@ -691,9 +691,17 @@ abstract class BaseController extends Controller
         $data['updated_by']= user()->id;
 
         if($id){
-            $dataLama = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id]);
-            $db->update($tabel, $data, "$namaKolomId = '".$db->clean($id)."'");
-            $dataBaru = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
+            $dataLama = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRow();
+            $update = $this->updateTabel($tabel, $data, "$namaKolomId = :$namaKolomId:", [$namaKolomId => $id]);
+            if(!$update){
+                return [
+                    "hasil" => 0,
+                    "data"=> $dataLama,
+                    "error"=> "Update tabel $tabel mengalami masalah!",
+                    "message" => "Update tabel $tabel mengalami masalah!",
+                ];
+            }
+            $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRow();
 
             $keteranganLog = "";
             $strDataLama = "";
@@ -705,12 +713,13 @@ abstract class BaseController extends Controller
                 $strDataBaru .= ($strDataBaru?"|":"").$fldLog." : ".$valLog;
             }
             $keteranganLog .= "$strDataLama => $strDataBaru";
-            simpanLog($menu, $tabel, $keteranganLog, "edit");
+            // simpanLog($menu, $tabel, $keteranganLog, "edit");
         }else{
             $data['created_at']= date("Y-m-d H:i:s");
-            $data['created_by']= $userid;    
-            $id = $db->insert($tabel, $data);
-            $dataBaru = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
+            $data['created_by']= user()->id;    
+            $id = $this->insertTabel($tabel, $data);
+            // $dataBaru = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
+            $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRow();
 
             $keteranganLog = "";
             $strDataBaru = "";
@@ -718,10 +727,10 @@ abstract class BaseController extends Controller
                 $strDataBaru .= ($strDataBaru?"|":"").$fldLog." : ".$valLog;
             }
             $keteranganLog .= "$strDataBaru";
-            simpanLog($menu, $tabel, $keteranganLog, "create");
+            // simpanLog($menu, $tabel, $keteranganLog, "create");
         }
 
-        $data = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
+        $data = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRow();
 
         // Simpan data details
         if(sizeof($details)){
@@ -779,6 +788,36 @@ abstract class BaseController extends Controller
         ]);
     }
 
+    function insertTabel($tabel = "", $data=[]){
+        if(!$tabel) return false;
+        if(!sizeof(value: $data)) return false;
+        $query = "INSERT INTO $tabel (";
+        $fields = [];
+        $values = [];
+        foreach($data as $field=>$val){
+           array_push($fields, $field);
+           array_push($values, "'" . $this->db->escape($val) . "'");
+        }
+        $query .= implode(", ", $fields) . ") VALUES (" . implode(", ", $values). ")";
+        $this->db->query($query);
+        return $this->db->affectedRows();
+    }
+
+    function updateTabel($tabel = "", $data=[], $kriteria="", $bindingKriteria=[]){
+        if(!$tabel) return false;
+        if(!sizeof($data)) return false;
+        $query = "UPDATE $tabel SET ";
+        $updates = [];
+        foreach($data as $field=>$val){
+           array_push($updates, " $field = '" . $this->db->escape($val) . "'");
+        }
+        $query .= implode(", ", $updates);
+        if($kriteria){
+            $query .= " WHERE $kriteria";
+        }
+        $this->db->query($query, $bindingKriteria);
+        return $this->db->affectedRows();
+    }
     function hapus($tabel = "", $data = [], $dataDetail = [], $namaKolomId='id'){
         global $db, $userid;
         // Hapus data header
