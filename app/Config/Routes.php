@@ -12,6 +12,7 @@ $routes->post('/menu', 'Sistem::menu');
 $routes->get('/page/(:num)', 'Sistem::linkPage/$1');
 $routes->post('/page', 'Sistem::page');
 $routes->post('/get-menu', 'Pengaturan\DesainMenu::getMenu');
+$routes->post('/simpan-menu', 'Pengaturan\DesainMenu::simpanMenu');
 $routes->post('/get-icons', 'Pengaturan\DesainMenu::getIcons');
 // Myth:Auth routes file.
 $routes->group('', ['namespace' => 'App\Controllers'], static function ($routes) {

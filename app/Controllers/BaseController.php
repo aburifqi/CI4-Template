@@ -677,13 +677,13 @@ abstract class BaseController extends Controller
             }
         }
 
-        $menu = $data['menu'];
+        // $menu = $data['menu'];
         $id = (int)$data[$namaKolomId];
 
         // Buang inputan yang bukan bagian dari database
-        unset($data['action']);
+        // unset($data['action']);
         unset($data[$namaKolomId]);
-        unset($data['menu']);
+        // unset($data['menu']);
         $details = $data['details'] ?? [];
         if(!empty($data['details']))unset($data['details']);
         // Simpan data utama/ data header
@@ -691,7 +691,7 @@ abstract class BaseController extends Controller
         $data['updated_by']= user()->id;
 
         if($id){
-            $dataLama = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRow();
+            $dataLama = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRowArray();
             $update = $this->updateTabel($tabel, $data, "$namaKolomId = :$namaKolomId:", [$namaKolomId => $id]);
             if(!$update){
                 return [
@@ -701,7 +701,7 @@ abstract class BaseController extends Controller
                     "message" => "Update tabel $tabel mengalami masalah!",
                 ];
             }
-            $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRow();
+            $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRowArray();
 
             $keteranganLog = "";
             $strDataLama = "";
@@ -719,7 +719,7 @@ abstract class BaseController extends Controller
             $data['created_by']= user()->id;    
             $id = $this->insertTabel($tabel, $data);
             // $dataBaru = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
-            $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRow();
+            $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRowArray();
 
             $keteranganLog = "";
             $strDataBaru = "";
@@ -730,7 +730,7 @@ abstract class BaseController extends Controller
             // simpanLog($menu, $tabel, $keteranganLog, "create");
         }
 
-        $data = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRow();
+        $data = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRowArray();
 
         // Simpan data details
         if(sizeof($details)){
@@ -741,26 +741,25 @@ abstract class BaseController extends Controller
                     $dataSimpan = [];
                     foreach($det as $idx=>$dataDetail){
                         $dataDetail[$idRelasi] = $id;
-                        $dataDetail['menu'] = $menu;
-                        $simpanDetail = simpan($tbl,$dataDetail,$aturan['details'][$tbl] ?? [], $pesanError['details'][$tbl] ?? [],'id', $idx);
+                        // $dataDetail['menu'] = $menu;
+                        $simpanDetail = $this->simpan($tbl,$dataDetail,$aturan['details'][$tbl] ?? [], $pesanError['details'][$tbl] ?? [],'id', $idx);
                         // Kalau data detail gagal disimpan, data header juga harus batal disimpan
-                        $simpanDetail = json_decode($simpanDetail, true);
                         switch($simpanDetail['hasil']){
                             case 0:
-                                return json_encode([
+                                return [
                                     "hasil" => 0,
                                     "data"=> $data,
                                     "error"=> $simpanDetail,
                                     "message" => "Terjadi kesalahan!",
-                                ]);
+                                ];
                             break;
                             case 2:
-                                return json_encode([
+                                return [
                                     "hasil" => 2,
                                     "data"=> $data,
                                     "error"=> $simpanDetail['error'],
                                     "message" => "Data yang diisi tidak valid!",
-                                ]);
+                                ];
                             break;
                         }
                         array_push($dataSimpan, $simpanDetail['data']);
@@ -769,23 +768,23 @@ abstract class BaseController extends Controller
                     }
                     $data['details'][$tbl]=$dataSimpan;
                     // ID yang tidak ada di dalam daftar id yang diubah berarti sudah dihapus
-                    $queryDataHapus = "SELECT * FROM $tbl WHERE id NOT IN ( $strIDDetail ) AND $idRelasi = '" . $db->clean($id) . "' AND (deleted_by = 0 OR deleted_by IS NULL OR deleted_by = '')";
-                    $dataDetailHapus = $db->fetch_all($queryDataHapus);
+                    $queryDataHapus = "SELECT * FROM $tbl WHERE id NOT IN ( $strIDDetail ) AND $idRelasi = '" . $this->db->escape($id) . "' AND (deleted_by = 0 OR deleted_by IS NULL OR deleted_by = '')";
+                    $dataDetailHapus = $this->db->query($queryDataHapus)->getResultArray();
 
                     foreach($dataDetailHapus as $dataHapus){
-                        $dataHapus['menu'] = $menu;
-                        hapus($tbl, $dataHapus);
+                        // $dataHapus['menu'] = $menu;
+                        $this->hapus($tbl, $dataHapus);
                     }
                 }
         
             }
         }
 
-        return json_encode([
+        return [
             "hasil" => 1,
             "data"=> $data,
             "message" => "Data $tabel berhasil disimpan!",
-        ]);
+        ];
     }
 
     function insertTabel($tabel = "", $data=[]){
@@ -796,7 +795,7 @@ abstract class BaseController extends Controller
         $values = [];
         foreach($data as $field=>$val){
            array_push($fields, $field);
-           array_push($values, "'" . $this->db->escape($val) . "'");
+           array_push($values, $this->db->escape($val));
         }
         $query .= implode(", ", $fields) . ") VALUES (" . implode(", ", $values). ")";
         $this->db->query($query);
@@ -809,7 +808,7 @@ abstract class BaseController extends Controller
         $query = "UPDATE $tabel SET ";
         $updates = [];
         foreach($data as $field=>$val){
-           array_push($updates, " $field = '" . $this->db->escape($val) . "'");
+           array_push($updates, " $field = " . $this->db->escape($val));
         }
         $query .= implode(", ", $updates);
         if($kriteria){
@@ -819,14 +818,13 @@ abstract class BaseController extends Controller
         return $this->db->affectedRows();
     }
     function hapus($tabel = "", $data = [], $dataDetail = [], $namaKolomId='id'){
-        global $db, $userid;
         // Hapus data header
         $update['deleted_at']= date("Y-m-d H:s:i");
-        $update['deleted_by']= $userid;
+        $update['deleted_by']= user()->id;
         
-        $db->update($tabel, $update, "$namaKolomId = '".$db->clean($data[$namaKolomId])."'");
+        $this->updateTabel($tabel, $update, "$namaKolomId = '".$this->db->escape($data[$namaKolomId])."'");
 
-        $dataHapus = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($data[$namaKolomId])."'");
+        $dataHapus = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = '".$this->db->escape($data[$namaKolomId])."'")->getRowArray();
         $keteranganLog = "";
         $strDataHapus = "";
         foreach($dataHapus as $fldLog=>$valLog){
@@ -834,17 +832,17 @@ abstract class BaseController extends Controller
         }
         $keteranganLog .= "$strDataHapus";
 
-        simpanLog($data['menu'], $tabel, $keteranganLog, "delete");
+        // simpanLog($data['menu'], $tabel, $keteranganLog, "delete");
 
         // Jika ada data detail
         if(sizeof($dataDetail)){
             // Proses hapus data detail
         }
 
-        return json_encode([
+        return [
             "hasil" => 1,
             "data"=> $data,
             "message" => "Data $tabel berhasil dihapus!"
-        ]);
+        ];
     }
 }

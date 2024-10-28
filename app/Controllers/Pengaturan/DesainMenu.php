@@ -70,4 +70,25 @@ class DesainMenu extends BaseController
         }, $data);
         return $hasil;
     }
+
+    function simpanMenu(){
+        $request = request();
+        $data = $request->getPost('data');
+        $hasil = [];
+        if(sizeof($data)){
+            foreach($data as $dt){
+                $dataAuthPermisssions = [
+                    "id"=>$dt['auth_permissions_id'],
+                    "name"=>$dt['name'],
+                    "description"=>$dt['description'],
+                ];
+                $hasil = $this->simpan('auth_permissions', $dataAuthPermisssions);
+                if($hasil['hasil']!== 1)return json_encode($hasil);
+                $dt['auth_permissions_id'] = $hasil['data']['id'];
+                $hasil = $this->simpan('sistem_otoritas', $dt);
+                if($hasil['hasil']!== 1)return json_encode($hasil);
+            }
+        }
+        return json_encode($hasil);
+    }
 }
