@@ -21,9 +21,9 @@ class CreateSistemOtoritasTable extends Migration
             'is_page'                       => ['type' => 'tinyint', 'constraint' => 1, 'null' => 0, 'default' => 0],
             'status'                        => ['type' => 'ENUM("active","inactive")', 'default' => 'active', 'null' => FALSE,],
             'created_at'                    => ['type' => 'datetime', 'null' => true],
-            'created_by'                    => ['type' => 'datetime', 'null' => true],
+            'created_by'                    => ['type' => 'int', 'null' => true],
             'updated_at'                    => ['type' => 'datetime', 'null' => true],
-            'updated_by'                    => ['type' => 'datetime', 'null' => true],
+            'updated_by'                    => ['type' => 'int', 'null' => true],
         ]);
 
         $this->forge->addKey('id', true);

@@ -72,6 +72,8 @@ class DesainMenu extends BaseController
     }
 
     function simpanMenu(){
+        $this->db->transStart();
+
         $request = request();
         $data = $request->getPost('data');
         $hasil = [];
@@ -83,12 +85,23 @@ class DesainMenu extends BaseController
                     "description"=>$dt['description'],
                 ];
                 $hasil = $this->simpan('auth_permissions', $dataAuthPermisssions);
-                if($hasil['hasil']!== 1)return json_encode($hasil);
+                if((int)$hasil['hasil']!== 1)return json_encode($hasil);
                 $dt['auth_permissions_id'] = $hasil['data']['id'];
+                unset($dt['description']);
+                unset($dt['level']);
+                unset($dt['name']);
+                unset($dt['anak']);
+                // return json_encode([
+                //     "hasil"=> 0,
+                //     "message"=>"CEK",
+                //     "data"=>$dt
+                // ]);
                 $hasil = $this->simpan('sistem_otoritas', $dt);
                 if($hasil['hasil']!== 1)return json_encode($hasil);
             }
         }
+
+        $this->db->transComplete();
         return json_encode($hasil);
     }
 }

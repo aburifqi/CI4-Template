@@ -11,8 +11,16 @@ class UpdateAndAddfieldToUsersTable extends Migration
         $addfields = [
             'full_name'          => ['type' => 'varchar', 'constraint' => 30, 'null' => true],
             'user_image'         => ['type' => 'varchar', 'constraint' => 30, 'null' => true, 'default' => 'default-user.png'],
+        ];
+        $this->forge->addColumn('users', $addfields);
+
+        $addfields = [
+            'created_at'                    => ['type' => 'datetime', 'null' => true],
+            'created_by'                    => ['type' => 'int', 'null' => true],
+            'updated_at'                    => ['type' => 'datetime', 'null' => true],
+            'updated_by'                    => ['type' => 'int', 'null' => true],
        ];
-       $this->forge->addColumn('users', $addfields);
+       $this->forge->addColumn('auth_permissions', $addfields);
     //    $alterfields = [
     //             'emp_name' => [
     //                 'name' => 'fullname',
@@ -26,5 +34,6 @@ class UpdateAndAddfieldToUsersTable extends Migration
     public function down()
     {
         $this->forge->dropColumn('users', ['full_name', 'user_image']);
+        $this->forge->dropColumn('auth_permissions', ['created_at', 'created_by', 'updated_at', 'updated_by']);
     }
 }
