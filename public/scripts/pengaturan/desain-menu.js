@@ -330,7 +330,7 @@ async function simpan(obj) {
             data:data
         },
         success: (data) => {
-            if (parseInt(data.hasil)) {
+            if (parseInt(data.hasil)==1) {
                 $.toast({
                     heading: "Berhasil",
                     text: data.message,

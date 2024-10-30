@@ -14,14 +14,14 @@ class DesainMenu extends BaseController
 
     public function getMenu(){
         $sql = 'SELECT 
-                    so.*, 
-                    0 AS level,
-                    ap.name,
-                    ap.description
-                FROM sistem_otoritas so
-                JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
-                WHERE so.parent_name = "" AND so.jenis="Menu" AND so.status = "active"
-                ORDER BY so.urut
+                so.*, 
+                0 AS level,
+                ap.name,
+                ap.description
+            FROM sistem_otoritas so
+            JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
+            WHERE so.parent_name = "" AND so.jenis="Menu" AND so.status = "active"
+            ORDER BY so.urut
         ';
 
         $query = $this->db->query($sql);
@@ -70,7 +70,6 @@ class DesainMenu extends BaseController
         }, $data);
         return $hasil;
     }
-
     function simpanMenu(){
         $this->db->transStart();
 
@@ -84,7 +83,7 @@ class DesainMenu extends BaseController
                     "name"=>$dt['name'],
                     "description"=>$dt['description'],
                 ];
-                $hasil = $this->simpan('auth_permissions', $dataAuthPermisssions);
+                $hasil = $this->simpan('auth_permissions', $dataAuthPermisssions,["name"=>["unik"]]);
                 if((int)$hasil['hasil']!== 1)return json_encode($hasil);
                 $dt['auth_permissions_id'] = $hasil['data']['id'];
                 unset($dt['description']);

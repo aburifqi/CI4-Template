@@ -701,6 +701,11 @@ abstract class BaseController extends Controller
                     "message" => "Update tabel $tabel mengalami masalah!",
                 ];
             }
+            // return [
+            //     "hasil" => 0,
+            //     "message"=>"CEK",
+            //     "data"=>$update
+            // ];
             $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRowArray();
 
             $keteranganLog = "";
@@ -717,7 +722,8 @@ abstract class BaseController extends Controller
         }else{
             $data['created_at']= date("Y-m-d H:i:s");
             $data['created_by']= user()->id;    
-            $id = $this->insertTabel($tabel, $data);
+            $tambah = $this->insertTabel($tabel, $data);
+            $id = $this->db->insertID();
             // $dataBaru = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
             $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRowArray();
 
