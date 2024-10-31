@@ -76,6 +76,8 @@ class DesainMenu extends BaseController
         $request = request();
         $data = $request->getPost('data');
         $hasil = [];
+        $idSimpanPermission=[];
+        $idSimpanOtoritas=[];
         if(sizeof($data)){
             foreach($data as $dt){
                 $dataAuthPermisssions = [
@@ -85,21 +87,31 @@ class DesainMenu extends BaseController
                 ];
                 $hasil = $this->simpan('auth_permissions', $dataAuthPermisssions,["name"=>["unik"]]);
                 if((int)$hasil['hasil']!== 1)return json_encode($hasil);
+                array_push($idSimpanPermission, $hasil['data']['id']);
                 $dt['auth_permissions_id'] = $hasil['data']['id'];
                 unset($dt['description']);
                 unset($dt['level']);
                 unset($dt['name']);
                 unset($dt['anak']);
-                // return json_encode([
-                //     "hasil"=> 0,
-                //     "message"=>"CEK",
-                //     "data"=>$dt
-                // ]);
+
                 $hasil = $this->simpan('sistem_otoritas', $dt);
                 if($hasil['hasil']!== 1)return json_encode($hasil);
+                array_push($idSimpanOtoritas, $hasil['data']['id']);
             }
         }
-
+        // Yang gak kesimpan, dianggap dihapus.
+        $dataPermissions = $this->db->query("SELECT * FROM auth_permissions WHERE id NOT IN (:id:)",["id"=>implode(",", $idSimpanPermission)])->getResultArray();
+        $dataOtoritas = $this->db->query("SELECT * FROM sistem_otoritas WHERE id NOT IN (:id:)",["id"=>implode(",", $idSimpanOtoritas)])->getResultArray();
+        if(sizeof($dataPermissions)){
+            foreach($dataPermissions as $dp){
+                $this->hapus('auth_permissions', $dp);
+            }
+        }
+        if(sizeof($dataOtoritas)){
+            foreach($dataOtoritas as $do){
+                $this->hapus('sistem_otoritas', $do);
+            }
+        }
         $this->db->transComplete();
         return json_encode($hasil);
     }

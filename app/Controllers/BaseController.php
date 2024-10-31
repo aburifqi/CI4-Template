@@ -825,18 +825,18 @@ abstract class BaseController extends Controller
     }
     function hapus($tabel = "", $data = [], $dataDetail = [], $namaKolomId='id'){
         // Hapus data header
-        $update['deleted_at']= date("Y-m-d H:s:i");
+        $update['deleted_at']= date("Y-m-d H:i:s");
         $update['deleted_by']= user()->id;
         
         $this->updateTabel($tabel, $update, "$namaKolomId = '".$this->db->escape($data[$namaKolomId])."'");
 
-        $dataHapus = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = '".$this->db->escape($data[$namaKolomId])."'")->getRowArray();
-        $keteranganLog = "";
-        $strDataHapus = "";
-        foreach($dataHapus as $fldLog=>$valLog){
-            $strDataHapus .= ($strDataHapus?"|":"").$fldLog." : ".$valLog;
-        }
-        $keteranganLog .= "$strDataHapus";
+        // $dataHapus = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = '".$this->db->escape($data[$namaKolomId])."' LIMIT 1")->getRowArray();
+        // $keteranganLog = "";
+        // $strDataHapus = "";
+        // foreach($dataHapus as $fldLog=>$valLog){
+        //     $strDataHapus .= ($strDataHapus?"|":"").$fldLog." : ".$valLog;
+        // }
+        // $keteranganLog .= "$strDataHapus";
 
         // simpanLog($data['menu'], $tabel, $keteranganLog, "delete");
 

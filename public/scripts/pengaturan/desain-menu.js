@@ -171,11 +171,33 @@ function addHoverDom(treeId, treeNode) {
         // tambahMenu(treeNode, treeNode.id);
         var zTree = $.fn.zTree.getZTreeObj("treeMenu");
 
-        console.log("KLIK")
+        const id = (100 + newCount);
+        const name = "new node" + (newCount++);
         zTree.addNodes(treeNode, {
-            id:(100 + newCount), 
+            id: id, 
             pId:treeNode.id, 
-            name:"new node" + (newCount++),
+            name: name,
+            db:{
+                id:0,
+                auth_permissions_id: 0,
+                "name": id,
+                "judul": name,
+                "icon": "",
+                "icon_color": "",
+                "jenis": "Menu",
+                "parent_name": treeNode.id,
+                "urut": 0,
+                "url": "",
+                "status": "active",
+                "level": 0,
+                "is_page": "0",
+                "status": "active",
+                "created_at": null,
+                "created_by": null,
+                "updated_at": null,
+                "updated_by": null,
+                "description": "",
+            }
         });
         return false;
     });
@@ -264,10 +286,13 @@ function simpanMenu(obj) {
 }
 
 function getChildData(data, anak){
+    console.log(data)
     $.each(anak, function(i, item){
+        console.log(item)
         if(!item.db){
             data.push({
                 "id": 0,
+                "auth_permissions_id": 0,
                 "name": item.id,
                 "judul": item.name,
                 "icon": "",
@@ -278,9 +303,17 @@ function getChildData(data, anak){
                 "url": "",
                 "status": "active",
                 "level": 0,
+                "is_page": "0",
+                "status": "active",
+                "created_at": null,
+                "created_by": null,
+                "updated_at": null,
+                "updated_by": null,
+                "description": "",
             });
         }else{
             let db = item.db;
+            // db.auth_permissions_id = item.auth_permissions_id;
             db.name = item.id;
             db.judul = item.name;
             db.parent_name = item.pId;
@@ -313,6 +346,7 @@ async function simpan(obj) {
     var data = [];
     $.each(nodes, function (i, item){
         var db = item.db;
+        // db.auth_permissions_id = item.auth_permissions_id;
         db.name = item.id;
         db.judul = item.name;
         db.urut = i;
