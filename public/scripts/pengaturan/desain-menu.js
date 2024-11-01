@@ -286,9 +286,7 @@ function simpanMenu(obj) {
 }
 
 function getChildData(data, anak){
-    console.log(data)
     $.each(anak, function(i, item){
-        console.log(item)
         if(!item.db){
             data.push({
                 "id": 0,

@@ -20,7 +20,7 @@ class DesainMenu extends BaseController
                 ap.description
             FROM sistem_otoritas so
             JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
-            WHERE so.parent_name = "" AND so.jenis="Menu" AND so.status = "active"
+            WHERE so.parent_name = "" AND so.status = "active"
             ORDER BY so.urut
         ';
 
@@ -56,7 +56,7 @@ class DesainMenu extends BaseController
                     ap.description
                 FROM sistem_otoritas so
                 JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
-                WHERE so.parent_name = :parent_name: AND so.jenis="Menu" AND so.status = "active"
+                WHERE so.parent_name = :parent_name: AND so.status = "active"
                 ORDER BY so.urut
             ';
             $dt['level'] = $level;
@@ -70,49 +70,68 @@ class DesainMenu extends BaseController
         }, $data);
         return $hasil;
     }
+
     function simpanMenu(){
-        $this->db->transStart();
+        // try {
+            // $this->db->transException(true)->transStart();
+            $this->db->transStart();
 
-        $request = request();
-        $data = $request->getPost('data');
-        $hasil = [];
-        $idSimpanPermission=[];
-        $idSimpanOtoritas=[];
-        if(sizeof($data)){
-            foreach($data as $dt){
-                $dataAuthPermisssions = [
-                    "id"=>$dt['auth_permissions_id'],
-                    "name"=>$dt['name'],
-                    "description"=>$dt['description'],
-                ];
-                $hasil = $this->simpan('auth_permissions', $dataAuthPermisssions,["name"=>["unik"]]);
-                if((int)$hasil['hasil']!== 1)return json_encode($hasil);
-                array_push($idSimpanPermission, $hasil['data']['id']);
-                $dt['auth_permissions_id'] = $hasil['data']['id'];
-                unset($dt['description']);
-                unset($dt['level']);
-                unset($dt['name']);
-                unset($dt['anak']);
+            $request = request();
+            $data = $request->getPost('data');
+            $hasil = [];
+            $idSimpanPermission=[];
+            $idSimpanOtoritas=[];
+            if(sizeof($data)){
+                foreach($data as $dt){
+                    $dataAuthPermisssions = [
+                        "id"=>$dt['auth_permissions_id'],
+                        "name"=>$dt['name'],
+                        "description"=>$dt['description'],
+                    ];
+                    $hasil = $this->simpan('auth_permissions', $dataAuthPermisssions,["name"=>["unik"]]);
+                    if((int)$hasil['hasil']!== 1)return json_encode($hasil);
+                    array_push($idSimpanPermission, $hasil['data']['id']);
+                    $dt['auth_permissions_id'] = $hasil['data']['id'];
+                    unset($dt['description']);
+                    unset($dt['level']);
+                    unset($dt['name']);
+                    unset($dt['anak']);
 
-                $hasil = $this->simpan('sistem_otoritas', $dt);
-                if($hasil['hasil']!== 1)return json_encode($hasil);
-                array_push($idSimpanOtoritas, $hasil['data']['id']);
+                    $hasil = $this->simpan('sistem_otoritas', $dt);
+                    if($hasil['hasil']!== 1)return json_encode($hasil);
+                    array_push($idSimpanOtoritas, $hasil['data']['id']);
+                }
             }
-        }
-        // Yang gak kesimpan, dianggap dihapus.
-        $dataPermissions = $this->db->query("SELECT * FROM auth_permissions WHERE id NOT IN (:id:)",["id"=>implode(",", $idSimpanPermission)])->getResultArray();
-        $dataOtoritas = $this->db->query("SELECT * FROM sistem_otoritas WHERE id NOT IN (:id:)",["id"=>implode(",", $idSimpanOtoritas)])->getResultArray();
-        if(sizeof($dataPermissions)){
-            foreach($dataPermissions as $dp){
-                $this->hapus('auth_permissions', $dp);
+            // Yang gak kesimpan, dianggap dihapus.
+            $dataPermissions = $this->db->query("SELECT * FROM auth_permissions WHERE id NOT IN (:id:)",["id"=>implode(",", $idSimpanPermission)])->getResultArray();
+            $dataOtoritas = $this->db->query("SELECT * FROM sistem_otoritas WHERE id NOT IN (:id:)",["id"=>implode(",", $idSimpanOtoritas)])->getResultArray();
+            return json_encode([
+                "hasil"=>0,
+                "data"=>$dataPermissions,
+                "message"=>"CEK"
+            ]);
+            if(sizeof($dataPermissions)){
+                foreach($dataPermissions as $dp){
+                    $this->hapus('auth_permissions', $dp);
+                }
             }
-        }
-        if(sizeof($dataOtoritas)){
-            foreach($dataOtoritas as $do){
-                $this->hapus('sistem_otoritas', $do);
+            if(sizeof($dataOtoritas)){
+                foreach($dataOtoritas as $do){
+                    $this->hapus('sistem_otoritas', $do);
+                }
             }
-        }
-        $this->db->transComplete();
-        return json_encode($hasil);
+            $this->db->transComplete();
+            if ($this->db->transStatus() === false) {
+                // generate an error... or use the log_message() function to log your error
+                return json_encode([
+                    "hasil"=>0,
+                    "message"=>"Terjadi kesalahan...",
+                    "data"=>$data
+                ]);
+            }
+            return json_encode($hasil);
+        // } catch (DatabaseException $e) {
+            // Automatically rolled back already.
+        // }
     }
 }
