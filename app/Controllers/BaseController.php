@@ -706,18 +706,18 @@ abstract class BaseController extends Controller
             //     "message"=>"CEK",
             //     "data"=>$update
             // ];
-            $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRowArray();
+            // $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRowArray();
 
-            $keteranganLog = "";
-            $strDataLama = "";
-            foreach($dataLama as $fldLog=>$valLog){
-                $strDataLama .= ($strDataLama?"|":"").$fldLog." : ".$valLog;
-            }
-            $strDataBaru = "";
-            foreach($dataBaru as $fldLog=>$valLog){
-                $strDataBaru .= ($strDataBaru?"|":"").$fldLog." : ".$valLog;
-            }
-            $keteranganLog .= "$strDataLama => $strDataBaru";
+            // $keteranganLog = "";
+            // $strDataLama = "";
+            // foreach($dataLama as $fldLog=>$valLog){
+            //     $strDataLama .= ($strDataLama?"|":"").$fldLog." : ".$valLog;
+            // }
+            // $strDataBaru = "";
+            // foreach($dataBaru as $fldLog=>$valLog){
+            //     $strDataBaru .= ($strDataBaru?"|":"").$fldLog." : ".$valLog;
+            // }
+            // $keteranganLog .= "$strDataLama => $strDataBaru";
             // simpanLog($menu, $tabel, $keteranganLog, "edit");
         }else{
             $data['created_at']= date("Y-m-d H:i:s");
@@ -725,14 +725,14 @@ abstract class BaseController extends Controller
             $tambah = $this->insertTabel($tabel, $data);
             $id = $this->db->insertID();
             // $dataBaru = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
-            $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRowArray();
+            // $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRowArray();
 
-            $keteranganLog = "";
-            $strDataBaru = "";
-            foreach($dataBaru as $fldLog=>$valLog){
-                $strDataBaru .= ($strDataBaru?"|":"").$fldLog." : ".$valLog;
-            }
-            $keteranganLog .= "$strDataBaru";
+            // $keteranganLog = "";
+            // $strDataBaru = "";
+            // foreach($dataBaru as $fldLog=>$valLog){
+            //     $strDataBaru .= ($strDataBaru?"|":"").$fldLog." : ".$valLog;
+            // }
+            // $keteranganLog .= "$strDataBaru";
             // simpanLog($menu, $tabel, $keteranganLog, "create");
         }
 

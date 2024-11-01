@@ -103,13 +103,13 @@ class DesainMenu extends BaseController
                 }
             }
             // Yang gak kesimpan, dianggap dihapus.
-            $dataPermissions = $this->db->query("SELECT * FROM auth_permissions WHERE id NOT IN (:id:)",["id"=>implode(",", $idSimpanPermission)])->getResultArray();
-            $dataOtoritas = $this->db->query("SELECT * FROM sistem_otoritas WHERE id NOT IN (:id:)",["id"=>implode(",", $idSimpanOtoritas)])->getResultArray();
-            return json_encode([
-                "hasil"=>0,
-                "data"=>$dataPermissions,
-                "message"=>"CEK"
-            ]);
+            $dataPermissions = $this->db->query("SELECT * FROM auth_permissions WHERE id NOT IN (".implode(",", $idSimpanPermission).")")->getResultArray();
+            $dataOtoritas = $this->db->query("SELECT * FROM sistem_otoritas WHERE id NOT IN (".implode(",", $idSimpanOtoritas).")")->getResultArray();
+            // return json_encode([
+            //     "hasil"=>0,
+            //     "data"=>$dataOtoritas,
+            //     "message"=>"CEK"
+            // ]);
             if(sizeof($dataPermissions)){
                 foreach($dataPermissions as $dp){
                     $this->hapus('auth_permissions', $dp);
