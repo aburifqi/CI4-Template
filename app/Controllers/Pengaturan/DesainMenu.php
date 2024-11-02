@@ -4,7 +4,7 @@ namespace App\Controllers\Pengaturan;
 
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
-
+use CodeIgniter\Database\Exceptions\DatabaseException;
 class DesainMenu extends BaseController
 {
     public function index()
@@ -20,7 +20,7 @@ class DesainMenu extends BaseController
                 ap.description
             FROM sistem_otoritas so
             JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
-            WHERE so.parent_name = "" AND so.status = "active"
+            WHERE so.parent_name = "" AND so.status = "active" AND (so.deleted_by = 0 OR so.deleted_by IS NULL OR so.deleted_by = "") AND (ap.deleted_by = 0 OR ap.deleted_by IS NULL OR ap.deleted_by = "")
             ORDER BY so.urut
         ';
 
@@ -56,7 +56,7 @@ class DesainMenu extends BaseController
                     ap.description
                 FROM sistem_otoritas so
                 JOIN auth_permissions ap ON ap.id = so.auth_permissions_id
-                WHERE so.parent_name = :parent_name: AND so.status = "active"
+                WHERE so.parent_name = :parent_name: AND so.status = "active" AND (so.deleted_by = 0 OR so.deleted_by IS NULL OR so.deleted_by = "") AND (ap.deleted_by = 0 OR ap.deleted_by IS NULL OR ap.deleted_by = "")
                 ORDER BY so.urut
             ';
             $dt['level'] = $level;
@@ -72,9 +72,9 @@ class DesainMenu extends BaseController
     }
 
     function simpanMenu(){
-        // try {
-            // $this->db->transException(true)->transStart();
-            $this->db->transStart();
+        try {
+            $this->db->transException(true)->transStart();
+            // $this->db->transStart();
 
             $request = request();
             $data = $request->getPost('data');
@@ -105,11 +105,6 @@ class DesainMenu extends BaseController
             // Yang gak kesimpan, dianggap dihapus.
             $dataPermissions = $this->db->query("SELECT * FROM auth_permissions WHERE id NOT IN (".implode(",", $idSimpanPermission).")")->getResultArray();
             $dataOtoritas = $this->db->query("SELECT * FROM sistem_otoritas WHERE id NOT IN (".implode(",", $idSimpanOtoritas).")")->getResultArray();
-            // return json_encode([
-            //     "hasil"=>0,
-            //     "data"=>$dataOtoritas,
-            //     "message"=>"CEK"
-            // ]);
             if(sizeof($dataPermissions)){
                 foreach($dataPermissions as $dp){
                     $this->hapus('auth_permissions', $dp);
@@ -121,17 +116,22 @@ class DesainMenu extends BaseController
                 }
             }
             $this->db->transComplete();
-            if ($this->db->transStatus() === false) {
-                // generate an error... or use the log_message() function to log your error
-                return json_encode([
-                    "hasil"=>0,
-                    "message"=>"Terjadi kesalahan...",
-                    "data"=>$data
-                ]);
-            }
+            // if ($this->db->transStatus() === false) {
+            //     // generate an error... or use the log_message() function to log your error
+            //     return json_encode([
+            //         "hasil"=>0,
+            //         "message"=>"Terjadi kesalahan...",
+            //         "data"=>$data
+            //     ]);
+            // }
             return json_encode($hasil);
-        // } catch (DatabaseException $e) {
+        } catch (DatabaseException $e) {
             // Automatically rolled back already.
-        // }
+            return json_encode([
+                "hasil"=>0,
+                "message"=>"Terjadi kesalahan...",
+                "data"=>$e
+            ]);
+        }
     }
 }

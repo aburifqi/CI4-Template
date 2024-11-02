@@ -353,16 +353,16 @@ function initDataTable(
                 // if (e.originalEvent.key!="Enter")return;
                 e.stopPropagation();
 
-                var cursorPosition = this.selectionStart;
+                // var cursorPosition = this.selectionStart;
                 var val = $.fn.dataTable.util.escapeRegex($(this).val());
 
                 if (column.search() !== val) {
                   column.search(val ? val : "", true, false).draw();
                 }
 
-                $(this)
-                  .focus()[0]
-                  .setSelectionRange(cursorPosition, cursorPosition);
+                // $(this)
+                //   .focus()[0]
+                //   .setSelectionRange(cursorPosition, cursorPosition);
               });
             break;
           case "select": // Select
@@ -575,7 +575,7 @@ function initDataTable(
                   column.search(val ? val : "", true, false).draw();
                 }
 
-                $(this).focus()[0];
+                // $(this).focus()[0];
                 // .setSelectionRange(cursorPosition, cursorPosition);
               });
             break;
@@ -725,9 +725,9 @@ function initDataTable(
                   column.search(val ? val : "", true, false).draw();
                 }
 
-                $(this)
-                  .focus()[0]
-                  .setSelectionRange(cursorPosition, cursorPosition);
+                // $(this)
+                //   .focus()[0]
+                //   .setSelectionRange(cursorPosition, cursorPosition);
               });
 
             var input_name = $(`
@@ -745,9 +745,9 @@ function initDataTable(
                   column.search(val ? val : "", true, false).draw();
                 }
 
-                $(this)
-                  .focus()[0]
-                  .setSelectionRange(cursorPosition, cursorPosition);
+                // $(this)
+                //   .focus()[0]
+                //   .setSelectionRange(cursorPosition, cursorPosition);
               });
             break;
           case "input-item": // Input
@@ -769,9 +769,9 @@ function initDataTable(
                   column.search(val ? val : "", true, false).draw();
                 }
 
-                $(this)
-                  .focus()[0]
-                  .setSelectionRange(cursorPosition, cursorPosition);
+                // $(this)
+                //   .focus()[0]
+                //   .setSelectionRange(cursorPosition, cursorPosition);
               });
             break;
         }

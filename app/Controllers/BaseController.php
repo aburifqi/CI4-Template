@@ -484,7 +484,7 @@ abstract class BaseController extends Controller
                                     }
                                 break;
                                 case "unik": 
-                                    $queryUnik = "SELECT COUNT($namaKolomId) AS jumlah FROM $tabel WHERE $key = :kolom: AND $namaKolomId <> :id:";
+                                    $queryUnik = "SELECT COUNT($namaKolomId) AS jumlah FROM $tabel WHERE $key = :kolom: AND $namaKolomId <> :id: AND (deleted_by = 0 OR deleted_by IS NULL OR deleted_by = '')";
                                     $bindingQueryUnik=[
                                         "kolom" => $data[$key],
                                         "id" => $data[$namaKolomId],
@@ -701,11 +701,6 @@ abstract class BaseController extends Controller
                     "message" => "Update tabel $tabel mengalami masalah!",
                 ];
             }
-            // return [
-            //     "hasil" => 0,
-            //     "message"=>"CEK",
-            //     "data"=>$update
-            // ];
             // $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRowArray();
 
             // $keteranganLog = "";
@@ -723,6 +718,14 @@ abstract class BaseController extends Controller
             $data['created_at']= date("Y-m-d H:i:s");
             $data['created_by']= user()->id;    
             $tambah = $this->insertTabel($tabel, $data);
+            if(!$tambah){
+                return [
+                    "hasil" => 0,
+                    "data"=> $data,
+                    "error"=> "Tambah data tabel $tabel mengalami masalah!",
+                    "message" => "Tambah data tabel $tabel mengalami masalah!",
+                ];
+            }
             $id = $this->db->insertID();
             // $dataBaru = $db->fetch_one("SELECT * FROM $tabel WHERE $namaKolomId = '".$db->clean($id)."'");
             // $dataBaru = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = :id:",["id"=>$id])->getRowArray();
@@ -779,7 +782,15 @@ abstract class BaseController extends Controller
 
                     foreach($dataDetailHapus as $dataHapus){
                         // $dataHapus['menu'] = $menu;
-                        $this->hapus($tbl, $dataHapus);
+                        $hapus = $this->hapus($tbl, $dataHapus);
+                        if(!$hapus['hasil']){
+                            return [
+                                "hasil" => 0,
+                                "data"=> $hapus['data'],
+                                "error"=> "Hapus data tabel $tbl mengalami masalah!",
+                                "message" => "Hapus data tabel $tbl mengalami masalah!",
+                            ];
+                        }
                     }
                 }
         
@@ -823,13 +834,21 @@ abstract class BaseController extends Controller
         $this->db->query($query, $bindingKriteria);
         return $this->db->affectedRows();
     }
-    function hapus($tabel = "", $data = [], $dataDetail = [], $namaKolomId='id'){
+
+    function hapus($tabel = "", $data = [], $namaKolomId='id'){
         // Hapus data header
         $update['deleted_at']= date("Y-m-d H:i:s");
         $update['deleted_by']= user()->id;
         
-        $this->updateTabel($tabel, $update, "$namaKolomId = '".$this->db->escape($data[$namaKolomId])."'");
+        $hapus = $this->updateTabel($tabel, $update, "$namaKolomId = :id:",["id"=>$data[$namaKolomId]]);
 
+        if(!$hapus){
+            return [
+                "hasil" => 0,
+                "data"=> $data,
+                "message" => "Data $tabel gagal dihapus!"
+            ];
+        }
         // $dataHapus = $this->db->query("SELECT * FROM $tabel WHERE $namaKolomId = '".$this->db->escape($data[$namaKolomId])."' LIMIT 1")->getRowArray();
         // $keteranganLog = "";
         // $strDataHapus = "";
@@ -841,9 +860,9 @@ abstract class BaseController extends Controller
         // simpanLog($data['menu'], $tabel, $keteranganLog, "delete");
 
         // Jika ada data detail
-        if(sizeof($dataDetail)){
+        // if(sizeof($dataDetail)){
             // Proses hapus data detail
-        }
+        // }
 
         return [
             "hasil" => 1,

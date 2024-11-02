@@ -85,7 +85,10 @@ $(function () {
             });
             data.db.status = $("#status").is(":checked")?'active':'inactive';
             data.db.jenis = $("#jenis").is(":checked")?'Menu':'Action';
+            data.db.is_page = $("#is_page").is(":checked")?1:0;
 
+            console.log(nodes)
+            console.log(data)
             const isNameEksis = $.grep(nodes, (nd)=>{
                 return nd.id == data.db.name;
             });
@@ -106,6 +109,7 @@ $(function () {
                 data.id = data.db.name;
                 data.name = data.db.judul;
             }
+            console.log(data.db)
             $.fn.zTree.init($("#treeMenu"), setting, nodes);
             $("#modal-menu").modal("toggle");
         }
@@ -147,13 +151,15 @@ function renderTree(){
             var zNode=[];
             if(res.data.length){
                 let id = 1;
+
                 $.each(res.data, (i, menu)=>{
-                    zNode.push({ id:menu.name, pId:0, name:menu.judul, isParent:menu.anak.length>0?true:false,db:menu, nocheck:true});
+                    zNode.push({ id:menu.name, pId:'', name:menu.judul, isParent:menu.anak.length>0?true:false, db:menu, nocheck:true});
                     if (menu.anak.length){
                         getChildMenu(res.data, menu.anak, menu, zNode, id);
                     }
                     id++;
                 });
+
                 $.fn.zTree.init($("#treeMenu"), setting, zNode);
             }
         }
@@ -203,7 +209,7 @@ function addHoverDom(treeId, treeNode) {
     });
 
     var btnRemove = $(`#${treeNode.tId}_remove`);
-    var btnDB = $(`<span class="btn btn-xs btn-primary" id="${treeNode.tId}_db" title="Data" style="width:21px; height:21px; border:1px solid gray;"><i class="mdi mdi-settings"></i></span>`).on("click", function(e){
+    var btnDB = $(`<span class="btn btn-xs btn-primary p-0" id="${treeNode.tId}_db" title="Data" style="width:19px; height:19px; border:1px solid gray;"><i class="mdi mdi-settings"></i></span>`).on("click", function(e){
         $("#modal-menu").data("data", treeNode).modal("show");
     }).on("ubah", function(e){
         treeNode = $(this).data("data");
@@ -353,7 +359,6 @@ async function simpan(obj) {
             getChildData(data, item.children);
         }
     });
-    console.log(data)
     $.ajax({
         url: baseURL+'simpan-menu',
         type: "POST",
@@ -371,93 +376,7 @@ async function simpan(obj) {
                     hideAfter: 1500,
                     icon: "success",
                 });
-                $(obj).prop("disabled", false);
-            } else {
-                $.toast({
-                    heading: "Gagal",
-                    text: data.message,
-                    showHideTransition: "slide",
-                    position: "bottom-right",
-                    hideAfter: 1500,
-                    icon: "error",
-                });
-                $(obj).prop("disabled", false);
-            }
-        },
-        error: (_xhr, status, err) => {
-            console.log(_xhr);
-            $(obj).prop("disabled", false);
-        },
-    });
-
-    return;
-    $(obj).prop("disabled", true);
-
-    var row = $(obj).closest("tr");
-    var table = $(obj).closest("table");
-    var data = $(table).DataTable().row(row).data();
-
-    data.icon = $(row).find(".pick-icon").length ?
-        $(row).find(".pick-icon i").attr("class") :
-        "";
-    data.icon_color = $(row).find(".pick-icon-color").length ?
-        $(row).find(".pick-icon-color").css("background-color") :
-        "";
-    data.title = $(row).find(".title").length ? $(row).find(".title").val() : "";
-    data.code = $(row).find(".kode").length ? $(row).find(".kode").val() : "";
-    data.jenis = $(row).find(".jenis").length ? $(row).find(".jenis").val() : "";
-    data.url = $(row).find(".url").length ? $(row).find(".url").val() : "";
-    data.status = $(row).find(".status").length ? $(row).find(".status").val() : "";
-    data.crud_state = "saved";
-
-    if (!data.title) {
-        $.toast({
-            heading: "Dibatalkan",
-            text: "Tentukan title desain menu",
-            showHideTransition: "slide",
-            position: "bottom-right",
-            hideAfter: 1500,
-            icon: "warning",
-        });
-        $(row).find(".title").focus();
-        $(obj).prop("disabled", false);
-        return;
-    }
-
-    if (!data.code) {
-        $.toast({
-            heading: "Dibatalkan",
-            text: "Tentukan kode desain menu",
-            showHideTransition: "slide",
-            position: "bottom-right",
-            hideAfter: 1500,
-            icon: "warning",
-        });
-        $(row).find(".kode").focus();
-        $(obj).prop("disabled", false);
-        return;
-    }
-
-    $.ajax({
-        url: "app/controller/pengaturan/desain-menu.php",
-        type: "POST",
-        dataType: "JSON",
-        data: {
-            action:"save",
-            data:data
-        },
-        success: (data) => {
-            if (data.success) {
-                $(table).DataTable().ajax.reload();
-                // renderSideBar();
-                $.toast({
-                    heading: "Berhasil",
-                    text: data.message,
-                    showHideTransition: "slide",
-                    position: "bottom-right",
-                    hideAfter: 1500,
-                    icon: "success",
-                });
+                renderTree();
                 $(obj).prop("disabled", false);
             } else {
                 $.toast({
@@ -580,65 +499,6 @@ async function edit(obj) {
     });
 }
 
-// async function newData(obj,parentCode) {
-//     var row = $(obj).closest("tr");
-//     var table = $(row).closest("table");
-//     var data = $(table).DataTable().row(row).data();
-
-//    if(!data) data ={code:'0'};
-
-//     $.ajax({
-//         url: "app/controller/pengaturan/desain-menu.php",
-//         type: "POST",
-//         dataType: "JSON",
-//         data: {
-//             action: "save",
-//             data: {
-//                 id: 0,
-//                 code: data.code,
-//                 title: "",
-//                 icon: "",
-//                 icon_color: "",
-//                 jenis: "Menu",
-//                 urut: 0,
-//                 url: "",
-//             },
-//         },
-//         success: (res) => {
-//             if (res.success) {
-//                 if (!data.id){
-//                     $(table).DataTable().ajax.reload();
-//                     return;
-//                 }
-//                 // $(table).DataTable().ajax.reload();
-//                 if ($(row).hasClass("shown")) {
-//                     $(row).next(".row-child").find("table").DataTable().ajax.reload();
-//                 }else{
-//                     let curTombolExpand = $(row).find(".tombol-expand");
-//                     if ($(curTombolExpand).length){
-//                         $(curTombolExpand).trigger("click");
-//                     }else{
-//                         $(row).find(".kolom-expand").append('<div class="tombol-expand"></div>');
-//                         $(row).find(".kolom-expand .tombol-expand").trigger("click");
-//                     }
-//                 }
-//             } else {
-//                 $.toast({
-//                     heading: "Gagal",
-//                     text: data.message,
-//                     showHideTransition: "slide",
-//                     position: "bottom-right",
-//                     hideAfter: 1500,
-//                     icon: "error",
-//                 });
-//             }
-//         },
-//         error: (_xhr, status, err) => {
-//             console.log(_xhr);
-//         },
-//     });
-// }
-
 //PICK icon
 function cariMDI(){
     $("#mdi .icon-box").hide();
@@ -680,6 +540,7 @@ $('#modal-menu').on('show.bs.modal', function (event) {
     if(!data.db){
        data.db={
         "id": 0,
+        "auth_permissions_id":0,
         "name":data.id,
         "judul": data.judul,
         "icon": "",
@@ -688,7 +549,10 @@ $('#modal-menu').on('show.bs.modal', function (event) {
        }
     }
     $.each(data.db, function(key, item){
-        $(`#frm-data input[name=${key}]`).val(item);
+        $(`#frm-data input[name=${key}][type="text"]`).val(item);
+        $(`#frm-data textarea[name=${key}]`).val(item);
+        $(`#frm-data textarea[name=${key}]`).val(item);
+        $(`#frm-data input[name=${key}][type="checkbox"]`).prop("checked", parseInt(item)? true: false);
     });
     $(this).find("input[name=status]").val('active').prop("checked",data.db.status=='active'?true:false).trigger("change");
     $(this).find("input[name=jenis]").val('Menu').prop("checked",data.db.jenis=='Menu'?true:false).trigger("change");
@@ -723,11 +587,12 @@ $('#modal-pick-icon').on('show.bs.modal', function (event) {
     relatedTarget = $(event.relatedTarget);
     if(!relatedTarget)return;
     curIcon = $(relatedTarget).find("i").attr("class");
-    console.log(curIcon)
+
     $("#tbl-icons .filter-row th:eq(3) input").val(curIcon).trigger("change");
 
     let icon =$(this).find(`i[class="${$(relatedTarget).find("i").attr("class")}"]`);
     $(icon).parent(".icon-box").addClass("active");
+    
     // $(icon).parents(".container-icon").animate({
     //     scrollTop: $(icon).parent(".icon-box").offsetTop
     // }, 100);

@@ -319,9 +319,11 @@
                                 <div class="form-group row">
                                     <div class="col-md-9">
                                         <label for="icon">Icon</label>
-                                        <div style="display:flex; align-items: center;justify-content: space-between;width:100%;">
+                                        <div class="input-group">
                                             <input type="text" class="form-control" name="icon" value="">
-                                            <button type="button" id="btn-pick-icon" class="btn btn-primary" style="margin:0" data-toggle="modal" data-target="#modal-pick-icon"><i class="fa fa-plus"></i>&nbsp;Pilih Icon </button>
+                                            <div class="input-group-append">
+                                                <button type="button" id="btn-pick-icon" class="btn btn-outline-secondary" data-toggle="modal" data-target="#modal-pick-icon"><i class="fa fa-plus"></i>&nbsp;Pilih Icon </button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -338,9 +340,11 @@
                                 <div class="form-group row">
                                     <div class="col-md-9">
                                         <label for="color">Warna Icon</label>
-                                        <div style="display:flex; align-items: center;justify-content: space-between;width:100%;">
+                                        <div class="input-group">
                                             <input type="text" class="form-control" name="icon_color" value="">
-                                            <button type="button" id="btn-pick-warna" class="btn btn-primary" style="margin:0" title="Warna">&nbsp;</button>
+                                            <div class="input-group-append">
+                                                <button type="button" id="btn-pick-warna" class="btn btn-outline-secondary" title="Warna">&nbsp;</button>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="col-md-3">
@@ -353,9 +357,17 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="col-xs-3">
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col">
                                         <label for="is_page">Ada Halaman</label>
                                         <input type="checkbox" name="is_page" class="form_control" id="is_page" checked>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col">
+                                        <label for="description">Keterangan</label>
+                                        <textarea name = "description" class = "form-control" id = "description"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -382,23 +394,23 @@
                 </div>
 
                 <div class="modal-body" align="center">
-                    <table id="tbl-icons" level="0" class="table table-striped table-hover jambo_table" width="100%">
-                        <thead>
-                            <tr>
-                                <th field-data="null" field-name="id" format-data="row-number" filter-type="toggle-filter"  class-name="dt-body-right" width="50px"><center>No</center></th>
-
-                                <th field-data="nama" field-name="nama" filter-type="input" format-data="custom" format-custom="columnIcon" class-name="dt-body-center"><center>Icon</center></th>
-
-                                <th field-data="font" field-name="font" filter-type="select" filter-option="optionFonts" ><center>Font</center></th>
-
-                                <th field-data="kode" field-name="kode" filter-type="input"><center>Kode Icon</center></th>
-
-                            </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
                     <div class="table-responsive">
+                        <table id="tbl-icons" level="0" class="table table-striped table-hover jambo_table" width="100%">
+                            <thead>
+                                <tr>
+                                    <th field-data="null" field-name="id" format-data="row-number" filter-type="toggle-filter"  class-name="dt-body-right" width="50px"><center>No</center></th>
+    
+                                    <th field-data="nama" field-name="nama" filter-type="input" format-data="custom" format-custom="columnIcon" class-name="dt-body-center"><center>Icon</center></th>
+    
+                                    <th field-data="font" field-name="font" filter-type="select" filter-option="optionFonts" ><center>Font</center></th>
+    
+                                    <th field-data="kode" field-name="kode" filter-type="input"><center>Kode Icon</center></th>
+    
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 
