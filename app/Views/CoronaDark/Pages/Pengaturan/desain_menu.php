@@ -293,7 +293,7 @@
 
                 <div class="modal-body">
                     <form id="frm-data">
-                        <!-- <input type="hidden" name="id" value="0"> -->
+                        <input type="hidden" name="id" value="0">
                         <!-- <input type="hidden" name="created_by" value=""> -->
                         <!-- <input type="hidden" name="created_at" value=""> -->
                         <!-- <input type="hidden" name="updated_by" value=""> -->
@@ -305,8 +305,8 @@
                         <div class="row">
                             <div class="col" style="height:60vh; overflow:auto">
                             <div class="form-group">
-                                    <label for="id">Kode</label><sup style="color:red">* wajib diisi</sup>
-                                    <input type="text" class="form-control" name="id" placeholder="Kode" required>
+                                    <label for="name">Kode</label><sup style="color:red">* wajib diisi</sup>
+                                    <input type="text" class="form-control" name="name" placeholder="Kode" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="judul">Judul</label><sup style="color:red">* wajib diisi</sup>

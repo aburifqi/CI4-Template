@@ -77,7 +77,7 @@ $(function () {
             let nodes = zTree.getNodes();
 
             dataArr.forEach(item => {
-                if(item.name == 'id'){
+                if(item.name == 'name'){
                     data.db.name = item.value;
                 }else{
                     data.db[item.name]=item.value;
@@ -90,7 +90,7 @@ $(function () {
             console.log(nodes)
             console.log(data)
             const isNameEksis = $.grep(nodes, (nd)=>{
-                return nd.id == data.db.name;
+                return nd.id == data.db.name && nd.db.id !== data.db.id;
             });
             if(isNameEksis.length){
                 $.toast({
@@ -548,7 +548,9 @@ $('#modal-menu').on('show.bs.modal', function (event) {
         "parent_name": data.pId,
        }
     }
+    console.log(data)
     $.each(data.db, function(key, item){
+        $(`#frm-data input[name=${key}][type="hidden"]`).val(item);
         $(`#frm-data input[name=${key}][type="text"]`).val(item);
         $(`#frm-data textarea[name=${key}]`).val(item);
         $(`#frm-data textarea[name=${key}]`).val(item);
