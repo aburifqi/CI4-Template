@@ -87,8 +87,6 @@ $(function () {
             data.db.jenis = $("#jenis").is(":checked")?'Menu':'Action';
             data.db.is_page = $("#is_page").is(":checked")?1:0;
 
-            console.log(nodes)
-            console.log(data)
             const isNameEksis = $.grep(nodes, (nd)=>{
                 return nd.id == data.db.name && nd.db.id !== data.db.id;
             });
@@ -109,7 +107,7 @@ $(function () {
                 data.id = data.db.name;
                 data.name = data.db.judul;
             }
-            console.log(data.db)
+
             $.fn.zTree.init($("#treeMenu"), setting, nodes);
             $("#modal-menu").modal("toggle");
         }
@@ -548,7 +546,7 @@ $('#modal-menu').on('show.bs.modal', function (event) {
         "parent_name": data.pId,
        }
     }
-    console.log(data)
+
     $.each(data.db, function(key, item){
         $(`#frm-data input[name=${key}][type="hidden"]`).val(item);
         $(`#frm-data input[name=${key}][type="text"]`).val(item);
