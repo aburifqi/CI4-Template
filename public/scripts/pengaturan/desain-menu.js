@@ -1,6 +1,6 @@
 var newCount = 1;
 var rulesForm = {
-    id: {
+    name: {
         required: true,
     },
     judul: {
@@ -8,7 +8,7 @@ var rulesForm = {
     },
 };
 var messageErrorForm = {
-    id: {
+    name: {
         required: "Kode menu belum diisi",
     },
     judul: {
