@@ -36,10 +36,6 @@ var setting = {
     }
 };
 
-var relatedTarget;
-var isChoose;
-var curIcon="";
-
 $(function () {
     renderTree();
 
@@ -47,8 +43,9 @@ $(function () {
         type: "component",
     })
     .on("change", function () {
+        console.log($(this).val())
         $(this).css("background-color", $(this).val());
-        $(this).prev('input').val($(this).val());
+        $("#modal-menu input[name=icon_color]").val($(this).val());
     });
 
     $("#frm-data").validate({
@@ -165,15 +162,15 @@ function renderTree(){
 }
 
 function addHoverDom(treeId, treeNode) {
-    var sObj = $("#" + treeNode.tId + "_span");
+    const sObj = $("#" + treeNode.tId + "_span");
     if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
     var addStr = "<span class='button add' id='addBtn_" + treeNode.tId + "' title='add node' onfocus='this.blur();'></span>";
     sObj.after(addStr);
 
-    var btn = $("#addBtn_"+treeNode.tId);
+    const btn = $("#addBtn_"+treeNode.tId);
     if (btn) btn.bind("click", function(){
         // tambahMenu(treeNode, treeNode.id);
-        var zTree = $.fn.zTree.getZTreeObj("treeMenu");
+        const zTree = $.fn.zTree.getZTreeObj("treeMenu");
 
         const id = (100 + newCount);
         const name = "new node" + (newCount++);
@@ -208,10 +205,12 @@ function addHoverDom(treeId, treeNode) {
 
     var btnRemove = $(`#${treeNode.tId}_remove`);
     var btnDB = $(`<span class="btn btn-xs btn-primary p-0" id="${treeNode.tId}_db" title="Data" style="width:19px; height:19px; border:1px solid gray;"><i class="mdi mdi-settings"></i></span>`).on("click", function(e){
+        treeNode.db.judul = treeNode.name;
         $("#modal-menu").data("data", treeNode).modal("show");
-    }).on("ubah", function(e){
-        treeNode = $(this).data("data");
-    });
+    })
+    // .on("ubah", function(e){
+    //     treeNode = $(this).data("data");
+    // });
     // .on("click", function(){
     //     $("#modal-menu").modal('show').data("data", treeNode);
     // });
@@ -226,10 +225,10 @@ function removeHoverDom(treeId, treeNode) {
 function addDiyDom(treeId, treeNode) {
     if(!treeNode.db) return;
     if(!treeNode.db.icon)return;
-    var aObj = $("#" + treeNode.tId + '_span');
+    const aObj = $("#" + treeNode.tId + '_span');
 
-    var btnDB = "<span class='demoIcon' id='diyBtn_" +treeNode.id+ "' title='"+treeNode.name+"' onfocus='this.blur();'><i class='"+treeNode.db.icon+"' style='color:"+treeNode.db.icon_color+";'></i></span>";
-    var editStr = $("<span class='icon-menu' title='"+treeNode.name+"' onfocus='this.blur();'><i class='"+treeNode.db.icon+"' style='color:"+treeNode.db.icon_color+";'></i></span>").on("click", function(e){
+    const btnDB = "<span class='demoIcon' id='diyBtn_" +treeNode.id+ "' title='"+treeNode.name+"' onfocus='this.blur();'><i class='"+treeNode.db.icon+"' style='color:"+treeNode.db.icon_color+";'></i></span>";
+    const editStr = $("<span class='icon-menu' title='"+treeNode.name+"' onfocus='this.blur();'><i class='"+treeNode.db.icon+"' style='color:"+treeNode.db.icon_color+";'></i></span>").on("click", function(e){
         // console.log(treeNode)
     });
     aObj.before(editStr);
@@ -395,142 +394,124 @@ async function simpan(obj) {
     });
 }
 
-async function batal(obj) {
-    let confirm = await Swal.fire({
-        title: "Konfirmasi",
-        text: "Apakah Anda yakin ingin membatalkannya?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        cancelButtonText: "Batal",
-        confirmButtonText: "Yakin",
-    });
+// async function batal(obj) {
+//     let confirm = await Swal.fire({
+//         title: "Konfirmasi",
+//         text: "Apakah Anda yakin ingin membatalkannya?",
+//         icon: "warning",
+//         showCancelButton: true,
+//         confirmButtonColor: "#3085d6",
+//         cancelButtonColor: "#d33",
+//         cancelButtonText: "Batal",
+//         confirmButtonText: "Yakin",
+//     });
 
-    if (!confirm.isConfirmed) return;
+//     if (!confirm.isConfirmed) return;
 
-    renderTree();
-}
+//     renderTree();
+// }
 
-async function hapus(obj,id) {
-    let confirm = await Swal.fire({
-        title: "Konfirmasi",
-        text: "Apakah Anda yakin ingin menghapusnya?",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        cancelButtonText: "Batal",
-        confirmButtonText: "Yakin",
-    });
+// async function hapus(obj,id) {
+//     let confirm = await Swal.fire({
+//         title: "Konfirmasi",
+//         text: "Apakah Anda yakin ingin menghapusnya?",
+//         icon: "warning",
+//         showCancelButton: true,
+//         confirmButtonColor: "#3085d6",
+//         cancelButtonColor: "#d33",
+//         cancelButtonText: "Batal",
+//         confirmButtonText: "Yakin",
+//     });
 
-    if (!confirm.isConfirmed) return;
-    let curTable = $(obj).closest("table");
+//     if (!confirm.isConfirmed) return;
+//     let curTable = $(obj).closest("table");
 
-    $.ajax({
-        url: "app/controller/pengaturan/desain-menu.php",
-        type: "POST",
-        dataType: "JSON",
-        data: {
-            action: "delete",
-            id: id, 
-        },
-        success: (data) => {
-            if (data.success) {
-                $(curTable).DataTable().ajax.reload();
-                $.toast({
-                    heading: "Berhasil",
-                    text: data.message,
-                    showHideTransition: "slide",
-                    position: "bottom-right",
-                    hideAfter: 1500,
-                    icon: "success",
-                });
-            } else {
-                $.toast({
-                    heading: "Gagal",
-                    text: data.message,
-                    showHideTransition: "slide",
-                    position: "bottom-right",
-                    hideAfter: 1500,
-                    icon: "error",
-                });
-            }
-        },
-        error: (_xhr, status, err) => {
-            console.log(_xhr);
-        },
-    });
-}
+//     $.ajax({
+//         url: "app/controller/pengaturan/desain-menu.php",
+//         type: "POST",
+//         dataType: "JSON",
+//         data: {
+//             action: "delete",
+//             id: id, 
+//         },
+//         success: (data) => {
+//             if (data.success) {
+//                 $(curTable).DataTable().ajax.reload();
+//                 $.toast({
+//                     heading: "Berhasil",
+//                     text: data.message,
+//                     showHideTransition: "slide",
+//                     position: "bottom-right",
+//                     hideAfter: 1500,
+//                     icon: "success",
+//                 });
+//             } else {
+//                 $.toast({
+//                     heading: "Gagal",
+//                     text: data.message,
+//                     showHideTransition: "slide",
+//                     position: "bottom-right",
+//                     hideAfter: 1500,
+//                     icon: "error",
+//                 });
+//             }
+//         },
+//         error: (_xhr, status, err) => {
+//             console.log(_xhr);
+//         },
+//     });
+// }
 
-async function edit(obj) {
-    var row = $(obj).closest("tr");
-    var table = $(obj).closest("table");
-    var data = $(table).DataTable().row(row).data();
+// async function edit(obj) {
+//     var row = $(obj).closest("tr");
+//     var table = $(obj).closest("table");
+//     var data = $(table).DataTable().row(row).data();
 
-    data.crud_state = "edit";
-    $.ajax({
-        url: "app/controller/pengaturan/desain-menu.php",
-        type: "POST",
-        dataType: "JSON",
-        data: {
-            action: "save",
-            data: data
-        },
-        success: (data) => {
-            if (data.success) {
-                $(table).DataTable().ajax.reload();
-            } else {
-                $.toast({
-                    heading: "Gagal",
-                    text: data.message,
-                    showHideTransition: "slide",
-                    position: "bottom-right",
-                    hideAfter: 1500,
-                    icon: "error",
-                });
-            }
-        },
-        error: (_xhr, status, err) => {
-            console.log(_xhr);
-        },
-    });
-}
+//     data.crud_state = "edit";
+//     $.ajax({
+//         url: "app/controller/pengaturan/desain-menu.php",
+//         type: "POST",
+//         dataType: "JSON",
+//         data: {
+//             action: "save",
+//             data: data
+//         },
+//         success: (data) => {
+//             if (data.success) {
+//                 $(table).DataTable().ajax.reload();
+//             } else {
+//                 $.toast({
+//                     heading: "Gagal",
+//                     text: data.message,
+//                     showHideTransition: "slide",
+//                     position: "bottom-right",
+//                     hideAfter: 1500,
+//                     icon: "error",
+//                 });
+//             }
+//         },
+//         error: (_xhr, status, err) => {
+//             console.log(_xhr);
+//         },
+//     });
+// }
 
 //PICK icon
-function cariMDI(){
-    $("#mdi .icon-box").hide();
-    $("#mdi .icon-box").each(function(){
-        let iconName = $(this).find("i").attr("class").toLowerCase();
-        let searchIcon = $("#txt-cari-mdi").val().toLowerCase()
-        if(iconName.indexOf(searchIcon)>=0){
-            $(this).show();
-        }
-    });
-}
+// function cariMDI(){
+//     $("#mdi .icon-box").hide();
+//     $("#mdi .icon-box").each(function(){
+//         let iconName = $(this).find("i").attr("class").toLowerCase();
+//         let searchIcon = $("#txt-cari-mdi").val().toLowerCase()
+//         if(iconName.indexOf(searchIcon)>=0){
+//             $(this).show();
+//         }
+//     });
+// }
 //#endregion
 
 //#region Events
-// $("#tbl-data>tbody").on("click", "div.tombol-expand", function (e) {
-//     e.stopPropagation();
-//     var tr = $(this).closest("tr");
-//     var curTabel = $(tr).closest("table");
-//     var row = $(curTabel).DataTable().row(tr);
-//     var level = parseInt($(curTabel).attr("level")) + 1;
-
-//     if (row.child.isShown()) {
-//         row.child.hide();
-//         tr.removeClass("shown");
-//     } else {
-//         row.child(formatDetail(row.data(), level)).show();
-//         tr.next("tr").addClass("row-child");
-//         tr.addClass("shown");
-//     }
-// });
-
 $('#modal-menu').on('show.bs.modal', function (event) {
-    // var btnDB = $(event.relatedTarget);
-    var data = $(this).data("data");
+    const data = $(this).data("data");
     if(!data){
         $("#frm-data").trigger("reset");
         return;
@@ -556,12 +537,9 @@ $('#modal-menu').on('show.bs.modal', function (event) {
     });
     $(this).find("input[name=status]").val('active').prop("checked",data.db.status=='active'?true:false).trigger("change");
     $(this).find("input[name=jenis]").val('Menu').prop("checked",data.db.jenis=='Menu'?true:false).trigger("change");
-    $("#btn-pick-icon i").attr("class", data.db.icon);
-    $("#btn-pick-warna").css("background-color", data.db.icon_color);
-});
 
-$("#btn-pick-icon").on("ubah", function(e){
-    $('#modal-menu').find("input[name=icon]").val($(this).find("i").attr("class"));
+    $("#btn-pick-icon").html(`<i class = "${data.db.icon}"></i>&nbsp; Pilih Icon`);
+    $("#btn-pick-warna").css("background-color", data.db.icon_color);
 });
 //PICK Icon
 $("#tbl-icons").on("click", ">tbody>tr", function(e){
@@ -570,6 +548,7 @@ $("#tbl-icons").on("click", ">tbody>tr", function(e){
 });
 
 $("#tbl-icons").on("draw.dt", function(e){
+    const curIcon = $("#modal-menu input[name=icon]").val();
     if(!curIcon)return;
 
     $(this).find(">tbody>tr").removeClass("selected");
@@ -578,39 +557,22 @@ $("#tbl-icons").on("draw.dt", function(e){
         var data = $("#tbl-icons").DataTable().row(this).data();
         if(!data)return;
         if(data.kode == curIcon)$(this).addClass("selected");
-    })
+    });
 });
 
 $('#modal-pick-icon').on('show.bs.modal', function (event) {
-    $(".icon-box").removeClass("active");
-    isChoose=false;
-    relatedTarget = $(event.relatedTarget);
-    if(!relatedTarget)return;
-    curIcon = $(relatedTarget).find("i").attr("class");
-
+    const curIcon = $("#modal-menu input[name=icon]").val();
+    if(!curIcon)return;
     $("#tbl-icons .filter-row th:eq(3) input").val(curIcon).trigger("change");
-
-    let icon =$(this).find(`i[class="${$(relatedTarget).find("i").attr("class")}"]`);
-    $(icon).parent(".icon-box").addClass("active");
-    
-    // $(icon).parents(".container-icon").animate({
-    //     scrollTop: $(icon).parent(".icon-box").offsetTop
-    // }, 100);
-});
-
-$('#btn-modal-pilih-icon').on('click', function (e) {
-    isChoose=true;
-    $('#modal-pick-icon').modal("toggle");
 });
 
 $('#modal-pick-icon').on('hidden.bs.modal', function (e) {
-    if(!relatedTarget || !isChoose)return;
     if(!$("#tbl-icons>tbody>tr.selected").length)return;
     var data = $("#tbl-icons").DataTable().row($("#tbl-icons>tbody>tr.selected")).data();
     if(!data)return;
-    let icon = data.kode;
-    $(relatedTarget).find("i").attr("class",icon);
-    $(relatedTarget).trigger('ubah');
+
+    $(`#modal-menu input[name=icon]`).val(data.kode);
+    $("#btn-pick-icon").html(`<i class = "${data.kode}"></i>&nbsp; Pilih Icon`);
 });
 
 //#endregion

@@ -188,31 +188,6 @@
             right: 0px;
         }
     
-
-        .container-icon {
-            min-height: 50vh;
-            max-height: 50vh;
-            overflow: auto;
-        }
-
-        .icon-box:hover {
-            color: black;
-            background-color: white;
-        }
-
-        .icon-box.active:hover {
-            color: black;
-            background-color: bisque;
-        }
-
-        .icon-box.active {
-            background-color: aquamarine;
-        }
-
-        .icon-box i {
-            text-align: center !important;
-        }
-
         /* Style the tab */
         .tab {
             overflow: hidden;
@@ -294,13 +269,6 @@
                 <div class="modal-body">
                     <form id="frm-data">
                         <input type="hidden" name="id" value="0">
-                        <!-- <input type="hidden" name="created_by" value=""> -->
-                        <!-- <input type="hidden" name="created_at" value=""> -->
-                        <!-- <input type="hidden" name="updated_by" value=""> -->
-                        <!-- <input type="hidden" name="updated_at" value=""> -->
-
-                        <!-- <input type="hidden" name="crud_state" value="saved"> -->
-                        <!-- <input type="hidden" name="status" value="active"> -->
 
                         <div class="row">
                             <div class="col" style="height:60vh; overflow:auto">
@@ -384,8 +352,7 @@
         </div>
     </modal>
     
-    <modal id="modal-pick-icon" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1"
-        aria-hidden="true">
+    <modal id="modal-pick-icon" class="modal fade" role="dialog" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
@@ -415,7 +382,7 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button id="btn-modal-pilih-icon" type="button" class="btn btn-danger">Pilih</button>
+                    <button id="btn-modal-pilih-icon" type="button" class="btn btn-danger" data-dismiss="modal">Pilih</button>
                 </div>
             </div>
         </div>
