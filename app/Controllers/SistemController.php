@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controllers;
-class Sistem extends BaseController
+class SistemController extends BaseController
 {
     public function index(): string
     {

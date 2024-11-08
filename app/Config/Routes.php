@@ -7,13 +7,13 @@ use Myth\Auth\Config\Auth as AuthConfig;
 
 /** @var RouteCollection $routes */
 
-$routes->get('/', 'Home::index');
-$routes->post('/menu', 'Sistem::menu');
-$routes->get('/page/(:num)', 'Sistem::linkPage/$1');
-$routes->post('/page', 'Sistem::page');
-$routes->post('/get-menu', 'Pengaturan\DesainMenu::getMenu');
-$routes->post('/simpan-menu', 'Pengaturan\DesainMenu::simpanMenu');
-$routes->post('/get-icons', 'Pengaturan\DesainMenu::getIcons');
+$routes->get('/', 'HomeController::index');
+$routes->post('/menu', 'SistemController::menu');
+$routes->get('/page/(:num)', 'SistemController::linkPage/$1');
+$routes->post('/page', 'SistemController::page');
+$routes->post('/get-menu', 'Pengaturan\DesainMenuController::getMenu');
+$routes->post('/simpan-menu', 'Pengaturan\DesainMenuController::simpanMenu');
+$routes->post('/get-icons', 'Pengaturan\DesainMenuController::getIcons');
 // Myth:Auth routes file.
 $routes->group('', ['namespace' => 'App\Controllers'], static function ($routes) {
     // Load the reserved routes from Auth.php
