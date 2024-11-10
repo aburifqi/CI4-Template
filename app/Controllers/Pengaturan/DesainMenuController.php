@@ -5,7 +5,7 @@ namespace App\Controllers\Pengaturan;
 use App\Controllers\BaseController;
 use CodeIgniter\HTTP\ResponseInterface;
 use CodeIgniter\Database\Exceptions\DatabaseException;
-class DesainMenu extends BaseController
+class DesainMenuController extends BaseController
 {
     public function index()
     {
