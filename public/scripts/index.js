@@ -7,7 +7,11 @@ $(function() {
 //#region Fungsi-fungsi
     function openPage(page){
         if(event)event.preventDefault();
-
+        $("#page-element").html(
+            `
+            <h1>Sedang memuat halaman...</h1>
+            `
+        );
         $.ajax({
             url :`${baseURL}/page`,
             type: 'POST',

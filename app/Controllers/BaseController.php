@@ -63,8 +63,8 @@ abstract class BaseController extends Controller
         //Untuk tema, pilih ini
         // $this->theme = getenv("TEMA");
         //atau yang ini
-        $theme = $this->db->query("SELECT * FROM themes WHERE pilih = 1");
-        $theme = $theme->getResultArray()[0]['theme'] ;
+        $theme = $this->db->query("SELECT * FROM themes WHERE pilih = 1 LIMIT 1")->getFirstRow();
+        $theme = $theme->theme ;
         $this->tema = $theme;
     }
 
