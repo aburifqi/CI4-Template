@@ -18,7 +18,8 @@
     <link rel="stylesheet" href="<?= base_url(); ?>/coronadark/css/style.css">
     <!-- End layout styles -->
     <link rel="shortcut icon" href="<?= base_url(); ?>/coronadark/images/favicon.png" />
-
+    <link rel="stylesheet" href="<?= base_url() ?>libs/sweetalert2/sweetalert2.min.css" type="text/css">
+    <link rel="stylesheet" href="<?= base_url() ?>libs/toast/jquery.toast.min.css" type="text/css">
     <style>
         .main-panel {
             min-height: 100vh!important;
@@ -94,6 +95,8 @@
     <script src="<?= base_url(); ?>/coronadark/js/misc.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/settings.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/custom.js"></script>
+    <script src="<?= base_url(); ?>/libs/sweetalert2/sweetalert2.min.js"></script>
+    <script src="<?= base_url(); ?>/libs/toast/jquery.toast.min.js"></script>
     <script src="<?= base_url(); ?>/coronadark/js/index.js"></script>
     <?= $this->renderSection('scripts') ?>
     <injectscript></injectscript>

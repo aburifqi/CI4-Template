@@ -35,6 +35,17 @@ $(function() {
             }
         })
     }
+
+    function tos(judul = '', pesan = '', jenis = '', durasi = 1500){
+        $.toast({
+            heading: judul,
+            text: pesan,
+            showHideTransition: "slide",
+            position: "bottom-right",
+            hideAfter: durasi,
+            icon: jenis,
+        });
+    }
 //#endregion
 
 //#region Events

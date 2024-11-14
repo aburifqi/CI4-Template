@@ -43,7 +43,6 @@ $(function () {
         type: "component",
     })
     .on("change", function () {
-        console.log($(this).val())
         $(this).css("background-color", $(this).val());
         $("#modal-menu input[name=icon_color]").val($(this).val());
     });
@@ -88,14 +87,7 @@ $(function () {
                 return nd.id == data.db.name && nd.db.id !== data.db.id;
             });
             if(isNameEksis.length){
-                $.toast({
-                    heading: "Dibatalkan!",
-                    text: `Menu ${data.db.name} sudah ada...`,
-                    showHideTransition: "slide",
-                    position: "bottom-right",
-                    hideAfter: 1500,
-                    icon: "warning",
-                });
+                tos("Dibatalkan!",`Menu ${data.db.name} sudah ada...`, "warning")
                 return;
             }
             if(!data.id){
@@ -365,25 +357,11 @@ async function simpan(obj) {
         },
         success: (data) => {
             if (parseInt(data.hasil)==1) {
-                $.toast({
-                    heading: "Berhasil",
-                    text: data.message,
-                    showHideTransition: "slide",
-                    position: "bottom-right",
-                    hideAfter: 1500,
-                    icon: "success",
-                });
+                tos("Berhasil!",data.message, "success");
                 renderTree();
                 $(obj).prop("disabled", false);
             } else {
-                $.toast({
-                    heading: "Gagal",
-                    text: data.message,
-                    showHideTransition: "slide",
-                    position: "bottom-right",
-                    hideAfter: 1500,
-                    icon: "error",
-                });
+                tos("Gagal!",data.message, "error");
                 $(obj).prop("disabled", false);
             }
         },

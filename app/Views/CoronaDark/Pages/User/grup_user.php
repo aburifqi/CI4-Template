@@ -2,8 +2,6 @@
     <link href="<?= base_url() ?>libs/spectrum/spectrum.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="<?= base_url() ?>libs/zTreeV3/css/metroStyle/metroStyle.css" type="text/css">
     <link rel="stylesheet" href="<?= base_url() ?>libs/datatables/datatables.min.css" type="text/css">
-    <link rel="stylesheet" href="<?= base_url() ?>libs/sweetalert2/sweetalert2.min.css" type="text/css">
-    <link rel="stylesheet" href="<?= base_url() ?>libs/toast/jquery.toast.min.css" type="text/css">
     <style>
         #treeMenu i{
             font-family: "Font Awesome 6 Brands";
@@ -396,8 +394,6 @@
     <script type="text/javascript" src="<?= base_url() ?>libs/zTreeV3/js/jquery.ztree.excheck.js"></script>
     <script type="text/javascript" src="<?= base_url() ?>libs/zTreeV3/js/jquery.ztree.exedit.js"></script>
     <script src="<?= base_url(); ?>/libs/jquery-validation/jquery.validate.min.js"></script>
-    <script src="<?= base_url(); ?>/libs/sweetalert2/sweetalert2.min.js"></script>
-    <script src="<?= base_url(); ?>/libs/toast/jquery.toast.min.js"></script>
     <script src="<?= base_url(); ?>/libs/datatables/datatables.min.js"></script>
     <script src="<?= base_url(); ?>/libs/datatables/custom-data-tables.js"></script>
     <script src="<?= base_url() ?>/scripts/pengaturan/desain-menu.js"></script>
