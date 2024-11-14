@@ -16,6 +16,7 @@ $(function() {
                 page:page
             },
             success :(res)=>{
+                console.log(res)
                 const elemen = $('<div></div>');
                 $(elemen).html(res.view);
                 const injectStyle = $(elemen).find("injectstyle");
