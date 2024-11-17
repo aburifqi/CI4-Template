@@ -58,6 +58,7 @@ abstract class BaseController extends Controller
 
     protected $db;
     protected $tema;
+    protected $otoritas;
     public function __construct(){
         $this->db      = \Config\Database::connect();
         //Untuk tema, pilih ini
@@ -66,6 +67,14 @@ abstract class BaseController extends Controller
         $theme = $this->db->query("SELECT * FROM themes WHERE pilih = 1 LIMIT 1")->getFirstRow();
         $theme = $theme->theme ;
         $this->tema = $theme;
+        $sql = '
+            SELECT 
+                ap.name 
+            FROM auth_users_permissions aup
+            JOIN auth_permissions ap ON ap.id = aup.permission_id
+            WHERE aup.user_id = :user_id: AND (ap.deleted_by = 0 OR ap.deleted_by IS NULL OR ap.deleted_by = "")
+        ';
+        $this->otoritas = $this->db->query($sql, ['user_id' => user()->id])->getRowArray();
     }
 
     public function loadDataTable($sumberData =[[
