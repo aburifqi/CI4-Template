@@ -57,6 +57,7 @@ class SistemController extends BaseController
                 'url'=> $data->url,
                 'page' => $data->name,
                 'data' => $data,
+                'otoritas' => $this->otoritas,
                 'breadCrumbs' => $breadCrumbs
             ]);
         }

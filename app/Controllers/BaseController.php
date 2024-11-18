@@ -74,7 +74,7 @@ abstract class BaseController extends Controller
             JOIN auth_permissions ap ON ap.id = aup.permission_id
             WHERE aup.user_id = :user_id: AND (ap.deleted_by = 0 OR ap.deleted_by IS NULL OR ap.deleted_by = "")
         ';
-        $this->otoritas = $this->db->query($sql, ['user_id' => user()->id])->getRowArray();
+        $this->otoritas = $this->db->query($sql, ['user_id' => user()->id])->getResultArray();
     }
 
     public function loadDataTable($sumberData =[[

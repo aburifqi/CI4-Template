@@ -2,6 +2,7 @@
 </injectstyle>
 
 <injectpage>
+    <?= print_r($otoritas) ?>
     <div class="page-header">
         <h3 class="page-title"><?= $data->judul ?></h3>
         <?= view_cell('\App\Libraries\Widget::breadcrumbs', $breadCrumbs) ?>
