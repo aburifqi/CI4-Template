@@ -1,8 +1,13 @@
+<?php
+    $izinLihat = in_array('lihat_grup_user', $otoritas);
+    $izinTambah = in_array('tambah_grup_user', $otoritas);
+    $izinEdit = in_array('edit_grup_user', $otoritas);
+    $izinHapus = in_array('hapus_grup_user', $otoritas);
+?>
 <injectstyle>
 </injectstyle>
 
 <injectpage>
-    <?= print_r($otoritas) ?>
     <div class="page-header">
         <h3 class="page-title"><?= $data->judul ?></h3>
         <?= view_cell('\App\Libraries\Widget::breadcrumbs', $breadCrumbs) ?>
@@ -28,10 +33,12 @@
                                     <th field-data="null" field-name="null" data-format="custom" custom-func="actionColumn" class-name="dt-body-center" width="150px">
                                         <center>
                                             Aksi
-                                            <br />
-                                            <button type="button" class="btn-new-data btn btn-sm btn-primary" onclick="newData(this,0);">
-                                                <i class="mdi mdi-plus"></i>
-                                            </button>
+                                            <?php if($izinTambah): ?>
+                                                <br />
+                                                <button type="button" class="btn-new-data btn btn-sm btn-primary" onclick="newData(this,0);">
+                                                    <i class="mdi mdi-plus"></i>
+                                                </button>
+                                            <?php endif ?>
                                         </center>
                                     </th>
                                 </tr>
@@ -51,6 +58,6 @@
     <script src="<?= base_url(); ?>/libs/jquery-validation/jquery.validate.min.js"></script>
     <script src="<?= base_url(); ?>/libs/datatables/datatables.min.js"></script>
     <script src="<?= base_url(); ?>/libs/datatables/custom-data-tables.js"></script>
-    <script src="<?= base_url() ?>/scripts/pengaturan/desain-menu.js"></script>
+    <script src="<?= base_url() ?>/scripts/common/list.js"></script>
 
 </injectscript>

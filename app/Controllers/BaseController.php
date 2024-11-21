@@ -74,7 +74,17 @@ abstract class BaseController extends Controller
             JOIN auth_permissions ap ON ap.id = aup.permission_id
             WHERE aup.user_id = :user_id: AND (ap.deleted_by = 0 OR ap.deleted_by IS NULL OR ap.deleted_by = "")
         ';
-        $this->otoritas = $this->db->query($sql, ['user_id' => user()->id])->getResultArray();
+
+        $otoritas = [];
+        $arrOtoritas = $this->db->query($sql, ['user_id' => user()->id])->getResultArray();
+
+        if(sizeof($arrOtoritas)){
+            foreach($arrOtoritas as $otr){
+                array_push($otoritas, $otr['name']);
+            }
+        }
+
+        $this->otoritas = $otoritas;
     }
 
     public function loadDataTable($sumberData =[[
@@ -121,20 +131,14 @@ abstract class BaseController extends Controller
         $queryCountAll .= ') all_data';
         $limit = $request->getPost('length') ?? -1;
         $start = $request->getPost('start');
-        $order = $request->getPost('columns')[0]['name'];
+        $strOrder = '';
         if(!empty($request->getPost('order'))){
-            $order = $request->getPost('columns')[$request->getPost('order')['0']['column']]['name'];
-        }
-        if($order){
+            $order = $request->getPost('order')['0']['name'];
             $order = explode('|', $order);
             $order =$order[0];
-        }
-        $dir = 'asc';
-        if(!empty($request->getPost('order'))){
             $dir = $request->getPost('order')['0']['dir'];
+            $strOrder = "ORDER BY $order $dir ";
         }
-        $strOrder = '';
-        if ($order && $dir) $strOrder = "ORDER BY $order $dir ";
 
         $strLimit = '';
         if ($limit && $limit>=0){
