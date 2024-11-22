@@ -9,7 +9,7 @@
 
 <injectpage>
     <div class="page-header">
-        <h3 class="page-title"><?= $data->judul ?></h3>
+        <h3 class="page-title"><?= $info->judul ?></h3>
         <?= view_cell('\App\Libraries\Widget::breadcrumbs', $breadCrumbs) ?>
     </div>
     <div class="row">

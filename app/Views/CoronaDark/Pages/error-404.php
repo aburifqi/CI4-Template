@@ -12,7 +12,7 @@
               </div>
               <div class="col-lg-6 error-page-divider text-lg-left pl-lg-4">
                 <h2>Ma'af!</h2>
-                <h3 class="font-weight-light">Halaman <b><?= $data->judul ?></b> yang Anda cari tidak dapat ditemukan.</h3>
+                <h3 class="font-weight-light">Halaman <b><?= $info->judul ?></b> yang Anda cari tidak dapat ditemukan.</h3>
               </div>
             </div>
           </div>

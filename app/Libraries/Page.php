@@ -17,12 +17,12 @@ class Page
 
     public function openPage($param)
     {
-        if(!isset($param['url']) || !isset($param['page'])){
+        if(!isset($param['info']->url) || !isset($param['info']->name)){
             return view($this->tema .'/pages/error-404.php', $param);
         }
-        if (!is_file(APPPATH.'views/' . $this->tema .'/pages/'.$param['url'].'/'.$param['page'] . '.php')){
+        if (!is_file(APPPATH.'views/' . $this->tema .'/pages/'.$param['info']->url.'/'.$param['info']->name . '.php')){
             return view($this->tema .'/pages/error-404.php', $param);
         }
-        return view($this->tema .'/pages/'.$param['url'].'/'.$param['page'], $param);
+        return view($this->tema .'/pages/'.$param['info']->url.'/'.$param['info']->name, $param);
     }
 }

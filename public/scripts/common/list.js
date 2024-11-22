@@ -1,27 +1,19 @@
 $(document).ready(function(){
     initDataTable(
-        $("#simplePos"),
-        $("#simplePos").attr("controller"),
+        $("#tbl-data"),
+        baseURL+$("#tbl-data").attr("sumber"),
         function (data) {
             data.action = "list";
             data.searchmode = "in";
-            data.searchCustom = ()=>{
-                if(!$("#inp-cari-custom").length)return '';
-                return $("#inp-cari-custom").val();
-            }
         },
         true,
         {
-            columnDefs:[
-                {
-                    orderable: false,
-                    targets: 0,
-                },
-                {
-                    orderable: false,
-                    targets: $("#simplePos .filter-row th").length - 1,
-                },
-            ],
+            // columnDefs:[
+            //     {
+            //         orderable: false,
+            //         targets: 0,
+            //     },
+            // ],
             order  : [[0, 'desc']],
         }
     );

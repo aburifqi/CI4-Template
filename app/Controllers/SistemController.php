@@ -54,9 +54,7 @@ class SistemController extends BaseController
         $renderView = '';
         try {
             $renderView = view_cell('\App\Libraries\Page::openPage', [
-                'url'=> $data->url,
-                'page' => $data->name,
-                'data' => $data,
+                'info' => $data,
                 'otoritas' => $this->otoritas,
                 'breadCrumbs' => $breadCrumbs
             ]);
@@ -70,7 +68,7 @@ class SistemController extends BaseController
         return json_encode([
             "page" =>$page,
             "view"=>$renderView,
-            "data"=>$data,
+            "info"=>$data,
             "breadCrumbs" => $breadCrumbs
         ]);
     }
