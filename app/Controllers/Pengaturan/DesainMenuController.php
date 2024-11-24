@@ -34,7 +34,7 @@ class DesainMenuController extends BaseController
         ]);
     }
 
-    public function getIcons(){
+    public function listIcons(){
         $sumberData = [[
             "tables" => "icons",
             "fields" => "*",

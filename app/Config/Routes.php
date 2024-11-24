@@ -13,7 +13,8 @@ $routes->get('/page/(:num)', 'SistemController::linkPage/$1');
 $routes->post('/page', 'SistemController::page');
 $routes->post('/get-menu', 'Pengaturan\DesainMenuController::getMenu');
 $routes->post('/simpan-menu', 'Pengaturan\DesainMenuController::simpanMenu');
-$routes->post('/get-icons', 'Pengaturan\DesainMenuController::getIcons');
+$routes->post('/list-icons', 'Pengaturan\DesainMenuController::listIcons');
+$routes->post('/list-grup_user', 'User\UserController::listGrupUser');
 // Myth:Auth routes file.
 $routes->group('', ['namespace' => 'App\Controllers'], static function ($routes) {
     // Load the reserved routes from Auth.php

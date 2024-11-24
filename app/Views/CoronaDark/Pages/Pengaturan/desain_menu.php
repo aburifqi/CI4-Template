@@ -365,13 +365,13 @@
                         <table id="tbl-icons" level="0" class="table table-striped table-hover jambo_table" width="100%">
                             <thead>
                                 <tr>
-                                    <th field-data="null" field-name="id" format-data="row-number" filter-type="toggle-filter"  class-name="dt-body-right" width="50px"><center>No</center></th>
+                                    <th field-name="id" format-data="row-number" filter-type="toggle-filter"  class-name="dt-body-right" width="50px" no-order = "1"><center>No</center></th>
     
-                                    <th field-data="nama" field-name="nama" filter-type="input" format-data="custom" format-custom="columnIcon" class-name="dt-body-center"><center>Icon</center></th>
+                                    <th field-name="nama" filter-type="input" format-data="custom" format-custom="columnIcon" class-name="dt-body-center"><center>Icon</center></th>
     
-                                    <th field-data="font" field-name="font" filter-type="select" filter-option="optionFonts" ><center>Font</center></th>
+                                    <th field-name="font" filter-type="select" filter-option="optionFonts" ><center>Font</center></th>
     
-                                    <th field-data="kode" field-name="kode" filter-type="input"><center>Kode Icon</center></th>
+                                    <th field-name="kode" filter-type="input"><center>Kode Icon</center></th>
     
                                 </tr>
                             </thead>

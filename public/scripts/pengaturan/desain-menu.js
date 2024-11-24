@@ -104,7 +104,7 @@ $(function () {
 
     initDataTable(
         $("#tbl-icons"),
-        baseURL+'get-icons',
+        baseURL+'list-icons',
         function (data) {
         },
         true,

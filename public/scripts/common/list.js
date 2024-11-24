@@ -20,27 +20,30 @@ $(document).ready(function(){
 });
 
 function actionColumn(data, type, row, meta) {
-    var strRender = `<div class="btn-group">
+    // ${lnkData + row.id}&judul=${judul}
+    // ${lnkView + row.id}
+    // hapus(this, '${menu}', ${row.id});
+    const strRender = `<div class="btn-group">
         <div class="d-flex justify-content-center">
             ${
-                otoritas.edit?
-                    `<a href="${lnkData + row.id}&judul=${judul}" class="btn btn-edit p-1 mr-1" data-toggle="tooltip" title="Ubah">
-                        <i class="fas fa-wrench f-10px"></i>
+                izinEdit?
+                    `<a href="" class="btn btn-edit p-1 mr-1" data-toggle="tooltip" title="Ubah">
+                        <i class="fas fa-edit f-10px"></i>
                     </a>`
                 :
                     ''
             }
             ${
-                otoritas.view?
-                    `<a href="${lnkView + row.id}" class="btn btn-read p-1 mr-1" data-toggle="tooltip" title="Lihat">
+                izinLihat?
+                    `<a href="" class="btn btn-read p-1 mr-1" data-toggle="tooltip" title="Lihat">
                         <i class="far fa-eye f-10px"></i>
                     </a>`
                 :
                     ''
             }
             ${
-                otoritas.delete?
-                    `<a href="javascript:void(0)" class="btn btn-delete p-1" data-toggle="tooltip" title="Hapus" onclick = "hapus(this, '${menu}', ${row.id});">
+                izinHapus?
+                    `<a href="javascript:void(0)" class="btn btn-delete p-1" data-toggle="tooltip" title="Hapus" onclick = "">
                         <i class="fas fa-trash-alt f-10px"></i>
                     </a>`
                 :

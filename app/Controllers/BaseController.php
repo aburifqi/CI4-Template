@@ -132,8 +132,9 @@ abstract class BaseController extends Controller
         $limit = $request->getPost('length') ?? -1;
         $start = $request->getPost('start');
         $strOrder = '';
-        if(!empty($request->getPost('order'))){
-            $order = $request->getPost('order')['0']['name'];
+        if(isset($request->getPost('order')['0'])){
+            $order = (int)$request->getPost('order')['0']['column'];
+            $order = $request->getPost('columns')[$order]['name'];
             $order = explode('|', $order);
             $order =$order[0];
             $dir = $request->getPost('order')['0']['dir'];

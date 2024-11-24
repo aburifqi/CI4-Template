@@ -17,20 +17,20 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
-                        <table id="tbl-data" level="0" class="table table-striped table-hover" width="100%">
+                        <table id="tbl-data" sumber = "list-<?= $info->name ?>" level="0" class="table table-striped table-hover" width="100%">
                             <thead>
                                 <tr>
-                                    <th field-data="null" field-name="id" filter-type="toggle-filter" data-format="row-number" class-name="dt-body-right" width="50px">No.</th>
+                                    <th field-name="id" filter-type="toggle-filter" format-data="row-number" class-name="dt-body-right" width="50px" no-order = "1">No.</th>
 
-                                    <th field-data="grup" field-name="grup" filter-type="input" data-format="custom" custom-func="grupColumn">
+                                    <th field-name="name" filter-type="input">
                                         <center>Grup</center>
                                     </th>
 
-                                    <th field-data="status" field-name="status" filter-type="select" option-function="statusOption" data-format="custom" custom-func="statusColumn" class-name="dt-body-center"  width="150px">
-                                        <center>Status</center>
+                                    <th field-name="description" filter-type="input">
+                                        <center>Keterangan</center>
                                     </th>
 
-                                    <th field-data="null" field-name="null" data-format="custom" custom-func="actionColumn" class-name="dt-body-center" width="150px">
+                                    <th field-name="null" format-data="custom" format-custom="actionColumn" class-name="dt-body-center" width="150px">
                                         <center>
                                             Aksi
                                             <?php if($izinTambah): ?>
@@ -55,6 +55,12 @@
 </injectpage>
 
 <injectscript>
+    <script>
+        const izinTambah = '<?= $izinTambah; ?>';
+        const izinEdit = '<?= $izinEdit; ?>';
+        const izinHapus = '<?= $izinHapus; ?>';
+        const izinLihat = '<?= $izinLihat; ?>';
+    </script>
     <script src="<?= base_url(); ?>/libs/jquery-validation/jquery.validate.min.js"></script>
     <script src="<?= base_url(); ?>/libs/datatables/datatables.min.js"></script>
     <script src="<?= base_url(); ?>/libs/datatables/custom-data-tables.js"></script>

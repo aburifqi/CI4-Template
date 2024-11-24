@@ -11,4 +11,17 @@ class UserController extends BaseController
     {
         //
     }
+
+    public function listGrupUser(){
+        $sumberData = [[
+            "tables" => "auth_groups",
+            "fields" => "*",
+            "where" => '(deleted_by = 0 OR deleted_by IS NULL OR deleted_by = "")',
+            "group" => "",
+            "having" => "",
+            "order" => "",
+        ]];
+
+        return $this->loadDataTable($sumberData);
+    }
 }

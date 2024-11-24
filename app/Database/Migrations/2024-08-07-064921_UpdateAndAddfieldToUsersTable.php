@@ -23,6 +23,7 @@ class UpdateAndAddfieldToUsersTable extends Migration
             'deleted_by'                    => ['type' => 'int', 'null' => true],
        ];
        $this->forge->addColumn('auth_permissions', $addfields);
+       $this->forge->addColumn('auth_groups', $addfields);
     //    $alterfields = [
     //             'emp_name' => [
     //                 'name' => 'fullname',
