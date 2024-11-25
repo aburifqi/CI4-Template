@@ -27,7 +27,7 @@ function actionColumn(data, type, row, meta) {
         <div class="d-flex justify-content-center">
             ${
                 izinEdit?
-                    `<a href="" class="btn btn-edit p-1 mr-1" data-toggle="tooltip" title="Ubah">
+                    `<a href="" class="btn btn-info btn-sm btn-edit p-1 mr-1" data-toggle="tooltip" title="Ubah">
                         <i class="fas fa-edit f-10px"></i>
                     </a>`
                 :

@@ -1,7 +1,16 @@
 $(function() {
-    if(directOpenPage){
-        openPage(directOpenPage);
-    }
+    // if(directOpenPage){
+    //     openPage(directOpenPage);
+    // }
+    currentPage = sessionStorage.getItem('current-page');
+    console.log(currentPage)
+    if(!parseInt(currentPage))return;
+    const curLink = $(`.menu-items a[onclick="openPage(${currentPage});"]`);
+    console.log($(curLink).parents(`.menu-items`).length)
+    $(curLink).parents(`.menu-items`).each(function(){
+        $(this).addClass('active');
+    });
+    $(curLink).trigger("click");
 });
 
 //#region Fungsi-fungsi
@@ -12,6 +21,7 @@ $(function() {
             <h1>Sedang memuat halaman...</h1>
             `
         );
+        sessionStorage.setItem('current-page', page);
         $.ajax({
             url :`${baseURL}/page`,
             type: 'POST',

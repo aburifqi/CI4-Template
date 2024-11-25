@@ -97,6 +97,9 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
+<script>
+    sessionStorage.clear();
+</script>
 <!-- <script src="<?= base_url(); ?>/standard/jquery-validation/jquery.validate.min.js"></script> -->
 <!-- <script src="<?= base_url(); ?>scripts/login.js"></script> -->
 
