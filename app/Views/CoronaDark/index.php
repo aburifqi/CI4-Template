@@ -13,9 +13,9 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('scripts') ?>
-<!-- <script>
+<script>
     const directOpenPage = '<?= $page ?? ''?>';
-</script> -->
+</script>
 <script src="<?= base_url(); ?>/scripts/index.js"></script>
 
 <?= $this->endSection() ?>

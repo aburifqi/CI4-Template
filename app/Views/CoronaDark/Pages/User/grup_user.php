@@ -56,10 +56,10 @@
 
 <injectscript>
     <script>
-        const izinTambah = '<?= $izinTambah; ?>';
-        const izinEdit = '<?= $izinEdit; ?>';
-        const izinHapus = '<?= $izinHapus; ?>';
-        const izinLihat = '<?= $izinLihat; ?>';
+        var izinTambah = '<?= $izinTambah; ?>';
+        var izinEdit = '<?= $izinEdit; ?>';
+        var izinHapus = '<?= $izinHapus; ?>';
+        var izinLihat = '<?= $izinLihat; ?>';
     </script>
     <script src="<?= base_url(); ?>/libs/jquery-validation/jquery.validate.min.js"></script>
     <script src="<?= base_url(); ?>/libs/datatables/datatables.min.js"></script>

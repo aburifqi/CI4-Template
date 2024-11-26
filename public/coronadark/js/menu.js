@@ -100,7 +100,6 @@ $(function() {
             }
         })
         .then(r =>  r.json().then(res =>{
-            console.log(res)
             if(res.hasil == 1){
                 const parentMenuFormat =`<li class="nav-item menu-items">
                     <a class="nav-link parent-menu" href="javascript:void(0);">

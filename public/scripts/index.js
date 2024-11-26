@@ -1,16 +1,19 @@
 $(function() {
-    // if(directOpenPage){
-    //     openPage(directOpenPage);
-    // }
+    if(directOpenPage){
+        // Ini untuk klik kanan menu trus ke tab halaman lain di browser
+        // openPage(directOpenPage);
+        // sessionStorage.clear();
+        // sessionStorage.setItem('current-page', directOpenPage);
+        const curLink = $(`.menu-items a[onclick="openPage(${directOpenPage});"]`);
+        $(curLink).trigger("click");
+        $(curLink).parents(`.menu-items`).addClass('active');
+        return;
+    }
     currentPage = sessionStorage.getItem('current-page');
-    console.log(currentPage)
     if(!parseInt(currentPage))return;
     const curLink = $(`.menu-items a[onclick="openPage(${currentPage});"]`);
-    console.log($(curLink).parents(`.menu-items`).length)
-    $(curLink).parents(`.menu-items`).each(function(){
-        $(this).addClass('active');
-    });
     $(curLink).trigger("click");
+    $(curLink).parents(`.menu-items`).addClass('active');
 });
 
 //#region Fungsi-fungsi
