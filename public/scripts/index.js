@@ -5,8 +5,8 @@ $(function() {
         // sessionStorage.clear();
         // sessionStorage.setItem('current-page', directOpenPage);
         const curLink = $(`.menu-items a[onclick="openPage(${directOpenPage});"]`);
+        // $(curLink).parents(`.menu-items`).addClass('active');
         $(curLink).trigger("click");
-        $(curLink).parents(`.menu-items`).addClass('active');
         return;
     }
     currentPage = sessionStorage.getItem('current-page');

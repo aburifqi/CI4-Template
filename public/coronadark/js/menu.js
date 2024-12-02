@@ -44,7 +44,6 @@ $(function() {
 
     function openPage(pageCode='menu_beranda', param={}){
         if(event)event.preventDefault();
-
         if (currentPage == pageCode && !initPage)return;
         // otoritas = [];
         initPage = false;

@@ -10,12 +10,12 @@ $(".nav-item.menu-items>a.nav-link").on("click", function(e){
     //     if($(this) !== $(li))$(this).removeClass("active");
     // });
     // console.log($(li).hasClass("active"));
-    $(li).siblings("li").removeClass("active");
-    $(li).find("div.collapse").removeClass("show");
-    $(li).parents('.menu-items').each(function(){
-        $(this).siblings(".menu-items").removeClass('active');
-        $(this).siblings(".menu-items").find('.menu-items').removeClass('active');
-    });
+    // $(li).siblings("li").removeClass("active");
+    // $(li).find("div.collapse").removeClass("show");
+    // $(li).parents('.menu-items').each(function(){
+    //     $(this).siblings(".menu-items").removeClass('active');
+    //     $(this).siblings(".menu-items").find('.menu-items').removeClass('active');
+    // });
     $(li).addClass("active");
 })
 //#endregion
